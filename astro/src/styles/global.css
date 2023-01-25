@@ -1,0 +1,72 @@
+:root {
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  background: #181818;
+  color: #fff;
+}
+
+a {
+  text-decoration: none;
+  color: #a8a8a8;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px;
+  min-height: 100vh;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background: #333;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+/* Page Content */
+.page-content {
+  margin: 20px 0;
+}
+
+.page-content h2,
+.page-content h3 {
+  margin: 20px 0;
+}
+
+.page-content h2 {
+  font-size: 40px;
+}
+
+.page-content h3 {
+  font-size: 25px;
+}
+
+@media (max-width: 500px) {
+  h1,
+  h2 {
+    text-align: center;
+  }
+}

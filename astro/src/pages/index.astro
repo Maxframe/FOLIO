@@ -1,0 +1,28 @@
+---
+import "../styles/global.css";
+import { getAboutContent } from "../lib/api.js";
+import { urlForImage } from "../utils/urlForImage.js";
+
+const aboutData = await getAboutContent();
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>FOLIO</title>
+  </head>
+  <body>
+    <h1>FOLIO</h1>
+
+    <div class="">
+      <img class="" src={urlForImage(aboutData[0].image).url() + "?h=300"} />
+      <div>
+        <h1 class="">{aboutData[0].title}</h1>
+        <p>{aboutData[0].description}</p>
+      </div>
+    </div>
+  </body>
+</html>
