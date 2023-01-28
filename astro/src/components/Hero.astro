@@ -2,12 +2,6 @@
 import { getHeroContent } from "../lib/api";
 const heroData = await getHeroContent();
 
-export interface Props {
-  headerText?: string;
-  col?: string;
-}
-
-const { headerText, col } = Astro.props as Props;
 ---
 
 <header>
@@ -24,7 +18,6 @@ const { headerText, col } = Astro.props as Props;
 <style>
   header {
     
-    height: 100dvh;
     height: 100vh;
   }
   .container {
