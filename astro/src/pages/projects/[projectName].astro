@@ -1,0 +1,55 @@
+---
+import "../../styles/global.css";
+
+import { urlForImage } from "../../utils/urlForImage.js";
+
+import { getAllProjects } from "../../lib/api.js";
+
+export async function getStaticPaths() {
+  const allProjectData = await getAllProjects();
+
+  return allProjectData.map((project: any) => {
+    return {
+      params: { projectName: project.slug.current },
+      props: { project },
+    };
+  });
+}
+const { projectName } = Astro.params;
+const { project } = Astro.props;
+
+const tagsArray = project.tags;
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>FOLIO</title>
+  </head>
+  <body>
+   
+    <div class="container">
+      <img
+        class="rounded-lg mt-36"
+        src={urlForImage(project.thumbnailImage).height(300).url()}
+      />
+      <h1 class="text-4xl">{project.projectName}</h1>
+      <div id="list"></div>
+      <h2>{project.description}</h2>
+    </div>
+  </body>
+</html>
+
+<script define:vars={{ tagsArray }}>
+  const list = document.getElementById("list");
+
+  const tagList = tagsArray.map((item) => {
+    const tagSpan = document.createElement("span");
+    tagSpan.textContent = item;
+    return tagSpan;
+  });
+
+  tagList.forEach((item) => list.appendChild(item));
+</script>

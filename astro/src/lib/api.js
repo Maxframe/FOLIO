@@ -12,6 +12,12 @@ export async function getAboutContent() {
   return about;
 }
 
+export async function getHeroContent() {
+  const query = `*[_type == 'hero'][0]`;
+  const hero = await useSanityClient().fetch(query);
+  return hero;
+}
+
 
 
 /* {

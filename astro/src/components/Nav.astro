@@ -1,0 +1,69 @@
+---
+---
+
+<nav class="flex items-center gap-8 z-50">
+  <a class="nav-text" href="#projects">Projekte</a>
+
+  <a class="logo" href="#top">
+    <svg viewBox="-2 -2 133 40" xmlns="http://www.w3.org/2000/svg">
+        <path d="M101.476 24.2397L94.8299 35.7566C94.7914 35.8233 94.6952 35.8233 94.6566 35.7567L88.0039 24.2397L94.7433 12.5728L101.476 24.2397Z" fill="var(--logo-background)"/>
+        <path d="M40.8499 35.9067H27.3711L34.1105 24.2397L40.8499 35.9067Z" fill="var(--logo-background)"/>
+        <path d="M54.3127 12.5727L47.5802 24.2397L40.8477 12.5727L47.4936 1.05586C47.532 0.989165 47.6283 0.989165 47.6668 1.05586L54.3127 12.5727Z" fill="var(--logo-background)"/>
+        <path d="M101.477 0.905762L81.2652 35.9066H67.7933L47.6687 1.05577C47.6302 0.989102 47.6783 0.905762 47.7553 0.905762H61.0539L74.5327 24.2397L88.0046 0.905762H101.477Z" fill="var(--logo-foreground)"/>
+        <path d="M128.425 0.905762L108.214 35.9066H94.9154C94.8384 35.9066 94.7903 35.8233 94.8288 35.7566L114.947 0.905762H128.425Z" fill="var(--logo-foreground)"/>
+        <path d="M40.8483 35.9135V35.9066L27.3696 12.5727L13.8977 35.9066H0.425781L20.6371 0.905762H34.109L47.5809 24.2397L54.3202 35.9135H40.8483Z" fill="var(--logo-foreground)"/>
+        </svg>
+  </a>
+  <a class="nav-text" href="#about">Über Mich</a>
+</nav>
+
+<style>
+  nav {
+    height: 5rem;
+    width: 100%;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+    gap: 0.5rem;
+    background: var(--nav-background);
+    backdrop-filter: blur(10px);
+    transition: opacity color 0.5s ease-in-out;
+  }
+
+  svg {
+    width: 100%;
+  }
+
+  a {
+    color: var(--text);
+    font-weight: 600;
+    padding: 0.5rem;
+  }
+
+.nav-text {
+    opacity: 0.5;
+    transition: opacity ease-out .2s;
+}
+
+.nav-text:hover {
+  opacity: 1;  
+}
+
+.logo {
+    width: 9rem;
+    display: flex;
+    align-items: center;
+
+}
+
+  .logo svg {
+    width: 100%;
+    stroke: var(--lightmode-stroke);/* var(text) */
+    stroke-width: 2px;
+    stroke-linecap: round;
+    fill: none;"
+  }
+</style>

@@ -1,28 +1,80 @@
 ---
 import "../styles/global.css";
+import FrontpageLayout from "../layouts/FrontpageLayout.astro";
+import Hero from "../components/Hero.astro";
+import Nav from "../components/Nav.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+
+import { getAllProjects } from "../lib/api.js";
 import { getAboutContent } from "../lib/api.js";
+
 import { urlForImage } from "../utils/urlForImage.js";
 
+const allProjectsData = await getAllProjects();
 const aboutData = await getAboutContent();
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>FOLIO</title>
-  </head>
-  <body>
-    <h1>FOLIO</h1>
-
-    <div class="">
-      <img class="" src={urlForImage(aboutData[0].image).url() + "?h=300"} />
-      <div>
-        <h1 class="">{aboutData[0].title}</h1>
-        <p>{aboutData[0].description}</p>
+<FrontpageLayout title="Portfolio Website">
+  <Nav />
+  <Hero />
+  <div class="container">
+    <section class="portfolio" id="projects">
+      <h2 id="portfolio-title">Projekte</h2>
+      <div class="projects-wrapper">
+        {
+          allProjectsData.map((project: any) => (
+              <ProjectCard
+                projectName={project.projectName}
+                projectLink={project.slug.current}
+                projectThumbnail={project.thumbnailImage}
+              />
+          ))
+        }
       </div>
+    </section>
+
+    <div style="background-color: gray;" id="about">
+      <img class="" src={urlForImage(aboutData[0].image).height(300).url()} />
+      <h1 class="">{aboutData[0].title}</h1>
+      <p>{aboutData[0].description}</p>
     </div>
-  </body>
-</html>
+  </div>
+</FrontpageLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  #portfolio-title {
+    color: var(--accent-color);
+    font-size: 40px;
+    padding-top: 100px;
+    margin-top: -100px;
+    margin-bottom: 35px;
+}
+
+  .projects-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+    gap: 5%;
+  }
+
+  @media screen and (max-width: 850px) {
+    .projects-wrapper {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media screen and (max-width: 500px) {
+  .projects-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2%;
+    }
+}
+
+
+
+</style>

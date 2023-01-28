@@ -1,0 +1,50 @@
+---
+import { getHeroContent } from "../lib/api";
+const heroData = await getHeroContent();
+
+export interface Props {
+  headerText?: string;
+  col?: string;
+}
+
+const { headerText, col } = Astro.props as Props;
+---
+
+<header>
+  <div class="container">
+    <h1>
+      <span class="highlight">{heroData.textAccent}</span>
+      {heroData.textFirstLine}<br />
+      {heroData.textParagraphOne}<br />
+      {heroData.textParagraphTwo}
+    </h1>
+  </div>
+</header>
+
+<style>
+  header {
+    
+    height: 100dvh;
+    height: 100vh;
+  }
+  .container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+    min-height: 100vh;
+  }
+  h1 {
+    max-width: 35rem;
+    font-size: 2.2rem;
+    margin-top: 0;
+    color: var(--hero-text);
+    line-height: 1.2;
+    user-select: none;
+  }
+  header span {
+    color: var(--accent-color);
+  }
+</style>
