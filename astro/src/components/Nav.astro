@@ -1,4 +1,5 @@
 ---
+
 ---
 
 <nav class="flex items-center gap-8 z-50">
@@ -6,6 +7,7 @@
 
   <a class="logo" href="#top">
     <svg viewBox="-2 -2 133 40" xmlns="http://www.w3.org/2000/svg">
+      <path d="M88.0031 0.905762L81.2638 12.5727L74.5312 0.905762H88.0031Z" fill="var(--logo-background)"/>
         <path d="M101.476 24.2397L94.8299 35.7566C94.7914 35.8233 94.6952 35.8233 94.6566 35.7567L88.0039 24.2397L94.7433 12.5728L101.476 24.2397Z" fill="var(--logo-background)"/>
         <path d="M40.8499 35.9067H27.3711L34.1105 24.2397L40.8499 35.9067Z" fill="var(--logo-background)"/>
         <path d="M54.3127 12.5727L47.5802 24.2397L40.8477 12.5727L47.4936 1.05586C47.532 0.989165 47.6283 0.989165 47.6668 1.05586L54.3127 12.5727Z" fill="var(--logo-background)"/>
@@ -30,12 +32,11 @@
     gap: 0.5rem;
     background: var(--nav-background);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     transition: opacity color 0.5s ease-in-out;
   }
 
-  svg {
-    width: 100%;
-  }
+
 
   a {
     color: var(--text);
@@ -56,14 +57,18 @@
     width: 9rem;
     display: flex;
     align-items: center;
-
 }
 
-  .logo svg {
+.logo svg {
     width: 100%;
-    stroke: var(--lightmode-stroke);/* var(text) */
-    stroke-width: 2px;
+    stroke: var(--lightmode-stroke);
+    stroke-width: 0.15rem;
     stroke-linecap: round;
-    fill: none;"
-  }
+    fill: none;
+    transition: stroke-width .2s ease-out;
+}
+
+.logo svg:hover {
+  stroke-width: 0.05rem;
+}
 </style>
