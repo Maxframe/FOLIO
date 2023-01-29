@@ -1,27 +1,39 @@
 :root {
-  --no-color: #00000000;
-  --accent-color:  #FD8C4A;
-  --accent-color-transparent:  #FD8C4A80;
+  --accent-color: #fd8c4a;
+  --accent-color-transparent: #fd8c4a80;
   --background-color: #181818;
   --hover-highlight: #919191;
-  
+
   --text: #fafafa;
-  --hero-text:  #8a8585;
+  --hero-text: #8a8585;
   --nav-background: #18181880;
   --logo-foreground: #fafafa;
-  --logo-background: #868686;
+  --logo-background: #888888;
   --lightmode-stroke: #00000000;
-  --lightmode-transition-time: .3s;
+  --about-color: #fafafa20;
+
+  /* Constants */
+  --no-color: #00000000;
+  --dark-color: #181818;
+  --light-color: #fafafa;
+  --neutral-color: #888888;
+
+  --nav-height: 5rem;
+  --lightmode-transition-time: 0.3s;
+  --card-transition: 0.3s ease-out;
+  --card-cut-corner: 6%;
+  --breakpoint-md: 52rem;
+  --breakpoint-sm: 32rem;
 }
 
 .lightmode {
   --no-color: #00000000;
-  --accent-color:  #FD8C4A;
+  --accent-color: #fd8c4a;
   --background-color: #fafafa;
   --hover-highlight: #919191;
-  
+
   --text: #181818;
-  --hero-text:  #18181880;
+  --hero-text: #18181880;
   --nav-background: #fafafa80;
   --logo-foreground: #fafafa80;
   --logo-background: #fafafa80;
@@ -42,9 +54,12 @@ body {
   font-family: "Manrope", sans-serif;
   font-size: 1rem;
   line-height: 1.5;
+  color: var(--text);
+}
+
+body {
   background: var(--background-color);
   transition: background var(--lightmode-transition-time) ease-out;
-  color: var(--text);
 }
 
 a {
@@ -60,3 +75,8 @@ img {
   box-shadow: 0px 6px 10px -8px #18181880;
 }
 
+@media screen and (max-width: 32rem) {
+  body {
+    font-size: 0.9rem;
+  }
+}

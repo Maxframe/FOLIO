@@ -1,15 +1,15 @@
-let lightMode = localStorage.getItem("lightMode");
+let lightMode = sessionStorage.getItem("lightMode");
 
 const lightModeToggle = document.querySelector("#lightmode-button");
 
 const enableLightMode = () => {
   document.body.classList.add("lightmode");
-  localStorage.setItem("lightMode", "enabled");
+  sessionStorage.setItem("lightMode", "enabled");
 };
 
 const disableLightMode = () => {
   document.body.classList.remove("lightmode");
-  localStorage.removeItem("lightMode");
+  sessionStorage.removeItem("lightMode");
 };
 
 if (lightMode === "enabled") {
@@ -17,7 +17,7 @@ if (lightMode === "enabled") {
 }
 
 lightModeToggle.addEventListener("click", () => {
-  lightMode = localStorage.getItem("lightMode");
+  lightMode = sessionStorage.getItem("lightMode");
 
   if (lightMode !== "enabled") {
     enableLightMode();

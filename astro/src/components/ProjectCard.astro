@@ -9,44 +9,75 @@ export interface Props {
 const { projectName, projectLink, projectThumbnail } = Astro.props as Props;
 ---
 
-<div class="card-wrapper">
+<div class="card">
   <a href={"/projects/" + projectLink} class="card-link">
-    <p class="card-title">{projectName}</p>
+    <div class="card-overlay">
+      <p class="card-title">{projectName}</p>
+      <div class="card-border"></div>
+    </div>
     <img
       class="thumbnail-image"
       src={urlForImage(projectThumbnail).height(600).url()}
-      alt={projectName}
       draggable="false"
     />
-    <div class="card-border"></div>
   </a>
 </div>
 
-
 <style>
-  .card-wrapper {
+  .card {
     position: relative;
-    margin-bottom: 10%;
-    border-radius: 4%;
+    border-radius: 6%;
     overflow: hidden;
-    box-shadow: 0px 6px 10px -8px var(--dropshadow);
+    box-shadow: 0px 6px 10px -8px black;
     width: 100%;
     aspect-ratio: 1/1;
-    background-color: var(--bgvar);
+    background-color: var(--neutral-color);
+    /* clip-path: polygon(
+      var(--card-cut-corner) 0,
+      calc(100% - var(--card-cut-corner)) 0,
+      100% var(--card-cut-corner),
+      100% calc(100% - var(--card-cut-corner)),
+      calc(100% - var(--card-cut-corner)) 100%,
+      var(--card-cut-corner) 100%,
+      0 calc(100% - var(--card-cut-corner)),
+      0 var(--card-cut-corner)
+    ); */
   }
 
-
-
-  .card-wrapper:hover a > .card-title {
+  .card:hover a .card-overlay > .card-title {
     opacity: 1;
   }
 
-  .card-wrapper:hover a > .thumbnail-image {
-    filter: brightness(50%)
+  .card:hover a > .thumbnail-image {
+    filter: brightness(30%);
+    transform: scale(1.05);
   }
 
-  .card-wrapper:hover a > .card-border {
+  .card:hover a .card-overlay > .card-border {
     opacity: 0.6;
+  }
+
+  .card:hover a > .card-overlay {
+    transform: scale(1);
+  }
+
+  .thumbnail-image {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    transform: scale(1.01);
+    transition: var(--card-transition);
+  }
+
+  .card-overlay {
+    transform: scale(0.9);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    transition: var(--card-transition);
   }
 
   .card-title {
@@ -55,45 +86,43 @@ const { projectName, projectLink, projectThumbnail } = Astro.props as Props;
     top: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
-    padding: 0 16px;
+    padding: 0 1rem;
     margin: 0;
-    color: white;
+    color: #fafafa;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 1rem;
     text-align: center;
     z-index: 1;
     opacity: 0;
-    font-weight: 600;
-    transition: 0.4s ease-in-out;
-  }
-
-  .thumbnail-image {
-    object-fit: cover;
-    height: 100%;
-    width: 100%;
-    transition: 0.4s ease-in-out;
-  }
-
-  .picbg {
-    position: relative;
-    padding-top: 100%;
-    background-size: auto 100%;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    transition: 0.4s ease-in-out;
+    font-weight: 700;
+    transition: opacity var(--card-transition);
   }
 
   .card-border {
     position: absolute;
     opacity: 0;
-    height: 88%;
-    width: 88%;
-    margin: 6%;
-    border-radius: 8%;
+    height: 85%;
+    width: 85%;
+    margin: 7.5%;
+    border-radius: 6%;
     top: 0;
     left: 0;
-    border: solid 0.6rem white;
+    border: solid 0.6rem #fafafa;
     box-sizing: border-box;
-    transition: opacity 0.4s ease-in-out;
+    transition: opacity var(--card-transition);
+  }
+
+  @media only screen and (hover: none) {
+    .thumbnail-image {
+      filter: brightness(30%);
+    }
+
+    .card-title {
+      opacity: 1;
+    }
+
+    .card-border {
+      opacity: 0.6;
+    }
   }
 </style>

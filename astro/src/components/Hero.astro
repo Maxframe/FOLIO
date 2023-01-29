@@ -1,7 +1,6 @@
 ---
 import { getHeroContent } from "../lib/api";
 const heroData = await getHeroContent();
-
 ---
 
 <header>
@@ -12,10 +11,18 @@ const heroData = await getHeroContent();
       {heroData.textParagraphOne}<br />
       {heroData.textParagraphTwo}
     </h1>
-    <button id="lightmode-button">
+
+    <div class="mode-switch-wrapper">
+      <label class="mode-switch" for="checkbox">
+        <input type="checkbox" id="checkbox" />
+        <div class="slider round"></div>
+      </label>
+    </div>
+
+    <!-- <button id="lightmode-button">
       <span class="lightmode-slider"></span>
 
-      <!-- <svg
+      <svg
         width="25px"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 29.36 29.36"
@@ -27,28 +34,30 @@ const heroData = await getHeroContent();
               d="M14.68,29.36A14.68,14.68,0,1,0,0,14.68,14.68,14.68,0,0,0,14.68,29.36Zm.14-26.59a11.91,11.91,0,0,1,0,23.82Z"
             ></path></g
           ></g
-        ></svg> -->
-      
-    </button>  
+        ></svg>
+    </button> -->
   </div>
 </header>
 
 <style>
   header {
-    
     height: 100dvh;
     height: 100vh;
   }
   .hero-container {
     position: relative;
     display: flex;
+    gap: 4rem;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 30px;
     min-height: 100vh;
   }
   h1 {
+    position: relative;
     max-width: 35rem;
     font-size: 2.2rem;
     margin-top: 0;
@@ -56,32 +65,66 @@ const heroData = await getHeroContent();
     line-height: 1.2;
     user-select: none;
   }
+
   header span {
     color: var(--accent-color);
   }
-  
-  #lightmode-button {
-    position: relative;
+
+  /* ------------------------------------------ */
+
+  .mode-switch-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  .mode-switch {
     display: inline-block;
-    width: 6rem;
-    height: 3rem;
-    margin: 0 .5rem;
-    border: #181818 3px;
-    background-color: transparent;
-    cursor:pointer;
+    height: 5rem;
+    position: relative;
+    width: 11rem;
   }
 
-.lightmode-slider {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: var(--text);
-  border: #181818 3px;
-  border-radius: 100%;
-  transition: var(--lightmode-transition-time) ease-out;
+  .mode-switch input {
+    display: none;
+  }
 
-}
+  .slider {
+    background-color: var(--about-color);
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    box-shadow: 0 0 0 0.2rem var(--lightmode-stroke);
+    transition: 0.4s;
+  }
 
+  .slider:before {
+    background-color: var(--light-color);
+    bottom: 0.5rem;
+    content: "";
+    height: 4rem;
+    left: 0.5rem;
+    position: absolute;
+    transition: 0.4s;
+    width: 4rem;
+    border: solid 0.2rem var(--lightmode-stroke);
+  }
+
+  input:checked + .slider {
+    box-shadow: 0 0 0 0.2rem var(--lightmode-stroke);
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(6rem);
+    border: solid 0.2rem var(--lightmode-stroke);
+  }
+
+  .slider.round {
+    border-radius: 5rem;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
 </style>

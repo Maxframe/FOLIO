@@ -4,7 +4,7 @@ import { visionTool } from "@sanity/vision";
 import schemas from "./schemas/schema";
 
 export default defineConfig({
-  title: "FOLIO2",
+  title: "FOLIO",
   projectId: "lctqiis2",
   dataset: "production",
   plugins: [deskTool(), visionTool()],

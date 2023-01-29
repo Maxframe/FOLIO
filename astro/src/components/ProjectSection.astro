@@ -1,0 +1,54 @@
+---
+import { urlForImage } from "../utils/urlForImage.js";
+
+export interface Props {
+  sectionTitle: string;
+  sectionText: string;
+  sectionImages: object[];
+}
+const { sectionTitle, sectionText, sectionImages } = Astro.props as Props;
+---
+
+<div class="section-wrapper">
+  <h3 class="section-title">{sectionTitle}</h3>
+  <p class="section-text">{sectionText}</p>
+  {
+    sectionImages?.map((image: any) => (
+      <div class="image-wrapper">
+        <img
+          class="section-image"
+          src={urlForImage(image).width(1000).url()}
+          draggable="false"
+        />
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .image-wrapper {
+    margin: auto;
+    text-align: center;
+  }
+
+  .section-image {
+    width: 100%;
+    max-width: var(--breakpoint-md);
+    height: auto;
+    max-height: calc(100vh - var(--nav-height));
+    background-color: var(--neutral-color);
+    border-radius: 0.4rem;
+  }
+
+  .section-title {
+    margin-top: 3rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+  }
+
+  .section-text {
+    margin-bottom: 5rem;
+    max-width: calc(var(--breakpoint-md) * 0.6);
+    width: auto;
+  }
+</style>

@@ -7,7 +7,7 @@ export async function getAllProjects() {
 }
 
 export async function getAboutContent() {
-  const query = `*[_type == 'about']`;
+  const query = `*[_type == 'about'][0]`;
   const about = await useSanityClient().fetch(query);
   return about;
 }
@@ -18,14 +18,8 @@ export async function getHeroContent() {
   return hero;
 }
 
-
-
-/* {
-  allProject(where: {_id: {eq: "0a71f66a-ac82-4b3a-b476-311d0ef16cb0"}}) {
-    title
-    slug {current}
-    _id
-    description
-    image {asset {url}}
-  }
-} */
+export async function getContactContent() {
+  const query = `*[_type == 'contact'][0]`;
+  const contact = await useSanityClient().fetch(query);
+  return contact;
+}

@@ -1,7 +1,8 @@
-import blockContent from "./blockContent";
-import about from "./about";
-import sectionContent from "./sectionContent";
-import project from "./project";
 import hero from "./hero";
+import project from "./project";
+import about from "./about";
+import contact from "./contact";
+import sectionContent from "./sectionContent";
+import blockContent from "./blockContent";
 
-export default [hero, project, blockContent, about, sectionContent];
+export default [hero, project, about, contact, sectionContent, blockContent];
