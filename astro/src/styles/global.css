@@ -1,6 +1,7 @@
 :root {
   --no-color: #00000000;
   --accent-color:  #FD8C4A;
+  --accent-color-transparent:  #FD8C4A80;
   --background-color: #181818;
   --hover-highlight: #919191;
   
@@ -10,6 +11,7 @@
   --logo-foreground: #fafafa;
   --logo-background: #868686;
   --lightmode-stroke: #00000000;
+  --lightmode-transition-time: .3s;
 }
 
 .lightmode {
@@ -20,7 +22,7 @@
   
   --text: #181818;
   --hero-text:  #18181880;
-  --nav-background: #fafafa15;
+  --nav-background: #fafafa80;
   --logo-foreground: #fafafa80;
   --logo-background: #fafafa80;
   --lightmode-stroke: #181818;
@@ -41,6 +43,7 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   background: var(--background-color);
+  transition: background var(--lightmode-transition-time) ease-out;
   color: var(--text);
 }
 

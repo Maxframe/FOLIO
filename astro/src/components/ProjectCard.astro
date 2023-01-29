@@ -9,56 +9,55 @@ export interface Props {
 const { projectName, projectLink, projectThumbnail } = Astro.props as Props;
 ---
 
-<div class="postwrapper">
-  <a href={"/projects/" + projectLink} class="picbgwrapper">
-    <p class="">{projectName}</p>
+<div class="card-wrapper">
+  <a href={"/projects/" + projectLink} class="card-link">
+    <p class="card-title">{projectName}</p>
     <img
       class="thumbnail-image"
       src={urlForImage(projectThumbnail).height(600).url()}
       alt={projectName}
       draggable="false"
     />
+    <div class="card-border"></div>
   </a>
 </div>
 
 
 <style>
-
- /*  .postwrapper {
+  .card-wrapper {
     position: relative;
     margin-bottom: 10%;
     border-radius: 4%;
     overflow: hidden;
     box-shadow: 0px 6px 10px -8px var(--dropshadow);
     width: 100%;
+    aspect-ratio: 1/1;
     background-color: var(--bgvar);
   }
-  .picbgwrapper {
-    transition: 0.4s 0.1s ease-in-out;
-  }
 
-  .picbgwrapper:hover > .picbg {
-    background-size: auto 110%;
-    filter: brightness(0.4);
-  }
 
-  .postwrapper:hover > .caption {
+
+  .card-wrapper:hover a > .card-title {
     opacity: 1;
   }
 
-  .postwrapper:hover > .card-border {
+  .card-wrapper:hover a > .thumbnail-image {
+    filter: brightness(50%)
+  }
+
+  .card-wrapper:hover a > .card-border {
     opacity: 0.6;
   }
 
-  .caption {
-    color: white;
+  .card-title {
     position: absolute;
     left: 50%;
     top: 50%;
-    padding: 0 16px;
-    margin: 0;
     margin-right: -50%;
     transform: translate(-50%, -50%);
+    padding: 0 16px;
+    margin: 0;
+    color: white;
     text-decoration: none;
     font-size: 20px;
     text-align: center;
@@ -66,13 +65,16 @@ const { projectName, projectLink, projectThumbnail } = Astro.props as Props;
     opacity: 0;
     font-weight: 600;
     transition: 0.4s ease-in-out;
-  } */
-
-  .thumbnail-image {
-    width: 100%;
   }
 
-  /* .picbg {
+  .thumbnail-image {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    transition: 0.4s ease-in-out;
+  }
+
+  .picbg {
     position: relative;
     padding-top: 100%;
     background-size: auto 100%;
@@ -93,5 +95,5 @@ const { projectName, projectLink, projectThumbnail } = Astro.props as Props;
     border: solid 0.6rem white;
     box-sizing: border-box;
     transition: opacity 0.4s ease-in-out;
-  } */
+  }
 </style>

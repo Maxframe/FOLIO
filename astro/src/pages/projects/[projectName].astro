@@ -1,5 +1,9 @@
 ---
 import "../../styles/global.css";
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
 
 import { urlForImage } from "../../utils/urlForImage.js";
 
@@ -20,36 +24,48 @@ const { project } = Astro.props;
 
 const tagsArray = project.tags;
 ---
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>FOLIO</title>
-  </head>
-  <body>
-   
-    <div class="container">
-      <img
-        class="rounded-lg mt-36"
-        src={urlForImage(project.thumbnailImage).height(300).url()}
-      />
-      <h1 class="text-4xl">{project.projectName}</h1>
-      <div id="list"></div>
-      <h2>{project.description}</h2>
-    </div>
-  </body>
-</html>
+
+<ProjectLayout title={project.projectName}>
+  <Nav />
+  <div class="project-container">
+    <img
+      class="rounded-lg mt-36"
+      src={urlForImage(project.thumbnailImage).height(300).url()}
+    />
+    <h1 class="">{project.projectName}</h1>
+    <div id="tag-list"></div>
+    <h2>{project.description}</h2>
+  </div>
+</ProjectLayout>
+<Footer />
+
 
 <script define:vars={{ tagsArray }}>
-  const list = document.getElementById("list");
+  const list = document.getElementById("tag-list");
 
-  const tagList = tagsArray.map((item) => {
+  const tagList = tagsArray.map((tag) => {
     const tagSpan = document.createElement("span");
-    tagSpan.textContent = item;
+    tagSpan.textContent = tag;
+    tagSpan.classList.add("tag");
     return tagSpan;
   });
 
   tagList.forEach((item) => list.appendChild(item));
 </script>
+<style>
+  #tag-list {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+
+  }
+  .project-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+    min-height: 100vh;
+  }
+
+</style>

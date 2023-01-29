@@ -1,8 +1,10 @@
 ---
 import FrontpageLayout from "../layouts/FrontpageLayout.astro";
+
 import Hero from "../components/Hero.astro";
 import Nav from "../components/Nav.astro";
 import ProjectCard from "../components/ProjectCard.astro";
+import Footer from "../components/Footer.astro";
 
 import { getAllProjects } from "../lib/api.js";
 import { getAboutContent } from "../lib/api.js";
@@ -16,6 +18,7 @@ const aboutData = await getAboutContent();
 <FrontpageLayout title="Portfolio Website">
   <Nav />
   <Hero />
+
   <div class="container">
     <section class="portfolio" id="projects">
       <h2 id="portfolio-title">Projekte</h2>
@@ -38,6 +41,7 @@ const aboutData = await getAboutContent();
       <p>{aboutData[0].description}</p>
     </div>
   </div>
+  <Footer />
 </FrontpageLayout>
 
 <style>

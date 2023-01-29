@@ -1,0 +1,103 @@
+---
+---
+
+<footer>
+  <div class="footer-blanket">
+      <div class="iconwrapper">
+          <div class="iconbox">
+              <a href="mailto:wernermaxx@gmail.com" target="_blank">
+                  <svg viewBox="0 -4 29 28" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                    d="M25.67,0H3.33A3.33,3.33,0,0,0,0,3.33V18.42a3.33,3.33,0,0,0,3.33,3.33H25.67A3.33,3.33,0,0,0,29,18.42V3.33A3.33,3.33,0,0,0,25.67,0ZM14.57,12.6a.4.4,0,0,1-.52,0L3.49,3.6H25.13Z"
+                    fill="var(--accent-color)"></path>
+                </svg>
+            </a>
+        </div>
+        <div class="iconbox">
+            <a href="https://www.instagram.com/wernermaxx.jpg" target="_blank">
+                <svg viewBox="0 0 29.2 29.2" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                    d="M21.56,0H7.64A7.64,7.64,0,0,0,0,7.64V21.56A7.64,7.64,0,0,0,7.64,29.2H21.56a7.64,7.64,0,0,0,7.64-7.64V7.64A7.64,7.64,0,0,0,21.56,0Zm5,21.11a5.41,5.41,0,0,1-5.41,5.41h-13a5.41,5.41,0,0,1-5.41-5.41v-13A5.41,5.41,0,0,1,8.09,2.68h13a5.41,5.41,0,0,1,5.41,5.41Z"
+                    fill="var(--accent-color)"></path>
+                    <path
+                    d="M14.6,7a7.56,7.56,0,1,0,7.56,7.56A7.57,7.57,0,0,0,14.6,7Zm0,12.44a4.88,4.88,0,1,1,4.88-4.88A4.89,4.89,0,0,1,14.6,19.48Z"
+                    fill="var(--accent-color)"></path>
+                    <circle cx="22.39" cy="6.82" r="1.82" fill="var(--accent-color)"
+                    ></circle>
+                </svg>
+            </a>
+        </div>
+        <div class="iconbox">
+            <a
+            href="https://www.linkedin.com/in/max-werner-058246235/"
+            target="_blank"
+            >
+            <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+                <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M31 36C33.762 36 36 33.762 36 31V5C36 2.238 33.762 0 31 0H5C2.239 0 0 2.238 0 5V31C0 33.762 2.239 36 5 36H31ZM11 13H6V30H11V13ZM8.457 11H8.485C10.035 11 11 9.887 11 8.499C10.972 7.08 10.035 6 8.514 6C6.995 6 6 7.08 6 8.499C6 9.888 6.965 11 8.457 11ZM25 30H30L29.999 20.274C29.999 15.25 27.316 13 23.738 13C20.85 13 19.721 14.5 19 15.616V13H14V30H19V21C19 20.9166 18.9987 20.8192 18.9974 20.7133C18.9908 20.1986 18.9816 19.4833 19.101 19.193C19.495 18.215 20.307 17.203 21.808 17.203C23.775 17.203 25 18.703 25 20.901V30Z"
+              fill="var(--accent-color)"></path>
+            </svg>
+        </a>
+    </div>
+</div>
+<p>Max Werner &copy; <span id="copyright-date"></span></p>
+</div>
+</footer>
+
+<style>
+  footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10rem;
+    width: 100%;
+    height: 10rem;
+    background-color: var(--accent-color-transparent);
+    z-index: 1;
+  }
+
+  footer p {
+    user-select: none;
+    text-align: center;
+    font-weight: 500;
+    color: var(--text);
+    opacity: .7;
+    margin-bottom: 0.5rem
+  }
+
+  footer .iconwrapper {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+.iconbox {
+    width: 2.5rem;
+    height: 2.5rem;
+    transition: 0.1s ease-in-out;
+    padding: 0.5rem;
+}
+
+  .iconbox a {
+  }
+
+  .iconwrapper:hover a {
+    opacity: 0.5;
+  }
+
+  .iconbox:hover a {
+    opacity: 1;
+  }
+
+
+</style>
+
+<script>
+  document.querySelector("#copyright-date").textContent = new Date()
+    .getFullYear()
+    .toString();
+</script>

@@ -5,13 +5,31 @@ const heroData = await getHeroContent();
 ---
 
 <header>
-  <div class="container">
+  <div class="hero-container">
     <h1>
       <span class="highlight">{heroData.textAccent}</span>
       {heroData.textFirstLine}<br />
       {heroData.textParagraphOne}<br />
       {heroData.textParagraphTwo}
     </h1>
+    <button id="lightmode-button">
+      <span class="lightmode-slider"></span>
+
+      <!-- <svg
+        width="25px"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 29.36 29.36"
+      >
+        <g id="Layer_2" data-name="Layer 2"
+          ><g id="Layer_2-2" data-name="Layer 2">
+            <path
+              class="svg-element"
+              d="M14.68,29.36A14.68,14.68,0,1,0,0,14.68,14.68,14.68,0,0,0,14.68,29.36Zm.14-26.59a11.91,11.91,0,0,1,0,23.82Z"
+            ></path></g
+          ></g
+        ></svg> -->
+      
+    </button>  
   </div>
 </header>
 
@@ -21,7 +39,7 @@ const heroData = await getHeroContent();
     height: 100dvh;
     height: 100vh;
   }
-  .container {
+  .hero-container {
     position: relative;
     display: flex;
     align-items: center;
@@ -41,4 +59,29 @@ const heroData = await getHeroContent();
   header span {
     color: var(--accent-color);
   }
+  
+  #lightmode-button {
+    position: relative;
+    display: inline-block;
+    width: 6rem;
+    height: 3rem;
+    margin: 0 .5rem;
+    border: #181818 3px;
+    background-color: transparent;
+    cursor:pointer;
+  }
+
+.lightmode-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: var(--text);
+  border: #181818 3px;
+  border-radius: 100%;
+  transition: var(--lightmode-transition-time) ease-out;
+
+}
+
 </style>

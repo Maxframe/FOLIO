@@ -3,9 +3,9 @@
 ---
 
 <nav class="flex items-center gap-8 z-50">
-  <a class="nav-text" href="#projects">Projekte</a>
+  <a class="nav-text" href="/#projects">Projekte</a>
 
-  <a class="logo" href="#top">
+  <a class="logo" href="/#top">
     <svg viewBox="-2 -2 133 40" xmlns="http://www.w3.org/2000/svg">
       <path d="M88.0031 0.905762L81.2638 12.5727L74.5312 0.905762H88.0031Z" fill="var(--logo-background)"/>
         <path d="M101.476 24.2397L94.8299 35.7566C94.7914 35.8233 94.6952 35.8233 94.6566 35.7567L88.0039 24.2397L94.7433 12.5728L101.476 24.2397Z" fill="var(--logo-background)"/>
@@ -16,7 +16,7 @@
         <path d="M40.8483 35.9135V35.9066L27.3696 12.5727L13.8977 35.9066H0.425781L20.6371 0.905762H34.109L47.5809 24.2397L54.3202 35.9135H40.8483Z" fill="var(--logo-foreground)"/>
         </svg>
   </a>
-  <a class="nav-text" href="#about">Über Mich</a>
+  <a class="nav-text" href="/#about">Über Mich</a>
 </nav>
 
 <style>
@@ -33,7 +33,7 @@
     background: var(--nav-background);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    transition: opacity color 0.5s ease-in-out;
+    transition: background var(--lightmode-transition-time) ease-out;
   }
 
 
@@ -46,11 +46,12 @@
 
 .nav-text {
     opacity: 0.5;
-    transition: opacity ease-out .2s;
+    transition: ease-out .2s;
 }
 
 .nav-text:hover {
-  opacity: 1;  
+  opacity: 1;
+  color: var(--text);
 }
 
 .logo {
@@ -65,10 +66,10 @@
     stroke-width: 0.15rem;
     stroke-linecap: round;
     fill: none;
-    transition: stroke-width .2s ease-out;
+    transition: var(--lightmode-transition-time) ease-out;
 }
 
 .logo svg:hover {
-  stroke-width: 0.05rem;
+  stroke-width: 0.22rem;
 }
 </style>
