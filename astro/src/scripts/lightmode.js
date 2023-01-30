@@ -1,27 +1,27 @@
-let lightMode = sessionStorage.getItem("lightMode");
+const lightMode = sessionStorage.getItem("lightMode")
+  ? sessionStorage.getItem("lightMode")
+  : null;
 
-const lightModeToggle = document.querySelector("#lightmode-button");
+const toggleSwitch = document.querySelector(
+  '.mode-switch input[type="checkbox"]'
+);
 
-const enableLightMode = () => {
-  document.body.classList.add("lightmode");
-  sessionStorage.setItem("lightMode", "enabled");
-};
-
-const disableLightMode = () => {
-  document.body.classList.remove("lightmode");
-  sessionStorage.removeItem("lightMode");
-};
-
-if (lightMode === "enabled") {
-  enableLightMode();
+function switchMode(e) {
+  if (e.target.checked) {
+    document.body.classList.add("lightmode");
+    sessionStorage.setItem("lightMode", "enabled");
+  } else {
+    document.body.classList.remove("lightmode");
+    sessionStorage.removeItem("lightMode");
+  }
 }
 
-lightModeToggle.addEventListener("click", () => {
-  lightMode = sessionStorage.getItem("lightMode");
+toggleSwitch.addEventListener("change", switchMode, false);
 
-  if (lightMode !== "enabled") {
-    enableLightMode();
-  } else {
-    disableLightMode();
+if (lightMode) {
+  document.body.classList.add("lightmode");
+
+  if (lightMode === "enabled") {
+    toggleSwitch.checked = true;
   }
-});
+}
