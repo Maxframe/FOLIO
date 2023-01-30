@@ -1,8 +1,11 @@
 # FOLIO
 
-**Technisches Proof Of Concept für meine Portfolio-Website. Erstellt mit Astro.js und Sanity CMS.**
+**Technisches Proof Of Concept für meine Portfolio-Website.** 
+
+**Erstellt mit Astro.js und Sanity CMS.**
 
 Studiengang Digital Ideation an der Hochschule Luzern
+
 Modul MEN5 - HS22Mentor: Gordan Savičić
 
 Vorübersichtlich Live auf: https://fol1o.netlify.app/
