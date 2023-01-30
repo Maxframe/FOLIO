@@ -6,7 +6,9 @@
 
 Studiengang Digital Ideation an der Hochschule Luzern
 
-Modul MEN5 - HS22Mentor: Gordan Savičić
+Modul MEN5 - HS22
+
+Mentor: Gordan Savičić
 
 Vorübersichtlich Live auf: https://fol1o.netlify.app/
 
