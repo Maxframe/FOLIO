@@ -20,7 +20,7 @@ Vorübersichtlich Live auf: https://fol1o.netlify.app/
 
 ### Anleitung
 
-Vom root-Ordner tippe `cd astro` ins Terminal, installiere `npm install` die packages und starte anschliessend den lokalen Server mit `npm run build`.
+Vom root-Ordner tippe `cd astro` ins Terminal, installiere dann mit `npm install` die packages und starte anschliessend den lokalen Server mit `npm run build`.
 
 Link: http://127.0.0.1:3000/
 
