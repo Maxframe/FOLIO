@@ -68,6 +68,7 @@ const { project } = Astro.props;
     max-width: var(--breakpoint-md);
     margin: 0 auto;
     padding: 0 2rem;
+    overflow: hidden;
   }
 
   h1 {
@@ -94,7 +95,10 @@ const { project } = Astro.props;
     font-weight: 600;
   }
 
-  .sections-wrapper {
+  @media screen and (max-width: 52rem) {
+    h1 {
+      font-size: 2rem;
+    }
   }
 
   @media screen and (max-width: 32rem) {
