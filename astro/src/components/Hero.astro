@@ -1,4 +1,6 @@
 ---
+import "../styles/global.css";
+
 import { getHeroContent } from "../lib/api";
 const heroData = await getHeroContent();
 ---
@@ -106,7 +108,7 @@ const heroData = await getHeroContent();
     height: 4rem;
     left: 0.5rem;
     position: absolute;
-    transition: 0.4s;
+    transition: var(--lightmode-transition-time);
     width: 4rem;
     border: solid 0.2rem var(--lightmode-stroke);
   }

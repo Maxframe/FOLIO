@@ -16,7 +16,7 @@ function switchMode(e) {
   }
 }
 
-toggleSwitch.addEventListener("change", switchMode, false);
+toggleSwitch?.addEventListener("change", switchMode, false);
 
 if (lightMode) {
   document.body.classList.add("lightmode");

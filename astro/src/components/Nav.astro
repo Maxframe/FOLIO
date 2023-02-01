@@ -1,4 +1,6 @@
 ---
+import "../styles/global.css";
+
 ---
 
 <nav class="flex items-center gap-8 z-50">
@@ -46,7 +48,7 @@
     background: var(--nav-background);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    transition: background var(--lightmode-transition-time) ease-out;
+    transition: var(--lightmode-transition-time) ease-out;
   }
 
   a {
@@ -77,6 +79,10 @@
     stroke-width: 0.15rem;
     stroke-linecap: round;
     fill: none;
+    transition: var(--lightmode-transition-time) ease-out;
+  }
+
+  .logo svg path {
     transition: var(--lightmode-transition-time) ease-out;
   }
 
