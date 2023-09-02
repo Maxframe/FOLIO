@@ -1,8 +1,9 @@
 ---
 import "../styles/global.css";
+import { useSanityClient } from "@sanity/astro";
 
-import { getHeroContent } from "../lib/api";
-const heroData = await getHeroContent();
+const heroData = await useSanityClient().fetch(`*[_type == 'hero'][0]`)
+
 ---
 
 <header>

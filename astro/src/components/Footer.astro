@@ -1,8 +1,9 @@
 ---
-import { getContactContent } from "../lib/api.js";
+import { useSanityClient } from "@sanity/astro";
+
+const contactData = await useSanityClient().fetch(`*[_type == 'contact'][0]`)
 import Copyright from "./Copyright.astro";
 
-const contactData = await getContactContent();
 ---
 
 <footer>

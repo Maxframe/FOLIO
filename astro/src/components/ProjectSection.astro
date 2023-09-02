@@ -1,5 +1,5 @@
 ---
-import { urlForImage } from "../utils/urlForImage.js";
+import ImageBuilder from './ImageBuilder.astro';
 
 export interface Props {
   sectionTitle: string;
@@ -15,13 +15,11 @@ const { sectionTitle, sectionText, sectionImages } = Astro.props as Props;
   {
     sectionImages?.map((image: any) => (
       <div class="image-wrapper">
-        <img
-          class="section-image"
-          src={urlForImage(image).width(1000).url()}
-          draggable="false"
-        />
+        <ImageBuilder cls="project-section-image" w={1000} source={image}/>
       </div>
     ))
+
+
   }
 </div>
 
@@ -29,15 +27,6 @@ const { sectionTitle, sectionText, sectionImages } = Astro.props as Props;
   .image-wrapper {
     margin: auto;
     text-align: center;
-  }
-
-  .section-image {
-    width: auto;
-    max-width: 100%;
-    height: auto;
-    max-height: 100%;
-    background-color: var(--neutral-color);
-    border-radius: 0.4rem;
   }
 
   .section-title {
