@@ -75,6 +75,46 @@ img {
   box-shadow: 0px 6px 10px -8px #18181880;
 }
 
+.thumbnail-image {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  transform: scale(1.01);
+  transition: var(--card-transition);
+}
+
+.card:hover a > .thumbnail-image {
+  filter: brightness(30%);
+  transform: scale(1.05);
+}
+
+.about-image {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: 0px 6px 10px -8px black;
+}
+
+.project-hero-image {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  margin-top: 5rem;
+  max-height: calc(100vh - 5rem);
+  background-color: var(--neutral-color);
+}
+
+.project-section-image {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+  background-color: var(--neutral-color);
+  border-radius: 0.4rem;
+}
+
 /* body, .no-transition *, .no-transition *::before {
   -webkit-transition: none !important;
   -moz-transition: none !important;
@@ -83,8 +123,8 @@ img {
   transition: none !important;
 } */
 
-::selection { 
-  background: var(--text); 
+::selection {
+  background: var(--text);
   color: var(--background-color);
 }
 

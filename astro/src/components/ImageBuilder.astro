@@ -1,0 +1,37 @@
+---
+import { urlFor } from "../utils/urlForImage";
+import { Image } from 'astro:assets';
+
+export interface Props {
+  source: {
+    _type: string;
+    asset: {
+      _ref: string;
+      _type: string;
+    }
+  }
+  cls?: string;
+  alt?: string;
+  w?:number;
+  h?:number;
+}
+
+const { source, alt, cls, w, h } = Astro.props as Props;
+
+const ref = source.asset._ref
+
+const pattern = /^image-([a-f\d]+)-(\d+x\d+)-(\w+)$/
+const decodeAssetId = id => {
+  const [, assetId, dimensions, format] = pattern.exec(id)
+  const [width, height] = dimensions.split("x").map(v => parseInt(v, 10))
+  return {
+    assetId,
+    size: { width, height },
+    format,
+  }
+}
+const imageSize = decodeAssetId(ref)
+
+---
+
+<Image class={cls} src={urlFor(source).auto("format").width(w).height(h).url()} width={w ? w : imageSize.size.width} height={h ? h : imageSize.size.height} draggable="false" alt={alt ? alt : ""} />

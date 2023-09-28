@@ -1,18 +1,17 @@
 ---
 import FrontpageLayout from "../layouts/FrontpageLayout.astro";
+import { useSanityClient } from "@sanity/astro";
 
-import { urlForImage } from "../utils/urlForImage.js";
-import Hero from "../components/Hero.astro";
+
 import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import ImageBuilder from "../components/ImageBuilder.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 
-import { getAllProjects } from "../lib/api.js";
-import { getAboutContent } from "../lib/api.js";
-import { getContactContent } from "../lib/api.js";
+const allProjectsData = await useSanityClient().fetch(`*[_type == 'project']`)
+const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]`)
+const contactData = await useSanityClient().fetch(`*[_type == 'contact'][0]`)
 
-const allProjectsData = await getAllProjects();
-const aboutData = await getAboutContent();
-const contactData = await getContactContent();
 ---
 
 <FrontpageLayout title="Portfolio Website">
@@ -37,7 +36,7 @@ const contactData = await getContactContent();
 
     <section class="about-section" id="about">
       <div class="about-image-wrapper">
-        <img class="" src={urlForImage(aboutData.image).height(500).url()} />
+          <ImageBuilder cls="about-image" source={aboutData.image} w={500} h={500}/>
       </div>
       <div class="about-text">
         <h1 class="about-title">{aboutData.title}</h1>
@@ -107,14 +106,6 @@ const contactData = await getContactContent();
     transform: translate(-3rem, -5rem);
   }
 
-  .about-image-wrapper img {
-    max-width: 100%;
-    width: auto;
-    height: auto;
-    border-radius: 2rem;
-    overflow: hidden;
-  }
-
   .about-title {
     font-size: clamp(1.5rem, 4vw, 4rem);
   }
@@ -127,6 +118,7 @@ const contactData = await getContactContent();
     display: block;
     font-weight: 600;
     transition: color 0.2s ease-out;
+    color: var(--hero-text);
   }
 
   .about-social a:hover {
@@ -154,6 +146,22 @@ const contactData = await getContactContent();
     .projects-wrapper {
       grid-template-columns: 1fr 1fr;
     }
+
+    .about-section {
+      grid-auto-flow: row;
+      grid-template-columns: none;
+      margin-left: 0;
+      padding: 2rem;
+    }
+
+    .about-text {
+      margin-top: -4rem;
+    }
+
+    .about-image-wrapper {
+      transform: translate(0, -5rem);
+      max-width: 15rem;
+    }
   }
   @media screen and (max-width: 32rem) {
     .container {
@@ -163,17 +171,7 @@ const contactData = await getContactContent();
       grid-template-columns: 1fr;
     }
 
-    .about-section {
-      grid-auto-flow: row;
-      grid-template-columns: none;
-      margin-left: 0;
-      padding: 2rem;
-      padding-bottom: 5rem;
-    }
 
-    .about-image-wrapper {
-      transform: translate(0, -5rem);
-    }
   }
 
   @media only screen and (hover: none), (max-width: 32rem) {

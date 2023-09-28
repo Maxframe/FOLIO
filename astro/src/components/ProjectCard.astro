@@ -1,29 +1,25 @@
 ---
-import { urlForImage } from "../utils/urlForImage.js";
+import ImageBuilder from './ImageBuilder.astro';
 
 export interface Props {
   projectName: string;
   projectLink: string;
-  projectThumbnail: object;
+  projectThumbnail: any;
 }
 const { projectName, projectLink, projectThumbnail } = Astro.props as Props;
 ---
 
 <div class="card">
-  <a href={"/projects/" + projectLink} class="card-link">
+  <a href={projectLink} class="card-link">
     <div class="card-overlay">
       <p class="card-title">{projectName}</p>
       <div class="card-border"></div>
     </div>
-    <img
-      class="thumbnail-image"
-      src={urlForImage(projectThumbnail).height(600).url()}
-      draggable="false"
-    />
+    <ImageBuilder cls="thumbnail-image" source={projectThumbnail} alt="" w={600} h={600} />
   </a>
 </div>
 
-<style>
+<style is:global>
   .card {
     position: relative;
     border-radius: 6%;
@@ -48,11 +44,6 @@ const { projectName, projectLink, projectThumbnail } = Astro.props as Props;
     opacity: 1;
   }
 
-  .card:hover a > .thumbnail-image {
-    filter: brightness(30%);
-    transform: scale(1.05);
-  }
-
   .card:hover a .card-overlay > .card-border {
     opacity: 0.6;
   }
@@ -61,7 +52,7 @@ const { projectName, projectLink, projectThumbnail } = Astro.props as Props;
     transform: scale(1);
   }
 
-  .thumbnail-image {
+  .thumbnail-image-style {
     object-fit: cover;
     height: 100%;
     width: 100%;
