@@ -38,7 +38,7 @@ export default {
       name: "description",
       title: "Short Description",
       type: "text",
-      rows: 5,
+      rows: 6,
     },
     {
       name: "content",
