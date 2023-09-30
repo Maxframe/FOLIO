@@ -1,3 +1,5 @@
+import { defineType, defineField } from "sanity";
+
 export default {
   name: "projectV2",
   title: "ProjectsV2",
@@ -7,6 +9,7 @@ export default {
       name: "projectName",
       title: "Project Name",
       type: "string",
+      validation: (Rule) => [Rule.required()],
     },
     {
       name: "slug",
@@ -15,16 +18,26 @@ export default {
       options: {
         source: "projectName",
       },
+      validation: (Rule) => [Rule.required()],
     },
 
     {
       name: "thumbnailImage",
       title: "Thumbnail Image",
       type: "image",
+      description: "minWidth: 1200px",
       options: {
         hotspot: true,
       },
+      validation: (Rule) => [Rule.required()],
     },
+    defineField({
+      title: "Alt",
+      name: "thumbAltText",
+      type: "string",
+      description: "Was ist im Bild zu sehen?",
+      validation: (Rule) => [Rule.required()],
+    }),
     {
       name: "tags",
       title: "Tags",
@@ -78,7 +91,8 @@ export default {
       type: "array",
       of: [
         { type: "sectionText" },
-        { type: "sectionImage" },
+        { type: "sectionImageSingle" },
+        { type: "sectionImageDouble" },
         { type: "sectionVideo" },
       ],
       preview: {

@@ -6,11 +6,14 @@ import sectionContent from "./sectionContent";
 import blockContent from "./blockContent";
 import projectV2 from "./projectV2";
 import infoSnippet from "./infoSnippet";
-import sectionImage from "./sectionImage";
+import sectionImageSingle from "./sectionImageSingle";
+import sectionImageDouble from "./sectionImageDouble";
 import sectionText from "./sectionText";
 import sectionVideo from "./sectionVideo";
+import siteSettings from "./siteSettings";
+import ui from "./ui";
 
-export default [
+export const schemaTypes = [
   hero,
   project,
   projectV2,
@@ -18,8 +21,11 @@ export default [
   contact,
   sectionContent,
   sectionText,
-  sectionImage,
+  sectionImageSingle,
+  sectionImageDouble,
   sectionVideo,
   blockContent,
   infoSnippet,
+  siteSettings,
+  ui,
 ];

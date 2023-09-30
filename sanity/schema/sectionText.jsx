@@ -6,12 +6,19 @@ export default {
   type: "object",
   icon: BlockContentIcon,
   fields: [
-    { name: "sectionTitle", title: "Section Title", type: "string" },
+    { name: "sectionTitle", title: "Optional Title", type: "string" },
     {
       name: "sectionText",
-      title: "Section Text",
+      title: "Text",
       type: "array",
+      description: "Try to keep it compact (max. 300 chars)",
       of: [{ type: "block" }],
+    },
+    {
+      title: "Inversed Layout? (RtL)",
+      name: "rightToLeft",
+      type: "boolean",
+      initialValue: false,
     },
   ],
   preview: {
