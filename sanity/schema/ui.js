@@ -4,11 +4,12 @@ export default {
   type: "document",
   fields: [
     {
-      name: "textAccent",
-      title: "Accent text",
+      name: "someting",
+      title:
+        "You can add there something if you know that you want it changed quickly :)",
       type: "string",
     },
-    {
+    /* {
       name: "textFirstLine",
       title: "Text First Line",
       type: "string",
@@ -25,11 +26,14 @@ export default {
       title: "Text Paragraph Two",
       type: "text",
       rows: 3,
-    },
+    }, */
   ],
   preview: {
-    select: {
-      title: "textFirstLine",
+    prepare() {
+      const myTitle = "UI Settings and Strings";
+      return {
+        title: myTitle,
+      };
     },
   },
 };

@@ -1,27 +1,30 @@
-import { defineType, defineField } from "sanity";
+import { defineType, defineField, defineArrayMember } from "sanity";
+import { DocumentsIcon } from "@sanity/icons";
 
-export default {
-  name: "projectV2",
-  title: "ProjectsV2",
+export default defineType({
+  name: "project",
+  title: "Project",
   type: "document",
+  icon: DocumentsIcon,
   fields: [
-    {
+    defineField({
       name: "projectName",
       title: "Project Name",
       type: "string",
       validation: (Rule) => [Rule.required()],
-    },
-    {
+    }),
+    defineField({
       name: "slug",
       title: "Slug",
       type: "slug",
       options: {
         source: "projectName",
+        maxLength: 96,
       },
       validation: (Rule) => [Rule.required()],
-    },
+    }),
 
-    {
+    defineField({
       name: "thumbnailImage",
       title: "Thumbnail Image",
       type: "image",
@@ -30,7 +33,7 @@ export default {
         hotspot: true,
       },
       validation: (Rule) => [Rule.required()],
-    },
+    }),
     defineField({
       title: "Alt",
       name: "thumbAltText",
@@ -38,23 +41,23 @@ export default {
       description: "Was ist im Bild zu sehen?",
       validation: (Rule) => [Rule.required()],
     }),
-    {
+    defineField({
       name: "tags",
       title: "Tags",
       type: "array",
-      of: [{ type: "string" }],
+      of: [defineArrayMember({ type: "string" })],
       options: {
         layout: "tags",
       },
-    },
-    {
+    }),
+    defineField({
       name: "description",
       title: "Initial Description",
       type: "array",
-      of: [{ type: "block" }],
+      of: [defineArrayMember({ type: "block" })],
       description: "Was ist es? Was macht es? Und für wen ist es?",
-    },
-    {
+    }),
+    defineField({
       name: "InfoSnippets",
       title: "Info Snippets",
       type: "object",
@@ -78,14 +81,14 @@ export default {
           description: "Was wurde dafür alles benutzt?",
         },
       ],
-    },
-    {
+    }),
+    defineField({
       name: "AddiInfoSnippets",
       title: "Additional Info Snippets",
       type: "array",
-      of: [{ type: "infoSnippet" }],
-    },
-    {
+      of: [defineArrayMember({ type: "infoSnippet" })],
+    }),
+    defineField({
       name: "content",
       title: "Content",
       type: "array",
@@ -100,7 +103,7 @@ export default {
           title: "sectionTitle",
         },
       },
-    },
+    }),
   ],
 
   preview: {
@@ -109,4 +112,4 @@ export default {
       media: "thumbnailImage",
     },
   },
-};
+});

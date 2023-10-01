@@ -3,7 +3,7 @@ const lightMode = sessionStorage.getItem("lightMode")
   : null;
 
 const toggleSwitch = document.querySelector(
-  '.mode-switch input[type="checkbox"]'
+  '.switchmode input[type="checkbox"]'
 );
 
 function switchMode(e) {

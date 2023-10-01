@@ -5,10 +5,10 @@ import { useSanityClient } from "@sanity/astro";
 
 import Nav from "../components/Nav.astro";
 import Hero from "../components/Hero.astro";
+import FeaturedProjects from "../components/FeaturedProjects.astro";
 import ImageBuilder from "../components/ImageBuilder.astro";
-import ProjectCard from "../components/ProjectCard.astro";
+import Footer from "../components/Footer.astro";
 
-const allProjectsData = await useSanityClient().fetch(`*[_type == 'project']`)
 const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]`)
 const contactData = await useSanityClient().fetch(`*[_type == 'contact'][0]`)
 
@@ -17,25 +17,12 @@ const contactData = await useSanityClient().fetch(`*[_type == 'contact'][0]`)
 <FrontpageLayout title="Portfolio Website">
   <Nav />
   <Hero />
-
+  
+  <FeaturedProjects />
   <div class="container">
-    <section class="project-section" id="projects">
-      <h2 id="project-section-title">Projekte</h2>
-      <div class="projects-wrapper">
-        {
-          allProjectsData?.map((project: any) => (
-            <ProjectCard
-              projectName={project.projectName}
-              projectLink={project.slug.current}
-              projectThumbnail={project.thumbnailImage}
-            />
-          ))
-        }
-      </div>
-    </section>
 
     <section class="about-section" id="about">
-      <div class="about-image-wrapper">
+     <!--  <div class="about-image-wrapper">
           <ImageBuilder cls="about-image" source={aboutData.image} w={500} h={500}/>
       </div>
       <div class="about-text">
@@ -55,19 +42,14 @@ const contactData = await useSanityClient().fetch(`*[_type == 'contact'][0]`)
             href={contactData.linkedinLink}
             target="_blank">Linkedin</a
           >
-        </div>
+        </div> -->
       </div>
     </section>
-    <p class="copyright">Max Werner &copy; <span id="copyright-date"></span></p>
+    <Footer />
   </div>
 </FrontpageLayout>
 
 <style>
-  .container {
-    max-width: 75rem;
-    margin: 0 auto;
-    padding: 0 2rem;
-  }
 
   .project-section {
     margin-bottom: 8rem;
@@ -133,14 +115,7 @@ const contactData = await useSanityClient().fetch(`*[_type == 'contact'][0]`)
     font-size: clamp(1rem, 2vw, 1.4rem);
   }
 
-  .copyright {
-    user-select: none;
-    text-align: center;
-    font-weight: 500;
-    color: var(--text);
-    opacity: 0.7;
-    margin-bottom: 0.5rem;
-  }
+
 
   @media screen and (max-width: 52rem) {
     .projects-wrapper {
@@ -182,7 +157,8 @@ const contactData = await useSanityClient().fetch(`*[_type == 'contact'][0]`)
 </style>
 
 <script>
-  document.querySelector("#copyright-date").textContent = new Date()
-    .getFullYear()
-    .toString();
+  document.querySelector("#copyright-date").textContent = "2k" + new Date()
+  .getFullYear()
+    .toString()
+    .substring(2, 4);
 </script>

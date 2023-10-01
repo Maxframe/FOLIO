@@ -1,5 +1,5 @@
 {
-  "name": "@example/minimal",
+  "name": "maxwerner-folio",
   "type": "module",
   "version": "0.0.1",
   "private": true,
@@ -13,6 +13,8 @@
   "dependencies": {
     "@sanity/astro": "^1.3.0",
     "@sanity/image-url": "^1.0.2",
-    "astro": "^3.1.4"
+    "astro": "^3.1.4",
+    "astro-portabletext": "^0.9.4",
+    "sass": "^1.68.0"
   }
 }

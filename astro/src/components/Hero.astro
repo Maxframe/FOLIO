@@ -2,21 +2,30 @@
 import "../styles/global.css";
 import { useSanityClient } from "@sanity/astro";
 
-const heroData = await useSanityClient().fetch(`*[_type == 'hero'][0]`)
-
+const heroData = await useSanityClient().fetch(`*[_type == 'hero'][0]{
+  heroText {
+    title,
+    titleSpecial,
+    subtitle,
+    subtitleSpecial
+  }
+}`)
+const title = heroData.heroText.title;
+const titleSpecial = heroData.heroText.titleSpecial;
+const subtitle = heroData.heroText.subtitle;
+const subtitleSpecial = heroData.heroText.subtitleSpecial;
 ---
 
-<header>
   <div class="hero-container">
     <h1>
-      <span class="highlight">{heroData.textAccent}</span>
-      {heroData.textFirstLine}<br />
-      {heroData.textParagraphOne}<br />
-      {heroData.textParagraphTwo}
+      <span class="title highlight">{titleSpecial}</span>
+      <span class="title">{title}</span><br>
+      <span class="sub">{subtitle}</span>
+      <span class="sub hidden">{subtitleSpecial}</span>
     </h1>
 
-    <div class="mode-switch-wrapper">
-      <label class="mode-switch" for="checkbox">
+    <div class="switchmode-wrapper">
+      <label class="switchmode" for="checkbox">
         <input type="checkbox" id="checkbox" />
         <div class="slider round"></div>
       </label>
@@ -40,16 +49,14 @@ const heroData = await useSanityClient().fetch(`*[_type == 'hero'][0]`)
         ></svg>
     </button> -->
   </div>
-</header>
 
-<style>
-  header {
-    height: 100dvh;
-    height: 100vh;
-  }
+<style lang="scss">
   .hero-container {
     position: relative;
     display: flex;
+    height: calc(100dvh - var(--featured-offset));
+    height: calc(100vh - var(--featured-offset));
+    min-height: calc(100vh var(--featured-offset));
     gap: 4rem;
     flex-direction: column;
     align-items: center;
@@ -57,74 +64,97 @@ const heroData = await useSanityClient().fetch(`*[_type == 'hero'][0]`)
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 30px;
-    min-height: 100vh;
-  }
-  h1 {
-    position: relative;
-    max-width: 35rem;
-    font-size: 2.2rem;
-    margin-top: 0;
-    color: var(--hero-text);
-    line-height: 1.2;
-    user-select: none;
+    
+    h1 {
+      position: relative;
+      transition: color var(--switchmode-transition-time);
+      max-width: 35rem;
+      margin-top: 0;
+      color: var(--c-fg);
+      line-height: 1.2;
+      user-select: none;
+   
+      .title {
+        font-size: 4rem;
+      }
+
+      .highlight {
+        color: var(--clr-accent);
+      }
+
+      .sub {
+        font-size: 1.4rem;
+        font-weight: 500;
+      }
+
+      .hidden {
+        color: var(--clr-wb-dark);
+      }
+    }
   }
 
-  header span {
-    color: var(--accent-color);
-  }
 
-  /* ------------------------------------------ */
 
-  .mode-switch-wrapper {
+
+/* Mode Switcher */
+  .switchmode-wrapper {
     display: flex;
     align-items: center;
   }
-  .mode-switch {
+  .switchmode {
     display: inline-block;
-    height: 5rem;
     position: relative;
-    width: 11rem;
+    width: var(--switchmode-w);
+    height: var(--switchmode-h);
+    transition: 0.4s;
+    input {
+      display: none;
+    }
   }
 
-  .mode-switch input {
-    display: none;
-  }
 
   .slider {
-    background-color: var(--about-color);
-    bottom: 0;
-    cursor: pointer;
-    left: 0;
     position: absolute;
-    right: 0;
+    cursor: pointer;
     top: 0;
-    box-shadow: 0 0 0 0.2rem var(--lightmode-stroke);
-    transition: 0.4s;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    outline: solid 0.2rem var(--c-stroke);
+    background-color: var(--clr-wb-light20);
+    transition: var(--switchmode-transition-time);
+
+    &:before {
+      position: absolute;
+      transform-origin: center;
+      transform: translate(-50%, 0%);
+      background-color: var(--clr-wb-light);
+      content: "";
+      height: calc(var(--switchmode-h) - var(--switchmode-slider-dist));
+      transition: var(--switchmode-transition-time);
+      width: calc(var(--switchmode-h) - var(--switchmode-slider-dist));
+      top: calc(var(--switchmode-slider-dist) / 2);
+      left: calc(var(--switchmode-h) / 2);
+      outline: solid 0.2rem var(--c-stroke);
+    }
+
+    .round {
+      border-radius: 999rem;
+    }
   }
 
-  .slider:before {
-    background-color: var(--light-color);
-    bottom: 0.5rem;
-    content: "";
-    height: 4rem;
-    left: 0.5rem;
-    position: absolute;
-    transition: var(--lightmode-transition-time);
-    width: 4rem;
-    border: solid 0.2rem var(--lightmode-stroke);
-  }
 
   input:checked + .slider {
-    box-shadow: 0 0 0 0.2rem var(--lightmode-stroke);
+    outline: solid 0.2rem var(--c-stroke);
   }
 
   input:checked + .slider:before {
-    transform: translateX(6rem);
-    border: solid 0.2rem var(--lightmode-stroke);
+    left: calc(var(--switchmode-w) - var(--switchmode-h) / 2);
+    outline: solid 0.2rem var(--c-stroke);
   }
 
-  .slider.round {
-    border-radius: 5rem;
+  .round {
+    border-radius: 999rem;
   }
 
   .slider.round:before {

@@ -1,6 +1,4 @@
 import { defineConfig } from "astro/config";
-
-// https://astro.build/config
 import sanity from "@sanity/astro";
 
 // https://astro.build/config

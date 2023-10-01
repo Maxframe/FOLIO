@@ -1,0 +1,154 @@
+---
+import { useSanityClient } from "@sanity/astro";
+import ImageBuilder from './ImageBuilder.astro';
+
+
+const fProjectsData = await useSanityClient().fetch(`*[_type == 'projectsSection'][0]{
+    heading,
+    projectsFeatured[]->{
+        projectName,
+        "slug": slug.current,
+        "thumbnailImage": thumbnailImage.asset._ref,
+        thumbAltText
+    }  
+}`)
+/* const heading = fProjectsData.heading;
+const slug = fProjectsData.projectsFeatured[].slug;
+/* const thumbnailImage = fProjectsData.projectsFeatured.thumbnailImage.asset._ref;
+*/
+console.log(fProjectsData)
+---
+
+<section class="project-section" id="projects">
+      <h2 id="project-section-title">{fProjectsData.heading}</h2>
+      <div class="projects-wrapper">
+        {
+          fProjectsData.projectsFeatured?.map((project: any) => (
+            <div class="card">
+                <a href={project.slug} class="card-link">
+                    <div class="card-overlay">
+                        <h3 class="card-title">{project.projectName}</h3>
+                    </div>
+                    <ImageBuilder cls="thumbnail-image" source={project.thumbnailImage} alt={project.thumbAltText} w={800} h={600} />
+                </a>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+<style lang="scss">
+    .project-section {
+        margin-bottom: 8rem;
+        max-width: var(--content-w);
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 var(--content-px);
+        #project-section-title {
+          color: var(--clr-accent);
+          font-size: 3rem;
+          padding-top: var(--nav-height);
+          margin-top: calc(var(--nav-height) * -1);
+          margin-bottom: 1rem;
+          margin-left: 1rem;
+        }
+    }
+
+  .projects-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+  }
+
+    .card {
+    position: relative;
+    border-radius: var(--card-radius);
+    overflow: hidden;
+    box-shadow: 0px 6px 10px -8px black;
+    width: 100%;
+    height: var(--card-h);
+    background-color: var(--neutral-color);
+  }
+
+  .card-link {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  .card:hover a .card-overlay > .card-title {
+    opacity: 1;
+  }
+
+  .card:hover a .card-overlay > .card-border {
+    opacity: 0.6;
+  }
+
+  .card:hover a > .card-overlay {
+    transform: scale(1);
+  }
+
+  .card:hover a > .thumbnail-image {
+    filter: brightness(30%);
+    transform: scale(1.05);
+  }
+
+
+
+  .card-overlay {
+    transform: scale(0.9);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    transition: var(--card-transition);
+  }
+
+  .card-title {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    padding: 0 1rem;
+    margin: 0;
+    color: #fafafa;
+    text-decoration: none;
+    font-size: 1rem;
+    text-align: center;
+    z-index: 1;
+    opacity: 0;
+    font-weight: 700;
+    transition: opacity var(--card-transition);
+  }
+
+  .card-border {
+    position: absolute;
+    opacity: 0;
+    height: 85%;
+    width: 85%;
+    margin: 7.5%;
+    border-radius: 6%;
+    top: 0;
+    left: 0;
+    border: solid 0.6rem #fafafa;
+    box-sizing: border-box;
+    transition: opacity var(--card-transition);
+  }
+
+  @media only screen and (hover: none) {
+    .thumbnail-image {
+      filter: brightness(30%);
+    }
+
+    .card-title {
+      opacity: 1;
+    }
+
+    .card-border {
+      opacity: 0.6;
+    }
+  }
+    </style>

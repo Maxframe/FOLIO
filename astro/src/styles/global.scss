@@ -6,25 +6,32 @@
   --content-w: 45rem; /* = 720px */
   --content-px: 2rem;
   --card-h: 11rem;
+
   --card-radius: 2rem;
   --breakpoint-md: 52rem;
   --breakpoint-sm: 32rem;
+
   --switchmode-h: 7rem;
   --switchmode-w: 15rem;
   --switchmode-slider-dist: 1.5rem;
   --switchmode-transition-time: 0.4s;
+
   /* Constant Colors */
   --clr-orange: #fd8c4a;
   --clr-yellow: #ccc016;
   --clr-accent: var(--clr-orange);
+
   --clr-transparent: #00000000;
   --clr-wb-dark: #181818;
   --clr-wb-dark60: #18181899;
   --clr-wb-dark20: #18181833;
+
   --clr-wb-neutral: #888888;
+
   --clr-wb-light: #fafafa;
   --clr-wb-light60: #fafafa99;
   --clr-wb-light20: #fafafa33;
+
   /* Color Variables */
   --c-bg: var(--clr-wb-dark);
   --c-fg: var(--clr-wb-light);
@@ -34,7 +41,6 @@
   --c-logo-bg: var(--clr-wb-neutral);
   --c-stroke: var(--clr-transparent);
 }
-
 .lightmode {
   --c-bg: var(--clr-wb-light);
   --c-fg: var(--clr-wb-dark);
@@ -114,10 +120,7 @@ img {
   -o-transition: none !important;
   transition: none !important;
 } */
-::-moz-selection {
-  background: var(--text);
-  color: var(--clr-wb-dark);
-}
+
 ::selection {
   background: var(--text);
   color: var(--clr-wb-dark);
@@ -127,4 +130,4 @@ img {
   body {
     font-size: 0.9rem;
   }
-}/*# sourceMappingURL=global.css.map */
+}
