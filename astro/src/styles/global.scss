@@ -3,9 +3,11 @@
   --nav-height: 5rem;
   --nav-offset: 2rem;
   --featured-offset: 9rem;
-  --content-w: 45rem; /* = 720px */
+  --content-w: 50rem; /* = 800px - 2*content-px */
   --content-px: 2rem;
   --card-h: 11rem;
+  --card-gap: 1.5rem;
+  --card-offset: 1rem;
 
   --card-radius: 2rem;
   --breakpoint-md: 52rem;
@@ -14,7 +16,9 @@
   --switchmode-h: 7rem;
   --switchmode-w: 15rem;
   --switchmode-slider-dist: 1.5rem;
-  --switchmode-transition-time: 0.4s;
+
+  --switchmode-transition-time: 400ms;
+  --card-transition-time: 300ms;
 
   /* Constant Colors */
   --clr-orange: #fd8c4a;
@@ -27,6 +31,8 @@
   --clr-wb-dark20: #18181833;
 
   --clr-wb-neutral: #888888;
+  --clr-wb-neutral60: #88888899;
+  --clr-wb-neutral20: #88888833;
 
   --clr-wb-light: #fafafa;
   --clr-wb-light60: #fafafa99;
@@ -40,6 +46,19 @@
   --c-logo-fg: var(--clr-wb-light);
   --c-logo-bg: var(--clr-wb-neutral);
   --c-stroke: var(--clr-transparent);
+  --c-tag-bg: var(--clr-wb-dark60);
+  --c-tag-text: var(--clr-wb-light);
+  --c-about-bg: var(--clr-wb-light20);
+
+  /* Text Scaling */
+  --step--2: clamp(0.6331rem, 0.7157rem + -0.1065vw, 0.6944rem);
+  --step--1: clamp(0.8331rem, 0.8294rem + 0.0185vw, 0.8438rem);
+  --step-0: clamp(1rem, 0.9565rem + 0.2174vw, 1.125rem);
+  --step-1: clamp(1.2rem, 1.0959rem + 0.5207vw, 1.4994rem);
+  --step-2: clamp(1.44rem, 1.2457rem + 0.9717vw, 1.9988rem);
+  --step-3: clamp(1.7281rem, 1.4025rem + 1.6283vw, 2.6644rem);
+  --step-4: clamp(2.0738rem, 1.5596rem + 2.5707vw, 3.5519rem);
+  --step-5: clamp(2.4881rem, 1.7066rem + 3.9076vw, 4.735rem);
 }
 .lightmode {
   --c-bg: var(--clr-wb-light);
@@ -49,6 +68,7 @@
   --c-logo-fg: var(--clr-transparent);
   --c-logo-bg: var(--clr-transparent);
   --c-stroke: var(--clr-wb-dark);
+  --c-about-bg: var(--clr-transparent);
 }
 
 *,

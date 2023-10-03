@@ -29,12 +29,12 @@ const imageSize = decodeAssetId(source)
 <Image class={cls} src={urlFor(source).auto("format").width(w).height(h).url()} width={w ? w : imageSize.size.width} height={h ? h : imageSize.size.height} draggable="false" alt={alt ? alt : ""} />
 
 <style lang="scss">
-    .thumbnail-image {
+  .thumbnail-image {
     object-fit: cover;
     height: 100%;
     width: 100%;
     transform: scale(1.01);
+    transform-origin: center;
     transition: var(--card-transition);
-    height: 13rem;
-}
+  }
 </style>

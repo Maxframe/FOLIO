@@ -1,0 +1,33 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Astro Server",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "dev"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/astro"
+      },
+      "runOptions": { "runOn": "folderOpen" }
+    },
+    {
+      "label": "Start Sanity Server",
+      "type": "shell",
+      "command": "sanity",
+      "args": ["dev"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/sanity"
+      },
+      "runOptions": { "runOn": "folderOpen" }
+    }
+  ]
+}

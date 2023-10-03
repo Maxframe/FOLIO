@@ -11,6 +11,7 @@ import Footer from "../components/Footer.astro";
 export async function getStaticPaths() {
   const allProjectData = await useSanityClient().fetch(`*[_type == "project"]`)
 
+
   return allProjectData?.map((project: any) => {
     return {
       params: { projectName: project.slug.current },
@@ -48,7 +49,7 @@ const { project } = Astro.props;
 </ProjectLayout>
 <Footer />
 
-<style>
+<style lang="scss">
   .image-wrapper {
     margin: auto;
     text-align: center;
