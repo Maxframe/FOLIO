@@ -23,11 +23,11 @@ export default defineType({
       },
     }),
     defineField({
-      name: "aboutText",
-      title: "Text",
+      name: "aboutTextBlock",
+      title: "Text Block",
+      description: "Wer bin ich?",
       type: "array",
       of: [defineArrayMember({ type: "block" })],
-      description: "Wer bin ich?",
     }),
     defineField({
       name: "aboutImage",

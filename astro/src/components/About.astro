@@ -11,6 +11,7 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
   "aboutImage": aboutImage.asset._ref,
   aboutAltText,
   aboutText,
+   aboutTextBlock,
   "mailLink": contactLinks.mailLink,
   contactLinks {
     addLinks[] {
@@ -19,7 +20,7 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
       contactType,
     } 
   },
-  "cvFile": cvFile.asset._ref,
+  "cvFile": cvFile.asset->url,
   "cvText": cvFile.cvText,
 }`);
 
@@ -33,7 +34,8 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
       <div class="about-text">
         <h1 class="about-title">{aboutData.aboutTitle}</h1>
         <div class="about-description">
-          <PortableText value={aboutData.aboutText} />
+          <p>{aboutData.aboutText}</p>
+          <PortableText value={aboutData.aboutTextBlock} />
         </div>
         <div class="about-social">
           <a class="about-mail-link" href={"mailto:" + aboutData.mailLink}
@@ -51,6 +53,7 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
             }
           
         </div>
+        <a href={aboutData.cvFile + "?dl="}>{aboutData.cvText}</a>
       </div>
     </div>
   </section>
@@ -83,6 +86,12 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
 
   .about-title {
     font-size: clamp(1.5rem, 4vw, 4rem);
+  }
+
+ .about-description {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
   }
 
   .about-social {

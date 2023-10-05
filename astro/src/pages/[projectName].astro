@@ -1,6 +1,8 @@
 ---
 import ProjectLayout from "../layouts/ProjectLayout.astro";
 import { useSanityClient } from "@sanity/astro";
+import { PortableText } from "astro-portabletext";
+
 
 
 import Nav from "../components/Nav.astro";
@@ -9,10 +11,9 @@ import ImageBuilder from "../components/ImageBuilder.astro";
 import Footer from "../components/Footer.astro";
 
 export async function getStaticPaths() {
-  const allProjectData = await useSanityClient().fetch(`*[_type == "project"]`)
+  const allProjectData = await useSanityClient().fetch(`*[_type == 'projectsSection'][0]{projectsFeatured[]->}`)
 
-
-  return allProjectData?.map((project: any) => {
+  return allProjectData.projectsFeatured?.map((project: any) => {
     return {
       params: { projectName: project.slug.current },
       props: { project },
@@ -20,22 +21,25 @@ export async function getStaticPaths() {
   });
 }
 const { project } = Astro.props;
+
+const thumbnailImage = project.thumbnailImage.asset._ref;
 ---
 
 <ProjectLayout title={project.projectName}>
   <Nav />
   <div class="image-wrapper">
-    <ImageBuilder cls="project-hero-image" source={project.thumbnailImage}/>
+    <ImageBuilder cls="project-hero-image" source={thumbnailImage} alt={project.thumbAltText} loading="eager" w={1280} />
   </div>
   <div class="container">
     <h1>{project.projectName}</h1>
     <div id="tag-list">
       {project.tags?.map((tag: string) => <span>{tag}</span>)}
     </div>
-    <h2>{project.description}</h2>
+    <PortableText value={project.description} />
+
 
     <div id="sections-wrapper">
-      {
+<!--       {
         project.content?.map((section: any) => (
           <ProjectSection
             sectionTitle={section.sectionTitle}
@@ -44,7 +48,7 @@ const { project } = Astro.props;
           />
         ))
       }
-    </div>
+    </div> -->
   </div>
 </ProjectLayout>
 <Footer />

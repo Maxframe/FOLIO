@@ -5,6 +5,7 @@ import ImageBuilder from './ImageBuilder.astro';
 
 const fProjectsData = await useSanityClient().fetch(`*[_type == 'projectsSection'][0]{
     heading,
+    "slug": slug.current,
     projectsFeatured[]->{
         projectName,
         "slug": slug.current,
@@ -14,7 +15,7 @@ const fProjectsData = await useSanityClient().fetch(`*[_type == 'projectsSection
 }`)
 ---
 
-<section class="project-section" id="projects">
+<section class="project-section" id={fProjectsData.slug}>
       <h2 id="project-section-title">{fProjectsData.heading}</h2>
       <div class="projects-wrapper">
         {

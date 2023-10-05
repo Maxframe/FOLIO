@@ -1,10 +1,17 @@
 ---
+import { useSanityClient } from "@sanity/astro";
+const projectsSLug = await useSanityClient().fetch(`*[_type == 'projectsSection'][0]{
+  "slug": slug.current,
+}`);
 
+const aboutSlug = await useSanityClient().fetch(`*[_type == 'about'][0]{
+  "slug": slug.current,
+}`);
 ---
 
 <nav>
   <div class="nav-content">
-    <a class="nav-text" href="/#projects">Projekte</a>
+    <a class="nav-text" href={"/#" + projectsSLug.slug}>Projekte</a>
     
     <a class="logo" href="/#top">
       <svg viewBox="-2 -2 133 40" xmlns="http://www.w3.org/2000/svg">
@@ -31,7 +38,7 @@
         fill="var(--c-logo-fg)"></path>
       </svg>
     </a>
-    <a class="nav-text" href="/#about">Über Mich</a>
+    <a class="nav-text" href={"/#" + aboutSlug.slug}>Über Mich</a>
   </div>
 </nav>
 

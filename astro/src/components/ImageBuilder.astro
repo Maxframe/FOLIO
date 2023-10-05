@@ -8,9 +8,10 @@ export interface Props {
   alt?: string;
   w?:number;
   h?:number;
+  loading?:'eager' | 'lazy';
 }
 
-const { source, alt, cls, w, h } = Astro.props as Props;
+const { source, alt, cls, w, h, loading } = Astro.props as Props;
 
 const pattern = /^image-([a-f\d]+)-(\d+x\d+)-(\w+)$/
 const decodeAssetId = id => {
@@ -26,7 +27,7 @@ const imageSize = decodeAssetId(source)
 
 ---
 
-<Image class={cls} src={urlFor(source).auto("format").width(w).height(h).url()} width={w ? w : imageSize.size.width} height={h ? h : imageSize.size.height} draggable="false" alt={alt ? alt : ""} />
+<Image class={cls} src={urlFor(source).auto("format").width(w).height(h).url()} width={w ? w : imageSize.size.width} height={h ? h : imageSize.size.height} draggable="false" alt={alt ? alt : ""} loading={loading} />
 
 <style lang="scss">
   .thumbnail-image {
