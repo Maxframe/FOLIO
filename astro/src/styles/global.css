@@ -3,6 +3,7 @@
   --nav-height: 5rem;
   --nav-offset: 2rem;
   --featured-offset: 9rem;
+  --hero-w: 78rem;
   --content-w: 50rem; /* = 800px - 2*content-px */
   --content-px: 2rem;
   --card-h: 11rem;
@@ -108,21 +109,13 @@ img {
 }
 
 .project-hero-image {
-  width: auto;
-  max-width: 100%;
-  height: auto;
+  width: 100%;
   margin-top: 5rem;
-  max-height: calc(100vh - 5rem);
+  max-height: calc(100vh - var(--nav-height));
   background-color: var(--clr-wb-neutral50);
-}
-
-.project-section-image {
-  width: auto;
-  max-width: 100%;
-  height: auto;
-  max-height: 100%;
-  background-color: var(--clr-wb-neutral);
-  border-radius: 0.4rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 1rem;
 }
 
 /* body, .no-transition *, .no-transition *::before {

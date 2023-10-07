@@ -12,7 +12,7 @@ import Footer from "../components/Footer.astro";
 
 export async function getStaticPaths() {
   const allProjectData = await useSanityClient().fetch(`*[_type == 'projectsSection'][0]{projectsFeatured[]->}`)
-
+  console.log(allProjectData);
   return allProjectData.projectsFeatured?.map((project: any) => {
     return {
       params: { projectName: project.slug.current },
@@ -28,18 +28,18 @@ const thumbnailImage = project.thumbnailImage.asset._ref;
 <ProjectLayout title={project.projectName}>
   <Nav />
   <div class="image-wrapper">
-    <ImageBuilder cls="project-hero-image" source={thumbnailImage} alt={project.thumbAltText} loading="eager" w={1280} />
+    <ImageBuilder cls="project-hero-image" source={thumbnailImage} alt={project.thumbAltText} loading="eager" w={1250} />
   </div>
   <div class="container">
     <h1>{project.projectName}</h1>
-    <div id="tag-list">
+    <div class="tag-list">
       {project.tags?.map((tag: string) => <span>{tag}</span>)}
     </div>
     <PortableText value={project.description} />
 
 
     <div id="sections-wrapper">
-<!--       {
+      {
         project.content?.map((section: any) => (
           <ProjectSection
             sectionTitle={section.sectionTitle}
@@ -48,32 +48,39 @@ const thumbnailImage = project.thumbnailImage.asset._ref;
           />
         ))
       }
-    </div> -->
+    </div>
   </div>
 </ProjectLayout>
 <Footer />
 
 <style lang="scss">
   .image-wrapper {
+    max-width: var(--hero-w);
+    padding: 0 var(--content-px);
     margin: auto;
-    text-align: center;
+    border-radius: 1rem;
   }
 
   .container {
+    position: relative;
+    background-color: var(--c-bg);
+    border-radius:4rem;
     max-width: var(--breakpoint-md);
     margin: 0 auto;
     padding: 0 2rem;
     overflow: hidden;
+    margin-top: -8rem;
   }
 
   h1 {
+    text-align: center;
     margin-top: 1.5rem;
-    font-size: 3.5rem;
+    font-size: var(--step-4);
     font-weight: 800;
-    color: var(--accent-color);
+    color: var(--clr-accent);
   }
 
-  #tag-list {
+  .tag-list {
     display: flex;
     flex-wrap: wrap;
     column-gap: 1.5rem;
