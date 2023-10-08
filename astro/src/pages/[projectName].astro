@@ -32,7 +32,7 @@ const thumbnailImage = project.thumbnailImage.asset._ref;
   </div>
 
   <div class="container">
-    <h1>{project.projectName}</h1>
+    <h1 class="project-title">{project.projectName}</h1>
 
     <div class="infosection-wrapper">
 
@@ -86,33 +86,39 @@ const thumbnailImage = project.thumbnailImage.asset._ref;
     padding: 0 2rem;
     overflow: hidden;
     margin-top: -8rem;
-  }
+    .project-title {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: var(--step-4);
+      font-weight: 800;
+      color: var(--clr-accent);
+    }
 
-  h1 {
-    text-align: center;
-    margin-top: 1.5rem;
-    font-size: var(--step-4);
-    font-weight: 800;
-    color: var(--clr-accent);
-  }
+    .infosection-wrapper {
+      .tag-description-wrapper {
+        .tag-list {
+          display: flex;
+          flex-wrap: wrap;
+          column-gap: 1.5rem;
+          margin-top: 1rem;
+          color: var(--hero-text);
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.05rem;
 
-  .tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 1.5rem;
-    margin-top: 1rem;
-    color: var(--hero-text);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05rem;
-
-    .tag {
-      padding: 0.5rem 1.1rem;
-      border-radius: 999rem;
-      border: solid 0.2rem var(--c-stroke);
-      font-weight: 700;
+          .tag {
+            padding: 0.5rem 1.1rem;
+            border-radius: 999rem;
+            border: solid 0.2rem var(--c-stroke);
+            font-weight: 700;
+          }
+        }
+      }
     }
   }
+
+
+
 
   h2 {
     margin-top: 0.4rem;
