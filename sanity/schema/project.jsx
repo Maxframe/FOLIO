@@ -58,7 +58,7 @@ export default defineType({
       description: "Was ist es? Was macht es? Und für wen ist es?",
     }),
     defineField({
-      name: "InfoSnippets",
+      name: "infoSnippets",
       title: "Info Snippets",
       type: "object",
       fields: [

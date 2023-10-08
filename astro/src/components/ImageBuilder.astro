@@ -8,10 +8,11 @@ export interface Props {
   alt?: string;
   w?:number;
   h?:number;
-  loading?:'eager' | 'lazy';
+  fit?: 'clip' | 'crop' | 'fill' | 'fillmax' | 'max' | 'scale' | 'min'; /* More info: https://www.sanity.io/docs/image-urls#fit-45b29dc6f09f */
+  loading?: 'eager' | 'lazy';
 }
 
-const { source, alt, cls, w, h, loading } = Astro.props as Props;
+const { source, alt, cls, w, h, fit, loading } = Astro.props as Props;
 
 const pattern = /^image-([a-f\d]+)-(\d+x\d+)-(\w+)$/
 const decodeAssetId = id => {
@@ -27,15 +28,8 @@ const imageSize = decodeAssetId(source)
 
 ---
 
-<Image class={cls} src={urlFor(source).auto("format").width(w).height(h).url()} width={w ? w : imageSize.size.width} height={h ? h : imageSize.size.height} draggable="false" alt={alt ? alt : ""} loading={loading} />
+<Image class={cls} src={urlFor(source).auto("format").fit(fit ? fit : "clip").width(w).height(h).url()} width={w ? w : imageSize.size.width} height={h ? h : imageSize.size.height} draggable="false" alt={alt ? alt : ""} loading={loading} />
 
 <style lang="scss">
-  .thumbnail-image {
-    object-fit: cover;
-    height: 100%;
-    width: 100%;
-    transform: scale(1.01);
-    transform-origin: center;
-    transition: var(--card-transition);
-  }
+
 </style>

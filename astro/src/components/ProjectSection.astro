@@ -1,7 +1,8 @@
 ---
-import ImageBuilder from './ImageBuilder.astro';
+import ImageBuilder from "./ImageBuilder.astro";
 
 export interface Props {
+  sectionType: string;
   sectionTitle: string;
   sectionText: string;
   sectionImages: object[];
@@ -15,11 +16,9 @@ const { sectionTitle, sectionText, sectionImages } = Astro.props as Props;
   {
     sectionImages?.map((image: any) => (
       <div class="image-wrapper">
-        <ImageBuilder cls="project-section-image" w={1000} source={image}/>
+        <ImageBuilder cls="project-section-image" w={1000} source={image} />
       </div>
     ))
-
-
   }
 </div>
 

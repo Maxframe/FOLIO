@@ -145,7 +145,7 @@ const subtitleSpecial = heroData.heroText.subtitleSpecial;
     bottom: 0;
     left: 0;
     right: 0;
-    outline: solid 0.2rem var(--c-stroke);
+    outline: solid var(--stroke-w) var(--c-stroke);
     background-color: var(--clr-wb-light20);
     transition: var(--switchmode-transition-time);
 
@@ -158,7 +158,7 @@ const subtitleSpecial = heroData.heroText.subtitleSpecial;
       width: calc(var(--switchmode-h) - var(--switchmode-slider-dist));
       top: calc(var(--switchmode-slider-dist) / 2);
       left: calc(var(--switchmode-h) / 2);
-      outline: solid 0.2rem var(--c-stroke);
+      outline: solid var(--stroke-w) var(--c-stroke);
       transition: var(--switchmode-transition-time);
     }
 
@@ -188,12 +188,12 @@ transition: 0.7s cubic-bezier(.11,.61,.36,1.22);
 
 
   input:checked + .slider {
-    outline: solid 0.2rem var(--c-stroke);
+    outline: solid var(--stroke-w) var(--c-stroke);
   }
 
   input:checked + .slider .slidee {
     left: calc(var(--switchmode-w) - var(--switchmode-h) / 2);
-    outline: solid 0.2rem var(--c-stroke);
+    outline: solid var(--stroke-w) var(--c-stroke);
     transform: translate(-50%,0%);
 
   }

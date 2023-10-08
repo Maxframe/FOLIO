@@ -1,9 +1,9 @@
 ---
 import { useSanityClient } from "@sanity/astro";
-import ImageBuilder from './ImageBuilder.astro';
+import ImageBuilder from "./ImageBuilder.astro";
 
-
-const fProjectsData = await useSanityClient().fetch(`*[_type == 'projectsSection'][0]{
+const fProjectsData = await useSanityClient()
+  .fetch(`*[_type == 'projectsSection'][0]{
     heading,
     "slug": slug.current,
     projectsFeatured[]->{
@@ -12,101 +12,108 @@ const fProjectsData = await useSanityClient().fetch(`*[_type == 'projectsSection
         "thumbnailImage": thumbnailImage.asset._ref,
         thumbAltText
     }  
-}`)
+}`);
 ---
 
 <section class="project-section" id={fProjectsData.slug}>
-      <h2 id="project-section-title">{fProjectsData.heading}</h2>
-      <div class="projects-wrapper">
-        {
-          fProjectsData.projectsFeatured?.map((project: any) => (
-            <div class="card">
-              <a href={project.slug} class="card-link">
-                <div class="image-wrapper">
-                  <ImageBuilder cls="thumbnail-image" source={project.thumbnailImage} alt={project.thumbAltText} w={800} h={600} />
-                </div>
-              </a>
-              <h3 class="card-title">{project.projectName}</h3>
+  <h2 class="project-section-title">{fProjectsData.heading}</h2>
+  <div class="projects-wrapper">
+    {
+      fProjectsData.projectsFeatured?.map((project: any) => (
+        <div class="card">
+          <a href={project.slug} class="card-link">
+            <div class="image-wrapper">
+              <ImageBuilder
+                cls="thumbnail-image"
+                source={project.thumbnailImage}
+                alt={project.thumbAltText}
+                w={800}
+                h={600}
+              />
             </div>
-          ))
-        }
-      </div>
-    </section>
+          </a>
+          <h3 class="card-title">{project.projectName}</h3>
+        </div>
+      ))
+    }
+  </div>
+</section>
 
 <style lang="scss">
-    .project-section {
-      max-width: var(--content-w);
-      margin: 0 auto;
-      padding: 0 var(--content-px);
-      margin-bottom: 8rem;
+  .project-section {
+    max-width: var(--content-w);
+    margin: 0 auto;
+    padding: 0 var(--content-px);
+    margin-bottom: 8rem;
 
-        #project-section-title {
-          color: var(--clr-accent);
-          font-size: var(--step-3);
-          padding-top: var(--nav-height);
-          margin-top: calc(var(--nav-height) * -1);
-          margin-bottom: 1rem;
-          margin-left: 1rem;
-        }
+    .project-section-title {
+      color: var(--clr-accent);
+      font-size: var(--step-3);
+      padding-top: var(--nav-height);
+      margin-top: calc(var(--nav-height) * -1);
+      margin-bottom: 1rem;
+      margin-left: 1rem;
     }
+  }
 
   .projects-wrapper {
     display: flex;
     flex-direction: column;
     gap: var(--card-gap);
     width: 100%;
-    
+
     .card {
-    position: relative;
-    width: 100%;
-    height: var(--card-h);
-
-    &:hover > .card-title {
-      opacity: 1;
-    }
-
-    &:hover >  .card-link .image-wrapper {
-      transform: translateX(calc(var(--card-offset) * -1));
-      filter: brightness(1);
-    }
-    
-    .card-link {
-      position: absolute;
+      position: relative;
       width: 100%;
-      height: 100%;
-      
-      .image-wrapper {
-        border-radius: var(--card-radius);
-        overflow: hidden;
+      height: var(--card-h);
+
+      &:hover > .card-title {
+        opacity: 1;
+      }
+
+      &:hover > .card-link .image-wrapper {
+        transform: translateX(calc(var(--card-offset) * -1));
+        filter: brightness(1);
+      }
+
+      .card-link {
+        position: absolute;
+        width: 100%;
         height: 100%;
-        filter: brightness(0.6);
-        background-color: var(--neutral-color);
-        transition: transform  var(--card-transition-time), filter  var(--card-transition-time);
-        box-shadow: 0px 6px 10px -8px black;
+
+        .image-wrapper {
+          border-radius: var(--card-radius);
+          overflow: hidden;
+          height: 100%;
+          filter: brightness(0.6);
+          background-color: var(--neutral-color);
+          transition:
+            transform var(--card-transition-time),
+            filter var(--card-transition-time);
+          box-shadow: 0px 6px 10px -8px black;
+        }
+      }
+      .card-title {
+        position: absolute;
+        right: 0;
+        bottom: 1rem;
+        color: var(--c-card-text);
+        background-color: var(--c-card-text-bg);
+        padding: 1rem 1.4rem;
+        margin: 0;
+        border-radius: 999px;
+        font-size: 1.2rem;
+        text-align: center;
+        z-index: 1;
+        opacity: 0;
+        font-weight: 700;
+        backdrop-filter: blur(10px);
+        transform: translateX(var(--card-offset));
+        pointer-events: none;
+        transition: opacity var(--card-transition-time);
       }
     }
-    .card-title {
-      position: absolute;
-      right: 0;
-      bottom: 1rem;
-      color: var(--c-tag-text);
-      background-color: var(--c-tag-bg);
-      padding: 1rem 1.4rem;
-      margin: 0;
-      border-radius: 999px;
-      font-size: 1.2rem;
-      text-align: center;
-      z-index: 1;
-      opacity: 0;
-      font-weight: 700;
-      backdrop-filter: blur(10px);
-      transform: translateX(var(--card-offset));
-      pointer-events: none;
-      transition: opacity var(--card-transition-time);
-    }
   }
-}
-
 
   @media only screen and (hover: none) {
     .thumbnail-image {
@@ -121,4 +128,4 @@ const fProjectsData = await useSanityClient().fetch(`*[_type == 'projectsSection
       opacity: 0.6;
     }
   }
-    </style>
+</style>

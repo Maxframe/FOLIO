@@ -1,6 +1,5 @@
 ---
 import "../styles/global.css";
-import logo from "../images/folio-logo.svg";
 export interface Props {
   title: string;
 }
@@ -8,15 +7,15 @@ export interface Props {
 const { title } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de-CH">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -38,36 +37,36 @@ const { title } = Astro.props;
 </html>
 
 <script is:inline>
-  document.addEventListener("DOMContentLoaded",function(){
-    let node = document.querySelector('.no-transition');
-    node.classList.remove('no-transition');
-  });
+document.addEventListener("DOMContentLoaded", function () {
+  let node = document.querySelector(".no-transition");
+  node.classList.remove("no-transition");
+});
 
-  const lightMode = sessionStorage.getItem("lightMode")
-    ? sessionStorage.getItem("lightMode")
-    : null;
+const lightMode = sessionStorage.getItem("lightMode")
+  ? sessionStorage.getItem("lightMode")
+  : null;
 
-  const toggleSwitch = document.querySelector(
-    '.switchmode input[type="checkbox"]'
-  );
+const toggleSwitch = document.querySelector(
+  '.switchmode input[type="checkbox"]'
+);
 
-  function switchMode(e) {
-    if (e.target.checked) {
-      document.body.classList.add("lightmode");
-      sessionStorage.setItem("lightMode", "enabled");
-    } else {
-      document.body.classList.remove("lightmode");
-      sessionStorage.removeItem("lightMode");
-    }
-  }
-
-  toggleSwitch?.addEventListener("change", switchMode, false);
-
-  if (lightMode) {
+function switchMode(e) {
+  if (e.target.checked) {
     document.body.classList.add("lightmode");
-
-    if (lightMode === "enabled") {
-      toggleSwitch.checked = true;
-    }
+    sessionStorage.setItem("lightMode", "enabled");
+  } else {
+    document.body.classList.remove("lightmode");
+    sessionStorage.removeItem("lightMode");
   }
+}
+
+toggleSwitch?.addEventListener("change", switchMode, false);
+
+if (lightMode) {
+  document.body.classList.add("lightmode");
+
+  if (lightMode === "enabled") {
+    toggleSwitch.checked = true;
+  }
+}
 </script>

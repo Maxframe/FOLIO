@@ -1,0 +1,39 @@
+---
+
+---
+
+<div class="language-wrapper">
+  <a class="language-option" href="#"> EN</a>
+  <span class="language-divider">/</span>
+  <a class="language-option current" href="#"> DE</a>
+</div>
+
+<style lang="scss">
+  .language-wrapper {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    right: 0;
+    padding: 1rem 2.5rem;
+    height: var(--nav-height);
+    gap: 0.4rem;
+
+    z-index: 100;
+    font-weight: 600;
+
+    .language-option {
+      opacity: 0.6;
+      color: var(--c-fg);
+      transition: var(--switchmode-transition-time) ease;
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    .current {
+      opacity: 1;
+    }
+  }
+</style>

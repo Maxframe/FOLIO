@@ -2,8 +2,7 @@
 import "../styles/global.css";
 import { useSanityClient } from "@sanity/astro";
 import { PortableText } from "astro-portabletext";
-import ImageBuilder from './ImageBuilder.astro';
-
+import ImageBuilder from "./ImageBuilder.astro";
 
 const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
   aboutTitle,
@@ -23,48 +22,54 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
   "cvFile": cvFile.asset->url,
   "cvText": cvFile.cvText,
 }`);
-
 ---
 
-  <section class="about-section" id={aboutData.slug}>
-    <div class="about-wrapper">
-      <div class="about-image-wrapper">
-        <ImageBuilder cls="about-image" source={aboutData.aboutImage} alt={aboutData.thumbAltText} w={500} h={500}/>
+<section class="about-section" id={aboutData.slug}>
+  <div class="about-wrapper">
+    <div class="about-image-wrapper">
+      <ImageBuilder
+        cls="about-image"
+        source={aboutData.aboutImage}
+        alt={aboutData.thumbAltText}
+        w={500}
+        h={500}
+      />
+    </div>
+    <div class="about-text">
+      <h1 class="about-title">{aboutData.aboutTitle}</h1>
+      <div class="about-description block-wrapper">
+        <PortableText value={aboutData.aboutTextBlock} />
       </div>
-      <div class="about-text">
-        <h1 class="about-title">{aboutData.aboutTitle}</h1>
-        <div class="about-description">
-          <p>{aboutData.aboutText}</p>
-          <PortableText value={aboutData.aboutTextBlock} />
-        </div>
-        <div class="about-social">
-          <a class="about-mail-link" href={"mailto:" + aboutData.mailLink}
+      <div class="about-social">
+        <a class="about-mail-link" href={"mailto:" + aboutData.mailLink}
           >{aboutData.mailLink}</a
-          >
-          {
-            aboutData.contactLinks.addLinks?.map((link: any) => (
-              <a
+        >
+        {
+          aboutData.contactLinks.addLinks?.map((link: any) => (
+            <a
               class="about-social-link"
               href={link.contactLink}
-              target="_blank">
-              {link.contactName} 
-              </a>
-              ))
-            }
-          
-        </div>
-        <a href={aboutData.cvFile + "?dl="}>{aboutData.cvText}</a>
+              target="_blank"
+            >
+              {link.contactName}
+            </a>
+          ))
+        }
       </div>
+      <a href={aboutData.cvFile + "?dl="}>{aboutData.cvText}</a>
     </div>
-  </section>
+  </div>
+</section>
 
 <style lang="scss">
   .about-section {
     max-width: var(--content-w);
     margin: 0 auto;
     padding: 0 var(--content-px);
+    padding-top: calc(var(--nav-height) + var(--about-img-offset-y) * -1);
+    margin-top: calc((var(--nav-height) + var(--about-img-offset-y)) * -1);
   }
-  
+
   .about-wrapper {
     position: relative;
     display: grid;
@@ -74,24 +79,17 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
     margin-bottom: 15rem;
     padding: 2rem;
     padding-left: 0;
-    background: var(--c-about-bg);
+    background-color: var(--c-highlighted-bg);
     border-radius: 2rem;
-    border: solid 0.2rem var(--c-stroke);
-
+    border: solid var(--stroke-w) var(--c-stroke);
   }
 
   .about-image-wrapper {
-    transform: translate(-3rem, -5rem);
+    transform: translate(var(--about-img-offset-x), var(--about-img-offset-y));
   }
 
   .about-title {
     font-size: clamp(1.5rem, 4vw, 4rem);
-  }
-
- .about-description {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
   }
 
   .about-social {
@@ -116,5 +114,4 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
   .about-social-link {
     font-size: clamp(1rem, 2vw, 1.4rem);
   }
-
 </style>

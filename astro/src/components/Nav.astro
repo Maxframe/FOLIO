@@ -76,7 +76,7 @@ const aboutSlug = await useSanityClient().fetch(`*[_type == 'about'][0]{
     color: var(--c-fg);
     font-weight: 600;
     padding: 0.5rem;
-    opacity: 0.5;
+    opacity: 0.6;
     text-align: center;
     transition: 0.2s ease-out;
 
@@ -109,7 +109,7 @@ const aboutSlug = await useSanityClient().fetch(`*[_type == 'about'][0]{
   }
 
   .logo svg:hover {
-    stroke-width: 0.2rem;
+    stroke-width: var(--stroke-w);
     opacity: 1;
   }
 

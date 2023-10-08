@@ -1,7 +1,6 @@
 ---
 import "../styles/global.css";
-import { ViewTransitions } from 'astro:transitions';
-
+import { ViewTransitions } from "astro:transitions";
 
 export interface Props {
   title: string;
@@ -10,15 +9,15 @@ export interface Props {
 const { title } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de-CH">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
@@ -32,7 +31,6 @@ const { title } = Astro.props;
     <meta name="keywords" content="Portfolio, Max, Werner, Design, Code" />
     <meta name="generator" content={Astro.generator} />
     <title>Max Werner | {title}</title>
-    <ViewTransitions />
   </head>
   <body class="no-transition">
     <div>
@@ -46,7 +44,7 @@ const lightMode = sessionStorage.getItem("lightMode")
   ? sessionStorage.getItem("lightMode")
   : null;
 
-  if (lightMode) {
-    document.body.classList.add("lightmode");
-  }
+if (lightMode) {
+  document.body.classList.add("lightmode");
+}
 </script>
