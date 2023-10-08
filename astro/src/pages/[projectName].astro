@@ -30,12 +30,28 @@ const thumbnailImage = project.thumbnailImage.asset._ref;
   <div class="image-wrapper">
     <ImageBuilder cls="project-hero-image" source={thumbnailImage} alt={project.thumbAltText} loading="eager" w={1250} />
   </div>
+
   <div class="container">
     <h1>{project.projectName}</h1>
-    <div class="tag-list">
-      {project.tags?.map((tag: string) => <span>{tag}</span>)}
+
+    <div class="infosection-wrapper">
+
+      <div class="tag-description-wrapper">
+
+        <div class="tag-list">
+          {project.tags?.map((tag: string) => <span class="tag">{tag}</span>)}
+        </div>
+        
+        <div class="description">
+          <PortableText value={project.description} />
+        </div>
+
+      </div>
+    <div class="info-snippet-wrapper">
+      div
+
     </div>
-    <PortableText value={project.description} />
+  </div>
 
 
     <div id="sections-wrapper">
@@ -89,6 +105,13 @@ const thumbnailImage = project.thumbnailImage.asset._ref;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05rem;
+
+    .tag {
+      padding: 0.5rem 1.1rem;
+      border-radius: 999rem;
+      border: solid 0.2rem var(--c-stroke);
+      font-weight: 700;
+    }
   }
 
   h2 {
