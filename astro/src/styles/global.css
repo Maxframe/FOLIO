@@ -15,7 +15,10 @@
   --project-b-radius: 2rem;
   --about-img-offset-x: -3rem;
   --about-img-offset-y: -5rem;
-  --project-container-offset: 4.5rem;
+  --project-container-offset: 5rem;
+  --project-grid-columns: 10;
+  --project-grid-nr: calc(var(--project-grid-columns) * 2 - 1);
+  --project-grid-gap: 1.8%;
   --switchmode-h: 7rem;
   --switchmode-w: 15rem;
   --switchmode-slider-dist: 1.5rem;
@@ -48,6 +51,7 @@
   --c-card-text: var(--clr-wb-light);
   --c-tag-bg: var(--clr-wb-light20);
   --c-highlighted-bg: var(--clr-wb-light20);
+  --c-lighter-text: var(--clr-wb-light60);
   /* Text Scaling */
   --step--2: clamp(0.6331rem, 0.7157rem + -0.1065vw, 0.6944rem);
   --step--1: clamp(0.8331rem, 0.8294rem + 0.0185vw, 0.8438rem);
@@ -68,6 +72,7 @@
   --c-logo-bg: var(--clr-transparent);
   --c-stroke: var(--clr-wb-dark);
   --c-highlighted-bg: var(--clr-transparent);
+  --c-lighter-text: var(--clr-wb-dark60);
 }
 
 *,
@@ -130,7 +135,7 @@ ul {
 
 .project-hero-image {
   width: 100%;
-  max-height: calc(100vh - var(--nav-height) * 2);
+  max-height: calc(100vh - var(--nav-height) - 3rem);
   background-color: var(--clr-wb-neutral50);
   -o-object-fit: cover;
      object-fit: cover;
