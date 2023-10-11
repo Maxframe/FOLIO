@@ -151,6 +151,19 @@ ul {
   border-radius: var(--project-b-radius);
 }
 
+.single-image {
+  width: 100%;
+  object-fit: cover;
+  border-radius: var(--project-b-radius);
+  height: auto;
+}
+
+.double-image {
+  width: 50%;
+  object-fit: cover;
+  border-radius: var(--project-b-radius);
+  height: auto;
+}
 /* body, .no-transition *, .no-transition *::before {
   -webkit-transition: none !important;
   -moz-transition: none !important;

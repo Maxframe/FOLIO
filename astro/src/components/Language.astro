@@ -19,7 +19,6 @@
     padding: 1rem 2.5rem;
     height: var(--nav-height);
     gap: 0.4rem;
-
     z-index: 100;
     font-weight: 600;
 
@@ -27,9 +26,15 @@
       opacity: 0.6;
       color: var(--c-fg);
       transition: var(--switchmode-transition-time) ease;
+
       &:hover {
         opacity: 1;
       }
+    }
+
+    .language-divider {
+      opacity: 0.6;
+      transition: var(--switchmode-transition-time) ease;
     }
 
     .current {

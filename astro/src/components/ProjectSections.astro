@@ -7,54 +7,65 @@ export interface Props {
 }
 const { sectionContent } = Astro.props as Props;
 
-const textGridPos = sectionContent.textGridPos;
+/* const maxHeight = sectionContent.maxHeight; */
 ---
 
 <div class="section-wrapper">
-  <!-- {
+  {
     sectionContent._type === "sectionImageSingle" ? (
-      <>
-        <ImageBuilder
-          cls="single-image"
-          source={sectionContent.sImage.asset._ref}
-          alt={sectionContent.altText}
-          w={500}
-          h={500}
-        />
-        <p>{sectionContent.imageSettings.gridBegin}</p>
-        <p>{sectionContent.imageSettings.gridEnd}</p>
-        <p>{sectionContent.imageSettings.maxHeight}</p>
-      </>
+      <div class="single-image-section">
+        <div
+          class="image-wrapper single-image-wrapper"
+          style={{
+            gridColumnStart: `calc(${sectionContent.imageSettings.gridBegin} * 2 - 1)`,
+            gridColumnEnd: `calc(${sectionContent.imageSettings.gridEnd} * 2 - 1)`,
+          }}
+        >
+          <ImageBuilder
+            cls="single-image"
+            source={sectionContent.sImage.asset._ref}
+            alt={sectionContent.altText}
+          />
+          {sectionContent.captionText && (
+            <p class="caption-text">{sectionContent.captionText}</p>
+          )}
+        </div>
+      </div>
     ) : (
       ""
     )
   }
   {
     sectionContent._type === "sectionImageDouble" ? (
-      <>
-        <ImageBuilder
-          cls="double-image"
-          source={sectionContent.dImageUpload.dImageLeft.asset._ref}
-          alt={sectionContent.dImageUpload.altTextLeft}
-          w={500}
-          h={500}
-        />
-        <ImageBuilder
-          cls="double-image"
-          source={sectionContent.dImageUpload.dImageRight.asset._ref}
-          alt={sectionContent.dImageUpload.altTextRight}
-          w={500}
-          h={500}
-        />
-        <p>{sectionContent.captionText}</p>
-        <p>{sectionContent.imageSettings.gridBegin}</p>
-        <p>{sectionContent.imageSettings.gridEnd}</p>
-        <p>{sectionContent.imageSettings.maxHeight}</p>
-      </>
+      <div class="double-image-section">
+        <div class="double-image-wrapper">
+          <div
+            class="image-wrapper"
+            style={{
+              gridColumnStart: `calc(${sectionContent.imageSettings.gridBegin} * 2 - 1)`,
+              gridColumnEnd: `calc(${sectionContent.imageSettings.gridEnd} * 2 - 1)`,
+            }}
+          >
+            <ImageBuilder
+              cls="double-image double-image-left"
+              source={sectionContent.dImageUpload.dImageLeft.asset._ref}
+              alt={sectionContent.dImageUpload.altTextLeft}
+            />
+            <ImageBuilder
+              cls="double-image double-image-right"
+              source={sectionContent.dImageUpload.dImageRight.asset._ref}
+              alt={sectionContent.dImageUpload.altTextRight}
+            />
+            {sectionContent.captionText && (
+              <p class="caption-text">{sectionContent.captionText}</p>
+            )}
+          </div>
+        </div>
+      </div>
     ) : (
       ""
     )
-  } -->
+  }
   {
     sectionContent._type === "sectionText" ? (
       <div class="text-section">
@@ -68,7 +79,8 @@ const textGridPos = sectionContent.textGridPos;
     )
   }
 </div>
-<style lang="scss" define:vars={{ textGridPos }}>
+<style lang="scss">
+  /* define:vars={{ textGridPos, sImageGridBegin, sImageGridEnd }} */
   .text-section {
     display: grid;
     grid-template-columns: repeat(18, 1fr);
@@ -85,11 +97,47 @@ const textGridPos = sectionContent.textGridPos;
       font-weight: 700;
       color: var(--c-lighter-text);
       letter-spacing: 0.06rem;
+      margin-top: 0.2rem;
     }
 
     .text-section-text {
       grid-column-start: calc(var(--textGridPos) * 2 - 1);
-      grid-column-end: span 7;
+      grid-column-end: span 8;
+      font-size: var(--step-1);
+    }
+  }
+
+  .single-image-section {
+    display: grid;
+    grid-template-columns: repeat(18, 1fr);
+    grid-template-rows: auto;
+    grid-column: 1 / var(--project-grid-nr);
+    column-gap: var(--project-grid-gap);
+
+    .single-image-wrapper {
+    }
+
+    .caption-text {
+      text-align: center;
+    }
+  }
+
+  .double-image-section {
+    display: grid;
+    grid-template-columns: repeat(18, 1fr);
+    grid-template-rows: auto;
+    grid-column: 1 / var(--project-grid-nr);
+    column-gap: var(--project-grid-gap);
+
+    .double-image-wrapper {
+      .image-wrapper {
+        display: flex;
+        gap: 1rem;
+      }
+    }
+
+    .caption-text {
+      text-align: center;
     }
   }
 </style>

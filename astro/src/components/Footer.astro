@@ -3,7 +3,9 @@
 ---
 
 <footer>
-  <p class="copyright">Hand-crafted by Max Werner &copy; <span id="copyright-date"></span></p>
+  <p class="copyright">
+    Hand-crafted by Max Werner &copy; <span id="copyright-date"></span>
+  </p>
 </footer>
 
 <style lang="scss">
@@ -18,8 +20,6 @@
 </style>
 
 <script>
-    document.querySelector("#copyright-date").textContent = "2k" + new Date()
-    .getFullYear()
-    .toString()
-    .substring(2, 4);
+  document.querySelector("#copyright-date").textContent =
+    "2k" + new Date().getFullYear().toString().substring(2, 4);
 </script>
