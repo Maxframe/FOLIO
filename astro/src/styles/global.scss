@@ -13,7 +13,8 @@
   --stroke-w: 0.2rem;
 
   --card-radius: 2rem;
-  --project-b-radius: 2rem;
+  --project-md-radius: 2rem;
+  --project-sm-radius: 1.4rem;
   --about-img-offset-x: -3rem;
   --about-img-offset-y: -5rem;
   --project-container-offset: 5rem;
@@ -97,7 +98,7 @@ body {
   scroll-behavior: smooth;
   font-family: "Manrope", sans-serif;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.6;
   color: var(--c-fg);
 }
 
@@ -148,20 +149,20 @@ ul {
   object-fit: cover;
   max-width: var(--hero-w);
   margin: auto;
-  border-radius: var(--project-b-radius);
+  border-radius: var(--project-md-radius);
 }
 
 .single-image {
   width: 100%;
   object-fit: cover;
-  border-radius: var(--project-b-radius);
+  border-radius: var(--project-sm-radius);
   height: auto;
 }
 
 .double-image {
-  width: 50%;
+  width: 100%;
   object-fit: cover;
-  border-radius: var(--project-b-radius);
+  border-radius: var(--project-sm-radius);
   height: auto;
 }
 /* body, .no-transition *, .no-transition *::before {

@@ -38,14 +38,14 @@ const { sectionContent } = Astro.props as Props;
   {
     sectionContent._type === "sectionImageDouble" ? (
       <div class="double-image-section">
-        <div class="double-image-wrapper">
-          <div
-            class="image-wrapper"
-            style={{
-              gridColumnStart: `calc(${sectionContent.imageSettings.gridBegin} * 2 - 1)`,
-              gridColumnEnd: `calc(${sectionContent.imageSettings.gridEnd} * 2 - 1)`,
-            }}
-          >
+        <div
+          class="double-image-wrapper"
+          style={{
+            gridColumnStart: `calc(${sectionContent.imageSettings.gridBegin} * 2 - 1)`,
+            gridColumnEnd: `calc(${sectionContent.imageSettings.gridEnd} * 2 - 1)`,
+          }}
+        >
+          <div class="image-wrapper">
             <ImageBuilder
               cls="double-image double-image-left"
               source={sectionContent.dImageUpload.dImageLeft.asset._ref}
@@ -56,10 +56,10 @@ const { sectionContent } = Astro.props as Props;
               source={sectionContent.dImageUpload.dImageRight.asset._ref}
               alt={sectionContent.dImageUpload.altTextRight}
             />
-            {sectionContent.captionText && (
-              <p class="caption-text">{sectionContent.captionText}</p>
-            )}
           </div>
+          {sectionContent.captionText && (
+            <p class="caption-text">{sectionContent.captionText}</p>
+          )}
         </div>
       </div>
     ) : (
@@ -104,6 +104,7 @@ const { sectionContent } = Astro.props as Props;
       grid-column-start: calc(var(--textGridPos) * 2 - 1);
       grid-column-end: span 8;
       font-size: var(--step-1);
+      font-weight: 500;
     }
   }
 
@@ -126,9 +127,7 @@ const { sectionContent } = Astro.props as Props;
     display: grid;
     grid-template-columns: repeat(18, 1fr);
     grid-template-rows: auto;
-    grid-column: 1 / var(--project-grid-nr);
     column-gap: var(--project-grid-gap);
-
     .double-image-wrapper {
       .image-wrapper {
         display: flex;
@@ -137,6 +136,7 @@ const { sectionContent } = Astro.props as Props;
     }
 
     .caption-text {
+      margin-top: 0.5em;
       text-align: center;
     }
   }
