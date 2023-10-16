@@ -69,8 +69,22 @@ const { sectionContent } = Astro.props as Props;
   {
     sectionContent._type === "sectionText" ? (
       <div class="text-section">
-        <h3 class="text-section-title">{sectionContent.sectionTitle}</h3>
-        <div class="text-section-text block-wrapper">
+        <h3
+          class="text-section-title"
+          style={{
+            gridColumnStart: `span 3`,
+            gridColumnEnd: `calc(${sectionContent.textGridPos} * 2 - 1)`,
+          }}
+        >
+          {sectionContent.sectionTitle}
+        </h3>
+        <div
+          class="text-section-text block-wrapper"
+          style={{
+            gridColumnStart: `calc(${sectionContent.textGridPos} * 2 - 1)`,
+            gridColumnEnd: `span 8`,
+          }}
+        >
           <PortableText value={sectionContent.sectionText} />
         </div>
       </div>
