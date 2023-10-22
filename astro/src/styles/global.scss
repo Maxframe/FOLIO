@@ -14,13 +14,14 @@
 
   --card-radius: 2rem;
   --project-md-radius: 2rem;
-  --project-sm-radius: 1.4rem;
+  --project-sm-radius: 1rem;
   --about-img-offset-x: -3rem;
   --about-img-offset-y: -5rem;
   --project-container-offset: 5rem;
   --project-grid-columns: 10;
   --project-grid-nr: calc(var(--project-grid-columns) * 2 - 1);
   --project-grid-gap: 1.8%;
+  --project-sections-gap: 6rem;
 
   --switchmode-h: 7rem;
   --switchmode-w: 15rem;
@@ -105,6 +106,7 @@ body {
 body {
   background: var(--c-bg);
   transition: background var(--switchmode-transition-time) ease-out;
+  overflow-x: hidden;
 }
 
 p {
@@ -182,4 +184,14 @@ ul {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+}
+
+@media only screen and (max-width: 800px) {
+  :root {
+    --project-sections-gap: 4rem;
+  }
+  .single-image,
+  .double-image {
+    border-radius: 0;
+  }
 }

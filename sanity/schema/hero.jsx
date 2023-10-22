@@ -20,13 +20,18 @@ export default defineType({
           type: "string",
         }),
         defineField({
-          title: "Subtitle",
-          name: "subtitle",
+          title: "Subtitle Links",
+          name: "subtitleLeft",
           type: "string",
         }),
         defineField({
-          title: "Subtitle Special",
-          name: "subtitleSpecial",
+          title: "Subtitle Connector",
+          name: "subtitleConnect",
+          type: "string",
+        }),
+        defineField({
+          title: "Subtitle Rechts",
+          name: "subtitleRight",
           type: "string",
         }),
       ],

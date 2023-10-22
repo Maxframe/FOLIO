@@ -4,8 +4,12 @@
 
 <footer>
   <p class="copyright">
-    Hand-crafted by me, powered by Astro &copy; <span id="copyright-date"
-    ></span>
+    Hand-crafted by me, powered by <a
+      target="_blank"
+      rel="noopener noreferrer"
+      href="https://astro.build/">Astro</a
+    >
+     &copy; <span id="copyright-date"></span>
   </p>
   <div class="bg-grad"></div>
 </footer>
@@ -34,6 +38,15 @@
       color: var(--text);
       opacity: 0.7;
       padding: 0.5rem;
+
+      a {
+        transition: color 300ms ease;
+        opacity: 1;
+
+        &:hover {
+          color: var(--clr-accent);
+        }
+      }
     }
   }
 </style>

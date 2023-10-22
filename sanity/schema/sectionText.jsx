@@ -23,8 +23,8 @@ export default defineType({
       name: "textGridPos",
       title: "Text Grid Position",
       type: "number",
-      description: "Range: 2-8",
-      validation: (Rule) => [Rule.min(2), Rule.max(8)],
+      description: "Links = 3 / Rechts = 5",
+      validation: (Rule) => [Rule.min(3), Rule.max(5)],
     }),
     defineField({
       name: "rightToLeft",

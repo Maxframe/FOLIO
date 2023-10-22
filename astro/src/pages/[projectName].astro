@@ -109,6 +109,7 @@ const thumbnailImage = project.thumbnailImage.asset._ref;
     grid-template-columns: repeat(18, 1fr);
     grid-template-rows: auto;
     column-gap: var(--project-grid-gap);
+    row-gap: var(--project-sections-gap);
 
     .project-card {
       position: absolute;
@@ -118,6 +119,7 @@ const thumbnailImage = project.thumbnailImage.asset._ref;
       width: 100%;
       height: 100%;
       grid-column: 2 / calc(var(--project-grid-nr) - 1);
+      border: solid var(--stroke-w) var(--c-stroke);
       z-index: -1;
     }
 
@@ -143,8 +145,7 @@ const thumbnailImage = project.thumbnailImage.asset._ref;
       grid-template-rows: auto;
       grid-column: 1 / var(--project-grid-nr);
       column-gap: var(--project-grid-gap);
-      padding-bottom: 6rem;
-
+      row-gap: var(--project-sections-gap);
       .tag-description-wrapper {
         grid-column: 3 / 12;
 
@@ -153,7 +154,6 @@ const thumbnailImage = project.thumbnailImage.asset._ref;
           flex-wrap: wrap;
           column-gap: 1.2rem;
           row-gap: 0.7rem;
-          color: var(--hero-text);
           font-weight: 600;
           text-transform: uppercase;
           letter-spacing: 0.05rem;
@@ -192,18 +192,38 @@ const thumbnailImage = project.thumbnailImage.asset._ref;
     }
     .sections-wrapper {
       grid-column: 1 / var(--project-grid-nr);
-      margin-bottom: 3rem;
+      margin-bottom: var(--project-sections-gap);
       display: flex;
       flex-direction: column;
-      gap: 6rem;
+      row-gap: var(--project-sections-gap);
     }
   }
 
-  @media screen and (max-width: 850px) {
+  @media screen and (max-width: 800px) {
     :root {
       --content-px: 1rem;
     }
     .project-container {
+      /*   margin: 0px -30px;
+      width: calc(100% + 60px); */
+      padding: 0;
+
+      .infosection-wrapper {
+        .tag-description-wrapper {
+          grid-column: 3 / -3;
+          row-gap: var(--project-sections-gap);
+          .tag-list {
+            justify-content: center;
+          }
+        }
+
+        .info-snippet-wrapper {
+          grid-column: 3 / -3;
+        }
+      }
+      .sections-wrapper {
+        row-gap: var(--project-sections-gap);
+      }
     }
 
     .hero-image-wrapper {
