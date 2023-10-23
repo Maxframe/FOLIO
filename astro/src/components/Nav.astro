@@ -109,4 +109,11 @@ const aboutSlug = await useSanityClient().fetch(`*[_type == 'about'][0]{
     stroke-width: var(--stroke-w);
     opacity: 1;
   }
+
+  @media only screen and (max-width: 800px) {
+    .nav-content {
+      justify-content: space-between;
+      padding: 0 var(--content-px);
+    }
+  }
 </style>

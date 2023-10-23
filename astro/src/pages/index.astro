@@ -1,9 +1,6 @@
 ---
 import FrontpageLayout from "../layouts/FrontpageLayout.astro";
 import { useSanityClient } from "@sanity/astro";
-import ImageBuilder from "../components/ImageBuilder.astro";
-
-
 import Nav from "../components/Nav.astro";
 import Hero from "../components/Hero.astro";
 import FeaturedProjects from "../components/FeaturedProjects.astro";
@@ -11,14 +8,14 @@ import About from "../components/About.astro";
 import Footer from "../components/Footer.astro";
 import Language from "../components/Language.astro";
 
-const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]`)
-const contactData = await useSanityClient().fetch(`*[_type == 'contact'][0]`)
-
+const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]`);
+const contactData = await useSanityClient().fetch(`*[_type == 'contact'][0]`);
 ---
 
 <FrontpageLayout title="Portfolio Website">
   <Nav />
-  <Language />
+  <!--   <Language />
+ -->
   <Hero />
   <FeaturedProjects />
   <About />
@@ -26,11 +23,6 @@ const contactData = await useSanityClient().fetch(`*[_type == 'contact'][0]`)
 </FrontpageLayout>
 
 <style lang="scss">
-
-
-
-
-
   @media screen and (max-width: 52rem) {
     .projects-wrapper {
       grid-template-columns: 1fr 1fr;
@@ -59,8 +51,6 @@ const contactData = await useSanityClient().fetch(`*[_type == 'contact'][0]`)
     .projects-wrapper {
       grid-template-columns: 1fr;
     }
-
-
   }
 
   @media only screen and (hover: none), (max-width: 32rem) {
@@ -71,8 +61,6 @@ const contactData = await useSanityClient().fetch(`*[_type == 'contact'][0]`)
 </style>
 
 <script>
-  document.querySelector("#copyright-date").textContent = "2k" + new Date()
-  .getFullYear()
-    .toString()
-    .substring(2, 4);
+  document.querySelector("#copyright-date").textContent =
+    "2k" + new Date().getFullYear().toString().substring(2, 4);
 </script>

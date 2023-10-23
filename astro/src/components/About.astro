@@ -41,22 +41,28 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
         <PortableText value={aboutData.aboutTextBlock} />
       </div>
       <div class="about-social">
-        <a class="about-mail-link" href={"mailto:" + aboutData.mailLink}
-          >{aboutData.mailLink}</a
-        >
+        <div>
+          <a class="about-mail-link" href={"mailto:" + aboutData.mailLink}>
+            {aboutData.mailLink}</a
+          >
+        </div>
         {
           aboutData.contactLinks.addLinks?.map((link: any) => (
-            <a
-              class="about-social-link"
-              href={link.contactLink}
-              target="_blank"
-            >
-              {link.contactName}
-            </a>
+            <div>
+              <a
+                class="about-social-link"
+                href={link.contactLink}
+                target="_blank"
+              >
+                {link.contactName}
+              </a>
+            </div>
           ))
         }
       </div>
-      <a href={aboutData.cvFile + "?dl="}>{aboutData.cvText}</a>
+      <a class="about-cv" href={aboutData.cvFile + "?dl="}
+        ><span>{aboutData.cvText}</span></a
+      >
     </div>
   </div>
 </section>
@@ -93,25 +99,47 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
   }
 
   .about-social {
-    margin-top: 1rem;
-  }
-
-  .about-social a {
-    display: block;
-    font-weight: 600;
-    transition: color 0.2s ease-out;
-    color: var(--hero-text);
-  }
-
-  .about-social a:hover {
-    color: var(--accent-color);
+    margin: 1rem 0;
+    a {
+      font-weight: 600;
+      transition: color 0.2s ease-out;
+      color: var(--c-fg);
+      &:hover {
+        color: var(--clr-accent);
+      }
+    }
   }
 
   .about-mail-link {
-    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-size: var(--step-2);
   }
 
   .about-social-link {
-    font-size: clamp(1rem, 2vw, 1.4rem);
+    font-size: var(--step-0);
+  }
+
+  .about-cv {
+    font-weight: 600;
+    transition: color 0.2s ease-out;
+    color: var(--c-fg);
+    &:hover {
+      color: var(--clr-accent);
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    .about-wrapper {
+      grid-auto-flow: row;
+      grid-template-columns: none;
+      row-gap: 2rem;
+      margin-left: 0;
+      padding: 2rem;
+      padding-bottom: 4rem;
+    }
+    .about-image-wrapper {
+      transform: translate(0);
+      text-align: center;
+      margin-top: -6rem;
+    }
   }
 </style>

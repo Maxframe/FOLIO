@@ -16,16 +16,18 @@
     align-items: center;
     top: 0;
     right: 0;
-    padding: 1rem 2.5rem;
+    padding: 1rem var(--content-px);
     height: var(--nav-height);
-    gap: 0.4rem;
-    z-index: 100;
+    padding: 1rem var(--content-px);
+    transform: translateX(-3px);
     font-weight: 600;
+    z-index: 100;
 
     .language-option {
       opacity: 0.6;
       color: var(--c-fg);
       transition: var(--switchmode-transition-time) ease;
+      padding: 0.5rem;
 
       &:hover {
         opacity: 1;
@@ -39,6 +41,13 @@
 
     .current {
       opacity: 1;
+    }
+  }
+
+  @media only screen and (max-width: 800px) {
+    .language-wrapper {
+      top: var(--nav-height);
+      z-index: 98;
     }
   }
 </style>
