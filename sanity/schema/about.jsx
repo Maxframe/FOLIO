@@ -59,35 +59,30 @@ export default defineType({
       ],
     },
 
-    /* 
-https://www.sanity.io/docs/file-type
-Download file
-In order to download a file from your front-end you need to append ?dl=<filename-of-your-choice.pdf> to the file URL. 
-If you leave the filename blank, the original filename will be used if present. 
-If the original filename is not available, the id of the file will be used instead.
-
-// GROQ query
-*[_type == 'movie'] {
-  title,
-  "manuscriptURL": manuscript.asset->url
-}
-
-// Then you can use the URL in HTML for example like this:
-// <a href={`${manuscriptURL}?dl=`}>Manuscript</a> 
-*/
     defineField({
       name: "contactLinks",
       title: "Contact",
       type: "object",
       fields: [
         defineField({
+          title: "E-Mail Label",
+          name: "mailLinkLabel",
+          type: "string",
+        }),
+        defineField({
           title: "E-Mail",
           name: "mailLink",
+          type: "string",
+          validation: (Rule) => [Rule.email()],
+        }),
+        defineField({
+          title: "Social Links Label",
+          name: "addLinksLabel",
           type: "string",
         }),
         defineField({
           name: "addLinks",
-          title: "Additional Contact Links",
+          title: "Additional Social Links",
           type: "array",
           of: [
             defineField({

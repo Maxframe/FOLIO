@@ -14,7 +14,7 @@ const aboutSlug = await useSanityClient().fetch(`*[_type == 'about'][0]{
   <div class="nav-content">
     <a class="nav-text" href={"/#" + projectsSLug.slug}>Projekte</a>
 
-    <a class="logo" href="/#">
+    <a class="logo" href="/#" aria-label="Home Button">
       <svg viewBox="-2 -2 133 40" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M88.0031 0.905762L81.2638 12.5727L74.5312 0.905762H88.0031Z"
@@ -94,20 +94,18 @@ const aboutSlug = await useSanityClient().fetch(`*[_type == 'about'][0]{
   .logo svg {
     width: 100%;
     stroke: var(--c-stroke);
-    stroke-width: 0.15rem;
+    stroke-width: 3px;
     stroke-linecap: round;
     opacity: 0.85;
     fill: none;
     transition: 0.2s ease-out;
-  }
-
-  .logo svg path {
-    transition: fill var(--switchmode-transition-time) ease-out;
-  }
-
-  .logo svg:hover {
-    stroke-width: var(--stroke-w);
-    opacity: 1;
+    &:hover {
+      stroke-width: 4px;
+      opacity: 1;
+    }
+    path {
+      transition: fill var(--switchmode-transition-time) ease-out;
+    }
   }
 
   @media only screen and (max-width: 800px) {

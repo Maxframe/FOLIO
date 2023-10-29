@@ -1,5 +1,4 @@
 ---
-import "../styles/global.css";
 import { useSanityClient } from "@sanity/astro";
 import { PortableText } from "astro-portabletext";
 import ImageBuilder from "./ImageBuilder.astro";
@@ -11,7 +10,9 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
   aboutAltText,
   aboutText,
    aboutTextBlock,
+   "mailLinkLabel": contactLinks.mailLinkLabel,
   "mailLink": contactLinks.mailLink,
+  "addLinksLabel": contactLinks.addLinksLabel,
   contactLinks {
     addLinks[] {
       contactLink,
@@ -40,78 +41,221 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
       <div class="about-description block-wrapper">
         <PortableText value={aboutData.aboutTextBlock} />
       </div>
-      <div class="about-social">
-        <div>
-          <a class="about-mail-link" href={"mailto:" + aboutData.mailLink}>
-            {aboutData.mailLink}</a
-          >
-        </div>
-        {
-          aboutData.contactLinks.addLinks?.map((link: any) => (
-            <div>
-              <a
-                class="about-social-link"
-                href={link.contactLink}
-                target="_blank"
-              >
-                {link.contactName}
-              </a>
-            </div>
-          ))
-        }
-      </div>
-      <a class="about-cv" href={aboutData.cvFile + "?dl="}
-        ><span>{aboutData.cvText}</span></a
-      >
     </div>
+    <div class="about-mail-label about-label">
+      <span>{aboutData.mailLinkLabel}</span>
+    </div>
+    <div class="about-mail">
+      <button class="mail-button" id="mailButton">
+        <span class="mail-text" id="mailText">{aboutData.mailLink}</span>
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M0 4C0 1.79086 1.79086 0 4 0H20.7059C22.915 0 24.7059 1.79086 24.7059 4V6.70588C24.7059 7.81045 23.8105 8.70588 22.7059 8.70588C21.6013 8.70588 20.7059 7.81045 20.7059 6.70588L20.7059 4L4 4V20.7059H6.70588C7.81045 20.7059 8.70588 21.6013 8.70588 22.7059C8.70588 23.8105 7.81045 24.7059 6.70588 24.7059H4C1.79086 24.7059 0 22.915 0 20.7059V4Z"
+            fill="#F6F6F6"></path>
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M11.2941 15.2941C11.2941 13.085 13.085 11.2941 15.2941 11.2941H32C34.2091 11.2941 36 13.085 36 15.2941V32C36 34.2091 34.2091 36 32 36H15.2941C13.085 36 11.2941 34.2091 11.2941 32V15.2941ZM32 15.2941L15.2941 15.2941V32H32V15.2941Z"
+            fill="#F6F6F6"></path>
+        </svg>
+      </button>
+      <span class="mail-tooltip" id="mailTooltip">Mail kopieren</span>
+    </div>
+    <div class="about-social-label about-label">
+      <span>{aboutData.addLinksLabel}</span>
+    </div>
+    <div class="about-social-wrapper">
+      {
+        aboutData.contactLinks.addLinks?.map((link: any) => (
+          <div class="about-social">
+            <a
+              class="about-social-link"
+              href={link.contactLink}
+              target="_blank"
+            >
+              {link.contactName}
+            </a>
+          </div>
+        ))
+      }
+    </div>
+    <a class="about-cv" href={aboutData.cvFile + "?dl="}
+      ><span>{aboutData.cvText}</span></a
+    >
   </div>
 </section>
+
+<script>
+  const copyContent = async () => {
+    try {
+      await navigator.clipboard.writeText(text);
+      toolTip.innerHTML = "Mail kopiert";
+    } catch (err) {
+      toolTip.innerHTML = "Irgendwas ist falsch gelaufen";
+    }
+    mailButton.classList.add("active");
+  };
+
+  const resetTooltip = () => {
+    mailButton.classList.remove("active");
+
+    setTimeout(() => (toolTip.innerHTML = toolTipText), 200);
+  };
+
+  let text = document.getElementById("mailText").innerHTML;
+  let mailButton = document.getElementById("mailButton");
+  let toolTip = document.getElementById("mailTooltip");
+  let toolTipText = document.getElementById("mailTooltip").innerHTML;
+
+  mailButton.addEventListener("click", copyContent);
+  mailButton.addEventListener("mouseout", resetTooltip);
+  console.log(toolTipText);
+</script>
 
 <style lang="scss">
   .about-section {
     max-width: var(--content-w);
     margin: 0 auto;
     padding: 0 var(--content-px);
-    padding-top: calc(var(--nav-height) + var(--about-img-offset-y) * -1);
-    margin-top: calc((var(--nav-height) + var(--about-img-offset-y)) * -1);
+    padding-top: calc(var(--nav-height) + var(--about-img-offset));
+    margin-top: calc((var(--nav-height) + var(--about-img-offset)) * -1);
   }
 
   .about-wrapper {
     position: relative;
     display: grid;
     grid-template-columns: 2fr 3fr;
-    grid-auto-flow: column;
     margin-left: 3rem;
-    margin-bottom: 15rem;
+    margin-bottom: 10rem;
     padding: 2rem;
-    padding-left: 0;
     background-color: var(--c-highlighted-bg);
     border-radius: 2rem;
     border: solid var(--stroke-w) var(--c-stroke);
+    transition: background-color 200ms ease-out;
+    column-gap: 5%;
+    row-gap: 1rem;
   }
 
   .about-image-wrapper {
-    transform: translate(var(--about-img-offset-x), var(--about-img-offset-y));
+    transform: translate(
+      calc((var(--about-img-offset) * -1) - var(--stroke-w)),
+      calc(var(--about-img-offset) * -1)
+    );
   }
 
   .about-title {
     font-size: var(--step-3);
+    transition: color 200ms ease-out;
   }
 
-  .about-social {
-    margin: 1rem 0;
+  .about-description > * {
+    transition: color 200ms ease-out;
+  }
+
+  .about-social-wrapper {
+    transition: color 200ms ease-out;
+
     a {
+      transition: color 200ms ease-out;
       font-weight: 600;
-      transition: color 0.2s ease-out;
       color: var(--c-fg);
       &:hover {
-        color: var(--clr-accent);
+        color: rgb(var(--clr-accent));
       }
     }
   }
 
-  .about-mail-link {
-    font-size: var(--step-2);
+  .about-mail {
+    width: fit-content;
+    position: relative;
+
+    .mail-button {
+      display: flex;
+      border: inherit;
+      font-family: inherit;
+      color: inherit;
+      background-color: inherit;
+      cursor: pointer;
+      align-items: center;
+      column-gap: 0.5rem;
+      .mail-text {
+        user-select: text;
+        line-height: 1;
+        font-weight: 600;
+        font-size: var(--step-2);
+        transition:
+          color 200ms ease-out,
+          filter 200ms ease-out;
+      }
+      svg {
+        width: 22px;
+        transform: translateY(3px);
+        path {
+          transition:
+            fill 200ms ease-out,
+            filter 200ms ease-out;
+          fill: var(--c-fg);
+        }
+      }
+      &:hover {
+        .mail-text {
+          filter: brightness(0.7);
+          color: rgb(var(--clr-accent), 0.8);
+        }
+
+        svg path {
+          filter: brightness(0.7);
+          fill: rgb(var(--clr-accent), 0.8);
+        }
+
+        ~ .mail-tooltip {
+          opacity: 1;
+        }
+      }
+    }
+
+    .mail-button.active:hover {
+      .mail-text {
+        filter: brightness(1);
+      }
+
+      svg path {
+        filter: brightness(1);
+      }
+    }
+
+    .mail-tooltip {
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      top: 50%;
+      right: 0;
+      text-align: center;
+      color: var(--c-card-text);
+      padding: 0.5rem 0;
+      width: 8rem;
+      background-color: var(--c-card-text-bg);
+      border-radius: 999px;
+      backdrop-filter: blur(20px);
+      border: solid var(--stroke-w) var(--c-stroke);
+      transform: translate(calc(100% + 1rem), -50%);
+      transition: opacity 200ms ease-out;
+    }
+  }
+
+  .about-label {
+    text-align: right;
+    margin-top: 0.1rem;
+    span {
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--c-lighter-text);
+      letter-spacing: 0.06rem;
+      margin-top: 0.5rem;
+    }
   }
 
   .about-social-link {
@@ -119,27 +263,41 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
   }
 
   .about-cv {
+    text-align: center;
+    transition: color 200ms ease-out;
     font-weight: 600;
-    transition: color 0.2s ease-out;
+    grid-column: 1 / span 2;
     color: var(--c-fg);
+    padding: 0.5rem 1rem;
+    background-color: var(--c-card-text-bg);
+
+    border-radius: 999px;
+    border: solid var(--stroke-w) var(--c-stroke);
     &:hover {
-      color: var(--clr-accent);
+      color: rgb(var(--clr-accent));
     }
   }
 
   @media screen and (max-width: 800px) {
     .about-wrapper {
-      grid-auto-flow: row;
-      grid-template-columns: none;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
       row-gap: 2rem;
       margin-left: 0;
-      padding: 2rem;
-      padding-bottom: 4rem;
-    }
-    .about-image-wrapper {
-      transform: translate(0);
-      text-align: center;
-      margin-top: -6rem;
+
+      & > * {
+        grid-column: auto;
+        grid-row: auto;
+      }
+      .about-image-wrapper {
+        transform: translate(0);
+        text-align: center;
+        margin-top: -6rem;
+      }
+
+      .about-label {
+        display: none;
+      }
     }
   }
 </style>

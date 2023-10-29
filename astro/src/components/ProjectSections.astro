@@ -66,15 +66,6 @@ const { sectionContent } = Astro.props as Props;
   sectionContent._type === "sectionText" ? (
     <div class="text-section">
       {sectionContent.rightToLeft ? (
-      <div
-        class="text-section-text block-wrapper rtl-text"
-        style={{
-          gridColumnStart: `calc(${sectionContent.textGridPos} * 2 - 4)`,
-          gridColumnEnd: `span 8`,
-        }}
-      >
-        <PortableText value={sectionContent.sectionText} />
-      </div>
       <h3
           class="text-section-title rtl-title"
           style={{
@@ -84,6 +75,15 @@ const { sectionContent } = Astro.props as Props;
         >
         {sectionContent.sectionTitle}
       </h3>
+      <div
+        class="text-section-text block-wrapper rtl-text"
+        style={{
+          gridColumnStart: `calc(${sectionContent.textGridPos} * 2 - 4)`,
+          gridColumnEnd: `span 8`,
+        }}
+      >
+        <PortableText value={sectionContent.sectionText} />
+      </div>
       ) : (<h3
         class="text-section-title"
         style={{
@@ -139,6 +139,7 @@ const { sectionContent } = Astro.props as Props;
 
     .rtl-title {
     text-align: left;
+    grid-row-start: 1;
     }
   }
 
