@@ -121,6 +121,7 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
     padding: 0 var(--content-px);
     padding-top: calc(var(--nav-height) + var(--about-img-offset));
     margin-top: calc((var(--nav-height) + var(--about-img-offset)) * -1);
+    overflow-x: hidden;
   }
 
   .about-wrapper {
@@ -131,7 +132,7 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
     margin-bottom: 10rem;
     padding: 2rem;
     background-color: var(--c-highlighted-bg);
-    border-radius: 2rem;
+    border-radius: 3rem;
     border: solid var(--stroke-w) var(--c-stroke);
     transition: background-color 200ms ease-out;
     column-gap: 5%;
@@ -268,9 +269,8 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
     font-weight: 600;
     grid-column: 1 / span 2;
     color: var(--c-fg);
-    padding: 0.5rem 1rem;
+    padding: 1rem 1.4rem;
     background-color: var(--c-card-text-bg);
-
     border-radius: 999px;
     border: solid var(--stroke-w) var(--c-stroke);
     &:hover {
@@ -297,6 +297,17 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
 
       .about-label {
         display: none;
+      }
+
+      .about-mail {
+        width: 100%;
+
+        .mail-tooltip {
+          top: 0;
+          right: unset;
+          left: 50%;
+          transform: translate(-50%, calc(-100% - 0.4rem));
+        }
       }
     }
   }
