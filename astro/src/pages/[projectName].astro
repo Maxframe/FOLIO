@@ -5,23 +5,51 @@ import { PortableText } from "astro-portabletext";
 
 import Nav from "../components/Nav.astro";
 import ProjectSections from "../components/ProjectSections.astro";
+import NextProjectLink from "../components/NextProjectLink.astro";
 import ImageBuilder from "../components/ImageBuilder.astro";
 import Footer from "../components/Footer.astro";
+
+type ProjectType = {
+  projectName: string;
+  slug: {
+    current: string;
+  };
+  thumbnailImage: {
+    asset: {
+      _ref: string;
+    };
+  };
+  thumbAltText: string;
+  tags: string[];
+  description: any;
+  infoSnippets: {
+    contextText: string;
+    roleText: string;
+    techText: string;
+  };
+  AddiInfoSnippets?: Array<{
+    snippetTitle: string;
+    snippetText: string;
+  }>;
+  content?: any[];
+};
 
 export async function getStaticPaths() {
   const allProjectData = await useSanityClient().fetch(
     `*[_type == 'projectsSection'][0]{projectsFeatured[]->}`
   );
-  return allProjectData.projectsFeatured?.map((project: any) => {
+  return allProjectData.projectsFeatured?.map((project: any, index: number) => {
+    /*  const currentIndex = index;
+    const nextIndex =
+      (currentIndex + 1) % allProjectData.projectsFeatured.length;
+    const nextProject = allProjectData.projectsFeatured[nextIndex]; */
     return {
       params: { projectName: project.slug.current },
       props: { project },
     };
   });
 }
-const { project } = Astro.props;
-
-const thumbnailImage = project.thumbnailImage.asset._ref;
+const { project } = Astro.props as { project: ProjectType };
 ---
 
 <ProjectLayout title={project.projectName}>
@@ -29,7 +57,7 @@ const thumbnailImage = project.thumbnailImage.asset._ref;
   <div class="image-wrapper hero-image-wrapper">
     <ImageBuilder
       cls="project-hero-image"
-      source={thumbnailImage}
+      source={project.thumbnailImage.asset._ref}
       alt={project.thumbAltText}
       loading="eager"
       w={1250}
@@ -84,6 +112,7 @@ const thumbnailImage = project.thumbnailImage.asset._ref;
       }
     </div>
   </div>
+  <NextProjectLink currentSlug={project.slug.current} />
 </ProjectLayout>
 <Footer />
 
@@ -136,6 +165,7 @@ const thumbnailImage = project.thumbnailImage.asset._ref;
         font-weight: 800;
         line-height: 1;
         transform: translateY(-25%);
+        text-align: center;
       }
     }
 
@@ -177,7 +207,7 @@ const thumbnailImage = project.thumbnailImage.asset._ref;
         grid-column: 13 / 17;
 
         .info-snippet {
-          margin-bottom: 1rem;
+          margin-bottom: 2rem;
 
           h3 {
             text-transform: uppercase;

@@ -4,7 +4,7 @@
   --nav-offset: 2rem;
   --featured-offset: 9rem;
   --hero-w: 78rem;
-  --content-w: 50rem; /* = 800px - 2*content-px */
+  --content-w: 58rem; /* = 800px - 2*content-px */
   --content-px: 2rem;
   --project-content-w: 70rem;
   --card-h: 11rem;
@@ -195,6 +195,9 @@ ul {
 
   .thumbnail-image {
     filter: brightness(1);
+  }
+  .project-hero-image {
+    border-radius: 0;
   }
   .single-image,
   .double-image {

@@ -1,0 +1,70 @@
+---
+import { useSanityClient } from "@sanity/astro";
+export interface Props {
+  currentSlug: string;
+}
+
+const { currentSlug } = Astro.props as Props;
+
+const allProjectData = await useSanityClient().fetch(
+  `*[_type == 'projectsSection'][0]{projectsFeatured[]->{
+        projectName,
+        "slug": slug.current,
+    }
+}`
+);
+
+let nextProjectSlug = "";
+let nextProjectTitle = "";
+if (allProjectData.projectsFeatured) {
+  const currentIndex = allProjectData.projectsFeatured.findIndex(
+    (project: any) => project.slug === currentSlug
+  );
+  const nextIndex = (currentIndex + 1) % allProjectData.projectsFeatured.length;
+  nextProjectSlug = allProjectData.projectsFeatured[nextIndex]?.slug;
+  nextProjectTitle = allProjectData.projectsFeatured[nextIndex]?.projectName;
+}
+---
+
+{
+  nextProjectSlug && (
+    <div class="wrapper">
+      <a class="next-project-button" href={nextProjectSlug}>
+        <svg
+          width="46"
+          height="25"
+          viewBox="0 0 46 25"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M24.7443 23.8883C23.5912 24.9661 21.8001 24.9661 20.647 23.8883L0.969814 5.49483C-1.01852 3.63622 0.296687 0.303221 3.01844 0.303221L42.3729 0.303223C45.0946 0.303223 46.4098 3.63622 44.4215 5.49483L24.7443 23.8883Z"
+            fill="#F6F6F6"
+          />
+        </svg>
+        <span>Nächstes Projekt</span>
+      </a>
+    </div>
+  )
+}
+
+<style lang="scss">
+  .wrapper {
+    margin: 2rem auto 0;
+    padding: 0 var(--content-px);
+    width: fit-content;
+    .next-project-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 20rem;
+      font-size: var(--step-2);
+      font-weight: 600;
+      background-color: var(--c-bg);
+      padding: 2rem;
+      border-radius: var(--project-sm-radius);
+      text-align: center;
+    }
+  }
+</style>

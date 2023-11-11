@@ -111,7 +111,6 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
 
   mailButton.addEventListener("click", copyContent);
   mailButton.addEventListener("mouseout", resetTooltip);
-  console.log(toolTipText);
 </script>
 
 <style lang="scss">
@@ -129,7 +128,6 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
     display: grid;
     grid-template-columns: 2fr 3fr;
     margin-left: 3rem;
-    margin-bottom: 10rem;
     padding: 2rem;
     background-color: var(--c-highlighted-bg);
     border-radius: 3rem;
@@ -265,7 +263,9 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
 
   .about-cv {
     text-align: center;
-    transition: color 200ms ease-out;
+    transition:
+      color 200ms ease-out,
+      background-color 200ms ease-out;
     font-weight: 600;
     grid-column: 1 / span 2;
     color: var(--c-fg);
@@ -274,6 +274,7 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
     border-radius: 999px;
     border: solid var(--stroke-w) var(--c-stroke);
     &:hover {
+      background-color: var(--c-bg);
       color: rgb(var(--clr-accent));
     }
   }

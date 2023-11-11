@@ -23,8 +23,8 @@ const subtitleRight = heroData.heroText.subtitleRight;
     <span class="title">{title}</span><br />
     <div class="sub-wrapper">
       <span class="sub sub-left">{subtitleLeft}</span>
-      <span class="sub hidden sub-connect">{subtitleConnect}</span>
-      <span class="sub hidden sub-right">{subtitleRight}</span>
+      <span class="sub sub-connect">{subtitleConnect}</span>
+      <span class="sub sub-right">{subtitleRight}</span>
     </div>
   </h1>
 
@@ -97,6 +97,7 @@ const subtitleRight = heroData.heroText.subtitleRight;
         .sub-left {
           font-weight: 500;
           font-family: monospace;
+          color: rgb(var(--clr-wb-light));
         }
 
         .sub-connect {
@@ -105,6 +106,7 @@ const subtitleRight = heroData.heroText.subtitleRight;
         .sub-right {
           position: relative;
           z-index: 1;
+          color: rgb(var(--clr-wb-dark));
         }
       }
       .hidden {
