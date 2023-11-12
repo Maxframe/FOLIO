@@ -147,6 +147,7 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
   .about-title {
     font-size: var(--step-3);
     transition: color 200ms ease-out;
+    margin-bottom: 0.5rem;
   }
 
   .about-description > * {
@@ -265,7 +266,8 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
     text-align: center;
     transition:
       color 200ms ease-out,
-      background-color 200ms ease-out;
+      background-color 200ms ease-out,
+      transform 200ms ease-out;
     font-weight: 600;
     grid-column: 1 / span 2;
     color: var(--c-fg);
@@ -276,6 +278,7 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
     &:hover {
       background-color: var(--c-bg);
       color: rgb(var(--clr-accent));
+      transform: scale(1.03);
     }
   }
 
@@ -292,8 +295,9 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
       }
       .about-image-wrapper {
         transform: translate(0);
-        text-align: center;
         margin-top: -6rem;
+        display: flex;
+        justify-content: center;
       }
 
       .about-label {

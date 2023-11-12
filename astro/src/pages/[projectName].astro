@@ -8,6 +8,7 @@ import ProjectSections from "../components/ProjectSections.astro";
 import NextProjectLink from "../components/NextProjectLink.astro";
 import ImageBuilder from "../components/ImageBuilder.astro";
 import Footer from "../components/Footer.astro";
+import BgLayer from "../components/BgLayer.astro";
 
 type ProjectType = {
   projectName: string;
@@ -115,6 +116,7 @@ const { project } = Astro.props as { project: ProjectType };
   <NextProjectLink currentSlug={project.slug.current} />
 </ProjectLayout>
 <Footer />
+<BgLayer />
 
 <style lang="scss">
   .image-wrapper {
@@ -131,8 +133,7 @@ const { project } = Astro.props as { project: ProjectType };
   .project-container {
     position: relative;
     max-width: var(--project-content-w);
-    margin: 0 auto;
-    margin-top: calc(var(--project-container-offset) * -1);
+    margin: calc(var(--project-container-offset) * -1) auto 0;
     padding: 0 var(--content-px);
     display: grid;
     grid-template-columns: repeat(18, 1fr);
@@ -234,8 +235,8 @@ const { project } = Astro.props as { project: ProjectType };
       --content-px: 1rem;
     }
     .project-container {
-      /*   margin: 0px -30px;
-      width: calc(100% + 60px); */
+      margin-left: -10px;
+      width: calc(100% + 20px);
       padding: 0;
 
       .infosection-wrapper {

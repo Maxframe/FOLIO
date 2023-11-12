@@ -22,7 +22,7 @@ const subtitleRight = heroData.heroText.subtitleRight;
     <span class="title highlight">{titleSpecial}</span>
     <span class="title">{title}</span><br />
     <div class="sub-wrapper">
-      <span class="sub sub-left">{subtitleLeft}</span>
+      <span class="sub sub-left" data-value={subtitleLeft}>{subtitleLeft}</span>
       <span class="sub sub-connect">{subtitleConnect}</span>
       <span class="sub sub-right">{subtitleRight}</span>
     </div>
@@ -133,10 +133,6 @@ const subtitleRight = heroData.heroText.subtitleRight;
       transform: scaleX(1);
       transform-origin: bottom left;
     }
-
-    &:hover {
-      cursor: help;
-    }
   }
 
   /* Mode Switcher */
@@ -164,8 +160,9 @@ const subtitleRight = heroData.heroText.subtitleRight;
     right: 0;
     outline: solid var(--stroke-w) var(--c-stroke);
     background-color: rgb(var(--clr-wb-light), 0.15);
-    transition: var(--switchmode-transition-time);
+    transition: 200ms;
     &:hover {
+      transform: scale(1.03);
       background-color: rgb(var(--clr-wb-light), 0.2);
     }
 
@@ -238,3 +235,41 @@ const subtitleRight = heroData.heroText.subtitleRight;
     }
   }
 </style>
+
+<script>
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+  let interval = null;
+
+  const subLeftElement = document.querySelector(".sub-left") as HTMLElement;
+  subLeftElement.onmouseover = (event: any) => {
+    let iteration = 0;
+
+    clearInterval(interval);
+
+    const originalText = event.target.dataset.value;
+    const textLength = originalText.length;
+    const maxIterations = 6;
+
+    interval = setInterval(() => {
+      event.target.innerText = originalText
+        .split("")
+        .map((originalLetter: string, index: number) => {
+          const changeIterations = Math.min(iteration - index, maxIterations);
+          if (changeIterations <= 0) {
+            return originalLetter;
+          } else if (changeIterations < maxIterations) {
+            return letters[Math.floor(Math.random() * 52)];
+          } else {
+            return originalText[index];
+          }
+        })
+        .join("");
+
+      iteration++;
+      if (iteration >= textLength + maxIterations) {
+        clearInterval(interval);
+      }
+    }, 17);
+  };
+</script>

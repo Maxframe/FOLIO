@@ -1,0 +1,66 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  font-display: block;
+  scroll-behavior: smooth;
+  font-family: "Manrope", sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--c-fg);
+}
+
+body {
+  background: var(--c-bg);
+  transition: background var(--switchmode-transition-time) ease-out;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.no-transition,
+.no-transition *,
+.no-transition *::before,
+.no-transition *::after {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
+
+p {
+  hyphens: manual;
+}
+
+a {
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--c-fg);
+}
+
+ul {
+  list-style: none;
+}
+
+img,
+picture,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  user-select: none;
+  object-fit: cover;
+  height: auto;
+}
+
+::selection {
+  background: var(--c-fg);
+  color: var(--c-bg);
+}

@@ -1,28 +1,28 @@
 :root {
   /* Constants */
-  --nav-height: 5rem;
-  --nav-offset: 2rem;
-  --featured-offset: 9rem;
-  --hero-w: 78rem;
   --content-w: 58rem; /* = 800px - 2*content-px */
   --content-px: 2rem;
-  --project-content-w: 70rem;
+  --nav-height: 5rem;
+  --nav-offset: 2rem;
+  --stroke-w: 4px;
+  --hero-w: 78rem;
+  --switchmode-h: 7rem;
+  --switchmode-w: 14rem;
+  --switchmode-slider-dist: 1.5rem;
+  --featured-offset: 9rem;
   --card-h: 11rem;
   --card-gap: 1.5rem;
-  --card-offset: 1rem;
-  --stroke-w: 4px;
   --card-radius: 2rem;
+  --card-offset: 1rem;
+  --about-img-offset: 5rem;
+  --project-content-w: 70rem;
   --project-md-radius: 2rem;
   --project-sm-radius: 1rem;
-  --about-img-offset: 5rem;
   --project-container-offset: 5rem;
   --project-grid-columns: 10;
   --project-grid-nr: calc(var(--project-grid-columns) * 2 - 1);
   --project-grid-gap: 1.8%;
   --project-sections-gap: 6rem;
-  --switchmode-h: 7rem;
-  --switchmode-w: 15rem;
-  --switchmode-slider-dist: 1.5rem;
   --switchmode-transition-time: 400ms;
   --card-transition-time: 300ms;
   /* Constant Colors */
@@ -72,6 +72,48 @@
   --c-card-text: rgb(var(--clr-wb-dark));
 }
 
+@font-face {
+  font-family: "Manrope";
+  src: local("Manrope Extra Bold"), url("/fonts/Manrope-ExtraBold.woff2") format("woff2"), url("/fonts//Manrope-ExtraBold.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Manrope";
+  src: local("Manrope Bold"), url("/fonts/Manrope-Bold.woff2") format("woff2"), url("/fonts/Manrope-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Manrope";
+  src: local("Manrope Semibold"), url("/fonts/Manrope-SemiBold.woff2") format("woff2"), url("/fonts/Manrope-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Manrope";
+  src: local("Manrope Medium"), url("/fonts/Manrope-Medium.woff2") format("woff2"), url("/fonts/Manrope-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Manrope";
+  src: local("Manrope Regular"), url("/fonts/Manrope-Regular.woff2") format("woff2"), url("/fonts/Manrope-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Manrope";
+  src: local("Manrope Light"), url("/fonts/Manrope-Light.woff2") format("woff2"), url("/fonts/Manrope-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Manrope";
+  src: local("Manrope Extra Light"), url("/fonts/Manrope-ExtraLight.woff2") format("woff2"), url("/fonts/Manrope-ExtraLight.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+}
 *,
 *::before,
 *::after {
@@ -94,6 +136,14 @@ body {
   background: var(--c-bg);
   transition: background var(--switchmode-transition-time) ease-out;
   overflow-x: hidden;
+  position: relative;
+}
+
+.no-transition,
+.no-transition *,
+.no-transition *::before,
+.no-transition *::after {
+  transition: none !important;
 }
 
 p {
@@ -111,9 +161,31 @@ ul {
   list-style: none;
 }
 
-/* img {
-  box-shadow: 0px 6px 10px -8px var(--c-bshadow);
-} */
+img,
+picture,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: auto;
+}
+
+::-moz-selection {
+  background: var(--c-fg);
+  color: var(--c-bg);
+}
+
+::selection {
+  background: var(--c-fg);
+  color: var(--c-bg);
+}
+
 .thumbnail-image {
   -o-object-fit: cover;
      object-fit: cover;
@@ -142,45 +214,13 @@ ul {
 
 .project-hero-image {
   width: 100%;
-  max-height: calc(100vh - var(--nav-height) - 3rem);
+  height: calc(100vh - var(--nav-height) - 3rem);
   background-color: var(--clr-wb-neutral);
   -o-object-fit: cover;
      object-fit: cover;
   max-width: var(--hero-w);
   margin: auto;
   border-radius: var(--project-md-radius);
-}
-
-.single-image {
-  width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  border-radius: var(--project-sm-radius);
-  height: auto;
-}
-
-.double-image {
-  width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  border-radius: var(--project-sm-radius);
-  height: auto;
-}
-
-/* body, .no-transition *, .no-transition *::before {
-  -webkit-transition: none !important;
-  -moz-transition: none !important;
-  -ms-transition: none !important;
-  -o-transition: none !important;
-  transition: none !important;
-} */
-::-moz-selection {
-  background: var(--c-fg);
-  color: var(--c-bg);
-}
-::selection {
-  background: var(--c-fg);
-  color: var(--c-bg);
 }
 
 .block-wrapper {

@@ -12,19 +12,21 @@ const { sectionContent } = Astro.props as Props;
   sectionContent._type === "sectionImageSingle" ? (
     <div class="single-image-section">
       <div
-        class="image-wrapper single-image-wrapper"
+        class="single-image-wrapper"
         style={{
           gridColumnStart: `calc(${sectionContent.imageSettings.gridBegin} * 2 - 1)`,
           gridColumnEnd: `calc(${sectionContent.imageSettings.gridEnd} * 2 - 1)`,
         }}
       >
+        <div class="image-wrapper">    
         <ImageBuilder
           cls="single-image"
           source={sectionContent.sImage.asset._ref}
           alt={sectionContent.altText}
         />
+        </div>  
         {sectionContent.captionText && (
-          <p class="caption-text">{sectionContent.captionText}</p>
+        <p class="caption-text">{sectionContent.captionText}</p>
         )}
       </div>
     </div>
@@ -35,7 +37,7 @@ const { sectionContent } = Astro.props as Props;
 {
   sectionContent._type === "sectionImageDouble" ? (
     <div class="double-image-section">
-      <div class="double-image-wrapper"
+      <div class="double-image-wrapper image-wrapper"
       style={{
         gridColumnStart: `calc(${sectionContent.gridBeginLeft} * 2 - 1)`,
         gridColumnEnd: `calc(${sectionContent.gridEndLeft} * 2 - 1)`,
@@ -46,7 +48,7 @@ const { sectionContent } = Astro.props as Props;
           alt={sectionContent.altTextLeft}
         />
       </div>
-      <div class="double-image-wrapper"
+      <div class="double-image-wrapper image-wrapper"
       style={{
         gridColumnStart: `calc(${sectionContent.gridBeginRight} * 2 - 1)`,
         gridColumnEnd: `calc(${sectionContent.gridEndRight} * 2 - 1)`,
@@ -163,6 +165,11 @@ const { sectionContent } = Astro.props as Props;
     
   }
 
+  .image-wrapper {
+    border-radius: var(--project-sm-radius);
+    overflow: hidden;
+  }
+
   @media only screen and (max-width: 800px) {
 
     .text-section {
@@ -176,14 +183,14 @@ const { sectionContent } = Astro.props as Props;
     
     .single-image-section {
       .single-image-wrapper {
-        grid-column: -1 / 1 !important;
+        grid-column: -3 / 3 !important;
       }
     }
 
     .double-image-section {
       row-gap: var(--project-sections-gap);
       .double-image-wrapper {
-        grid-column: -1 / 1 !important;
+        grid-column: -3 / 3 !important;
       }
     }
   }
