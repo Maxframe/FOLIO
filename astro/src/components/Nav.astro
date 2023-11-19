@@ -55,7 +55,7 @@ const aboutSlug = await useSanityClient().fetch(`*[_type == 'about'][0]{
     width: 100%;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    transition: var(--switchmode-transition-time) ease-out;
+    transition: var(--modeswitch-transition-time) ease-out;
     z-index: 99;
   }
 
@@ -105,7 +105,7 @@ const aboutSlug = await useSanityClient().fetch(`*[_type == 'about'][0]{
       opacity: 1;
     }
     path {
-      transition: fill var(--switchmode-transition-time) ease-out;
+      transition: fill var(--modeswitch-transition-time) ease-out;
     }
   }
 

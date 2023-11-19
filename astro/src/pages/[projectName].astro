@@ -9,6 +9,7 @@ import NextProjectLink from "../components/NextProjectLink.astro";
 import ImageBuilder from "../components/ImageBuilder.astro";
 import Footer from "../components/Footer.astro";
 import BgLayer from "../components/BgLayer.astro";
+import FloatingModeSwitcher from "../components/FloatingModeSwitcher.astro";
 
 type ProjectType = {
   projectName: string;
@@ -117,6 +118,7 @@ const { project } = Astro.props as { project: ProjectType };
 </ProjectLayout>
 <Footer />
 <BgLayer />
+<FloatingModeSwitcher />
 
 <style lang="scss">
   .image-wrapper {

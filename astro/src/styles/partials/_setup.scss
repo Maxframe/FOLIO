@@ -18,7 +18,7 @@ body {
 
 body {
   background: var(--c-bg);
-  transition: background var(--switchmode-transition-time) ease-out;
+  transition: background var(--modeswitch-transition-time) ease-out;
   overflow-x: hidden;
   position: relative;
 }
@@ -63,4 +63,9 @@ canvas {
 ::selection {
   background: var(--c-fg);
   color: var(--c-bg);
+}
+
+button {
+  background: none;
+  border: none;
 }

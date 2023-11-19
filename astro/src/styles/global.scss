@@ -9,10 +9,15 @@
   --stroke-w: 4px;
 
   --hero-w: 78rem;
-  --switchmode-h: 7rem;
-  --switchmode-w: 14rem;
+  --hero-modeswitch-h: 7rem;
+  --hero-modeswitch-w: 14rem;
+  --hero-modeswitch-slider-dist: 1.5rem;
 
-  --switchmode-slider-dist: 1.5rem;
+  --float-modeswitch-size: 5rem;
+  --float-modeswitch-h: 2.4rem;
+  --float-modeswitch-w: 4rem;
+  --float-modeswitch-slider-dist: 1rem;
+
   --featured-offset: 9rem;
   --card-h: 11rem;
   --card-gap: 1.5rem;
@@ -31,7 +36,7 @@
   --project-grid-gap: 1.8%;
   --project-sections-gap: 6rem;
 
-  --switchmode-transition-time: 400ms;
+  --modeswitch-transition-time: 400ms;
   --card-transition-time: 300ms;
 
   /* Constant Colors */

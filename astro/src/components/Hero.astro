@@ -28,9 +28,8 @@ const subtitleRight = heroData.heroText.subtitleRight;
     </div>
   </h1>
 
-  <div class="switchmode-wrapper">
-    <label class="switchmode" for="checkbox">
-      <input type="checkbox" id="checkbox" />
+  <div class="modeswitch-wrapper">
+    <button class="modeswitch">
       <div class="slider round">
         <div class="slidee round">
           <div class="arrow-wrapper">
@@ -48,7 +47,7 @@ const subtitleRight = heroData.heroText.subtitleRight;
           </div>
         </div>
       </div>
-    </label>
+    </button>
   </div>
 </div>
 
@@ -69,7 +68,7 @@ const subtitleRight = heroData.heroText.subtitleRight;
 
     h1 {
       position: relative;
-      transition: color var(--switchmode-transition-time);
+      transition: color var(--modeswitch-transition-time);
       margin-top: 0;
       color: var(--c-fg);
       user-select: none;
@@ -126,7 +125,7 @@ const subtitleRight = heroData.heroText.subtitleRight;
       width: calc(100% + 0.2rem);
       transform: scaleX(0);
       transform-origin: bottom right;
-      transition: transform var(--switchmode-transition-time) ease;
+      transition: transform var(--modeswitch-transition-time) ease;
       z-index: -1;
     }
     &:hover::after {
@@ -136,15 +135,15 @@ const subtitleRight = heroData.heroText.subtitleRight;
   }
 
   /* Mode Switcher */
-  .switchmode-wrapper {
+  .modeswitch-wrapper {
     display: flex;
     align-items: center;
   }
-  .switchmode {
+  .modeswitch {
     display: inline-block;
     position: relative;
-    width: var(--switchmode-w);
-    height: var(--switchmode-h);
+    width: var(--hero-modeswitch-w);
+    height: var(--hero-modeswitch-h);
     transition: 0.4s;
     input {
       display: none;
@@ -171,16 +170,21 @@ const subtitleRight = heroData.heroText.subtitleRight;
       transform-origin: center;
       transform: translate(-50%, 0%) rotate(0deg);
       background-color: rgb(var(--clr-wb-light));
-      height: calc(var(--switchmode-h) - var(--switchmode-slider-dist));
-      width: calc(var(--switchmode-h) - var(--switchmode-slider-dist));
-      top: calc(var(--switchmode-slider-dist) / 2);
-      left: calc(var(--switchmode-h) / 2);
+      height: calc(
+        var(--hero-modeswitch-h) - var(--hero-modeswitch-slider-dist)
+      );
+      width: calc(
+        var(--hero-modeswitch-h) - var(--hero-modeswitch-slider-dist)
+      );
+      top: calc(var(--hero-modeswitch-slider-dist) / 2);
+      left: calc(var(--hero-modeswitch-h) / 2);
       outline: solid var(--stroke-w) var(--c-stroke);
-      transition: var(--switchmode-transition-time);
+      transition: var(--modeswitch-transition-time);
     }
 
     .arrow-wrapper {
       width: 100%;
+      opacity: 1;
       height: 100%;
       transform: rotate(0deg);
       transition: 0.7s cubic-bezier(0.11, 0.61, 0.36, 1.22);
@@ -194,7 +198,7 @@ const subtitleRight = heroData.heroText.subtitleRight;
         fill: rgb(var(--clr-wb-dark), 0.2);
         stroke: var(--c-stroke);
         stroke-width: calc(var(--stroke-w) / 2);
-        transition: var(--switchmode-transition-time);
+        transition: var(--modeswitch-transition-time);
       }
     }
   }
@@ -203,22 +207,13 @@ const subtitleRight = heroData.heroText.subtitleRight;
     border-radius: 999rem;
   }
 
-  input:checked + .slider {
-    outline: solid var(--stroke-w) var(--c-stroke);
-  }
-
-  input:checked + .slider .slidee {
-    left: calc(var(--switchmode-w) - var(--switchmode-h) / 2);
-    outline: solid var(--stroke-w) var(--c-stroke);
+  body.lightmode .slider .slidee {
+    left: calc(var(--hero-modeswitch-w) - var(--hero-modeswitch-h) / 2);
     transform: translate(-50%, 0%);
   }
 
-  input:checked + .slider .slidee .arrow-wrapper {
+  body.lightmode .slider .slidee .arrow-wrapper {
     transform: rotate(180deg);
-  }
-
-  .round {
-    border-radius: 999rem;
   }
 
   @media only screen and (max-width: 600px) {
