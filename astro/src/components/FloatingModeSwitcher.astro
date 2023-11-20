@@ -97,16 +97,16 @@
 
   const enableDarkMode = () => {
     document.body.classList.remove("lightmode");
-    localStorage.setItem("mode", "dark");
+    localStorage.setItem("mode", null);
   };
 
   modeSwitch.forEach(function (e) {
     e.addEventListener("click", () => {
       mode = localStorage.getItem("mode");
 
-      if (mode == "dark" || null) {
+      if (mode !== "light") {
         enableLightMode();
-      } else if (mode == "light") {
+      } else {
         enableDarkMode();
       }
     });
