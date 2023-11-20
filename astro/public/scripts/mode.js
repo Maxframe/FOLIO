@@ -4,13 +4,11 @@ const modeSwitch = document.querySelectorAll(".modeswitch");
 
 const enableLightMode = () => {
   document.body.classList.add("lightmode");
-
   localStorage.setItem("mode", "light");
 };
 
 const enableDarkMode = () => {
   document.body.classList.remove("lightmode");
-
   localStorage.setItem("mode", "dark");
 };
 
