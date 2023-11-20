@@ -104,7 +104,7 @@
     e.addEventListener("click", () => {
       mode = localStorage.getItem("mode");
 
-      if (mode == "dark") {
+      if (mode == "dark" || null) {
         enableLightMode();
       } else if (mode == "light") {
         enableDarkMode();
