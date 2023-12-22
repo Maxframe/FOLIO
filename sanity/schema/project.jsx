@@ -86,6 +86,8 @@ export default defineType({
       name: "AddiInfoSnippets",
       title: "Additional Info Snippets",
       type: "array",
+      description:
+        "Zum Beispiel: Link zum Projekt, evtl. Preise oder Nominierungen, Artikel zum Projekt mit mehr Infos",
       of: [defineArrayMember({ type: "infoSnippet" })],
     }),
     defineField({

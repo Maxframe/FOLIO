@@ -1,5 +1,7 @@
 ---
 import { useSanityClient } from "@sanity/astro";
+import ImageBuilder from "./ImageBuilder.astro";
+
 export interface Props {
   currentSlug: string;
 }
@@ -10,12 +12,16 @@ const allProjectData = await useSanityClient().fetch(
   `*[_type == 'projectsSection'][0]{projectsFeatured[]->{
         projectName,
         "slug": slug.current,
+        "thumbnailImage": thumbnailImage.asset._ref,
+        thumbAltText,
     }
 }`
 );
 
 let nextProjectSlug = "";
 let nextProjectTitle = "";
+let nextThumbnailImage = "";
+let nextThumbAltText = "";
 if (allProjectData.projectsFeatured) {
   const currentIndex = allProjectData.projectsFeatured.findIndex(
     (project: any) => project.slug === currentSlug
@@ -23,6 +29,9 @@ if (allProjectData.projectsFeatured) {
   const nextIndex = (currentIndex + 1) % allProjectData.projectsFeatured.length;
   nextProjectSlug = allProjectData.projectsFeatured[nextIndex]?.slug;
   nextProjectTitle = allProjectData.projectsFeatured[nextIndex]?.projectName;
+  nextThumbnailImage =
+    allProjectData.projectsFeatured[nextIndex]?.thumbnailImage;
+  nextThumbAltText = allProjectData.projectsFeatured[nextIndex]?.thumbAltText;
 }
 ---
 
@@ -30,6 +39,15 @@ if (allProjectData.projectsFeatured) {
   nextProjectSlug && (
     <div class="wrapper">
       <a class="next-project-button" href={"/" + nextProjectSlug}>
+        <div class="next-image-wrapper">
+          <ImageBuilder
+            cls="next-image"
+            source={nextThumbnailImage}
+            alt={nextThumbAltText}
+            w={320}
+          />
+          <div class="next-image-overlay" />
+        </div>
         <svg
           width="89"
           height="42"
@@ -51,6 +69,7 @@ if (allProjectData.projectsFeatured) {
     padding: 0 var(--content-px);
     width: fit-content;
     .next-project-button {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -60,22 +79,51 @@ if (allProjectData.projectsFeatured) {
       font-weight: 600;
       background-color: var(--c-bg);
       padding: 2rem;
-      border: solid var(--stroke-w) var(--c-stroke);
+      outline: solid var(--stroke-w) var(--c-stroke);
       border-radius: var(--project-sm-radius);
       text-align: center;
+      overflow: hidden;
+      transition:
+        background-color var(--modeswitch-transition-time),
+        outline var(--modeswitch-transition-time);
 
-      &:hover span {
-        color: rgb(var(--clr-accent));
+      &:hover {
+        span {
+          color: rgb(var(--clr-accent));
+        }
+        .next-image-wrapper {
+          opacity: 1;
+        }
       }
 
+      .next-image-wrapper {
+        position: absolute;
+        opacity: 0;
+        inset: 0;
+        transition: 0.2s ease-out;
+        background-color: var(--c-stroke);
+        .next-image-overlay {
+          position: absolute;
+          z-index: 1;
+          inset: 0;
+          background: linear-gradient(
+            0deg,
+            var(--c-bg-90) 0%,
+            var(--c-bg) 100%
+          );
+        }
+      }
       span {
         transition: 0.2s ease-out;
+        z-index: 2;
       }
       svg {
+        transition: stroke var(--modeswitch-transition-time);
         fill: rgb(var(--clr-wb-light));
         stroke: var(--c-stroke);
         stroke-width: 3.5px;
         stroke-linecap: round;
+        z-index: 2;
       }
     }
   }

@@ -40,11 +40,7 @@ export async function getStaticPaths() {
   const allProjectData = await useSanityClient().fetch(
     `*[_type == 'projectsSection'][0]{projectsFeatured[]->}`
   );
-  return allProjectData.projectsFeatured?.map((project: any, index: number) => {
-    /*  const currentIndex = index;
-    const nextIndex =
-      (currentIndex + 1) % allProjectData.projectsFeatured.length;
-    const nextProject = allProjectData.projectsFeatured[nextIndex]; */
+  return allProjectData.projectsFeatured?.map((project: ProjectType) => {
     return {
       params: { projectName: project.slug.current },
       props: { project },
@@ -153,6 +149,9 @@ const { project } = Astro.props as { project: ProjectType };
       grid-column: 2 / calc(var(--project-grid-nr) - 1);
       border: solid var(--stroke-w) var(--c-stroke);
       z-index: -1;
+      transition:
+        background-color var(--modeswitch-transition-time),
+        border var(--modeswitch-transition-time);
     }
 
     .project-title-wrapper {
