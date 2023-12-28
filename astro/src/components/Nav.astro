@@ -1,11 +1,10 @@
 ---
-import { useSanityClient } from "@sanity/astro";
-const projectsSLug = await useSanityClient()
-  .fetch(`*[_type == 'projectsSection'][0]{
+import { sanityClient } from "sanity:client";
+const projectsSLug = await sanityClient.fetch(`*[_type == 'projectsSection'][0]{
   "slug": slug.current,
 }`);
 
-const aboutSlug = await useSanityClient().fetch(`*[_type == 'about'][0]{
+const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
   "slug": slug.current,
 }`);
 ---
@@ -45,13 +44,12 @@ const aboutSlug = await useSanityClient().fetch(`*[_type == 'about'][0]{
 
 <style lang="scss">
   nav {
-    position: static;
+    position: fixed;
     display: flex;
     margin-top: calc(var(--nav-offset) * -1);
     align-items: end;
     height: calc(var(--nav-height) + var(--nav-offset));
     background-color: var(--c-nav-bg);
-    position: fixed;
     width: 100%;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
