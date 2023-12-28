@@ -1,5 +1,5 @@
 ---
-import { useSanityClient } from "@sanity/astro";
+import { sanityClient } from "sanity:client";
 import ImageBuilder from "./ImageBuilder.astro";
 
 export interface Props {
@@ -8,7 +8,7 @@ export interface Props {
 
 const { currentSlug } = Astro.props as Props;
 
-const allProjectData = await useSanityClient().fetch(
+const allProjectData = await sanityClient.fetch(
   `*[_type == 'projectsSection'][0]{projectsFeatured[]->{
         projectName,
         "slug": slug.current,

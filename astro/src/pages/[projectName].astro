@@ -1,6 +1,6 @@
 ---
 import ProjectLayout from "../layouts/ProjectLayout.astro";
-import { useSanityClient } from "@sanity/astro";
+import { sanityClient } from "sanity:client";
 import { PortableText } from "astro-portabletext";
 
 import Nav from "../components/Nav.astro";
@@ -37,7 +37,7 @@ type ProjectType = {
 };
 
 export async function getStaticPaths() {
-  const allProjectData = await useSanityClient().fetch(
+  const allProjectData = await sanityClient.fetch(
     `*[_type == 'projectsSection'][0]{projectsFeatured[]->}`
   );
   return allProjectData.projectsFeatured?.map((project: ProjectType) => {
@@ -188,6 +188,7 @@ const { project } = Astro.props as { project: ProjectType };
           row-gap: 0.7rem;
           font-weight: 600;
           text-transform: uppercase;
+          text-align: center;
           letter-spacing: 0.05rem;
           margin-top: -0.2rem;
           margin-bottom: 1.5rem;

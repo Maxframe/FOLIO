@@ -1,7 +1,7 @@
 ---
-import { useSanityClient } from "@sanity/astro";
+import { sanityClient } from "sanity:client";
 
-const aboutSlug = await useSanityClient().fetch(`*[_type == 'about'][0]{
+const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
   "slug": slug.current
 }`);
 ---

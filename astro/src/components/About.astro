@@ -1,9 +1,9 @@
 ---
-import { useSanityClient } from "@sanity/astro";
+import { sanityClient } from "sanity:client";
 import { PortableText } from "astro-portabletext";
 import ImageBuilder from "./ImageBuilder.astro";
 
-const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
+const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
   aboutTitle,
   "slug": slug.current,
   "aboutImage": aboutImage.asset._ref,
@@ -287,7 +287,8 @@ const aboutData = await useSanityClient().fetch(`*[_type == 'about'][0]{
       grid-template-columns: 1fr;
       grid-template-rows: 1fr;
       row-gap: 2rem;
-      margin-left: 0;
+      margin-left: calc(var(--card-offset) * -1);
+      width: calc(100% + var(--card-offset) * 2);
 
       & > * {
         grid-column: auto;
