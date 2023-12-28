@@ -1,9 +1,9 @@
 ---
-import { useSanityClient } from "@sanity/astro";
+import { sanityClient } from "sanity:client";
 import ImageBuilder from "./ImageBuilder.astro";
 
-const fProjectsData = await useSanityClient()
-  .fetch(`*[_type == 'projectsSection'][0]{
+const fProjectsData =
+  await sanityClient.fetch(`*[_type == 'projectsSection'][0]{
     heading,
     "slug": slug.current,
     projectsFeatured[]->{
@@ -85,7 +85,6 @@ const fProjectsData = await useSanityClient()
           border-radius: var(--card-radius);
           overflow: hidden;
           height: 100%;
-
           transition: var(--card-transition-time);
           outline: solid var(--stroke-w) var(--c-stroke);
           background-color: var(--c-stroke);
