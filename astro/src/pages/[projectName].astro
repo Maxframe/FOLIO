@@ -29,7 +29,7 @@ type ProjectType = {
     roleText: string;
     techText: string;
   };
-  AddiInfoSnippets?: Array<{
+  AddiInfoSnippets: Array<{
     snippetTitle: string;
     snippetText: string;
   }>;
@@ -81,15 +81,15 @@ const { project } = Astro.props as { project: ProjectType };
       <div class="info-snippet-wrapper">
         <div class="info-snippet">
           <h3>Kontext</h3>
-          <p>{project.infoSnippets.contextText}</p>
+          <p>{project.infoSnippets?.contextText}</p>
         </div>
         <div class="info-snippet">
           <h3>Rolle</h3>
-          <p>{project.infoSnippets.roleText}</p>
+          <p>{project.infoSnippets?.roleText}</p>
         </div>
         <div class="info-snippet">
           <h3>Tools</h3>
-          <p>{project.infoSnippets.techText}</p>
+          <p>{project.infoSnippets?.techText}</p>
         </div>
         {
           project.AddiInfoSnippets?.map((snippet: any) => (
