@@ -1,8 +1,12 @@
 ---
+export interface Props {
+  classes?: string;
+}
 
+const { classes } = Astro.props as Props;
 ---
 
-<div class="floating-modeswitch-wrapper show-float">
+<div class="floating-modeswitch-wrapper" class:list={[classes]}>
   <button class="modeswitch">
     <div class="slider round">
       <div class="slidee round"></div>
@@ -116,7 +120,7 @@
     enableLightMode();
   }
 
-  /* Disable Transition on oageload/refresh  */
+  /* Disable Transition on pageload/refresh  */
   document.addEventListener("DOMContentLoaded", function () {
     let node = document.querySelector(".no-transition");
     node.classList.remove("no-transition");
