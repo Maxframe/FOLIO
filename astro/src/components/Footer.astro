@@ -13,7 +13,7 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
       rel="noopener noreferrer"
       href="https://astro.build/">Astro</a
     >
-     &copy; <span id="copyright-date"></span>
+    &copy; <span id="copyright-date"></span>
   </p>
 </footer>
 
@@ -26,14 +26,14 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
       user-select: none;
       text-align: center;
       font-weight: 400;
-      color: var(--c-lighter-text);
+      color: rgb(var(--c-fg), 0.6);
       font-size: var(--step--1);
       padding: 0.5rem;
       transition: color var(--modeswitch-transition-time);
 
       a {
         opacity: 1;
-        color: var(--c-fg);
+        color: rgb(var(--c-fg));
         font-weight: 700;
         transition: color var(--modeswitch-transition-time);
 

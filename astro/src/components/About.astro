@@ -129,10 +129,12 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
     grid-template-columns: 2fr 3fr;
     margin-left: 3rem;
     padding: 2rem;
-    background-color: var(--c-highlighted-bg);
+    background-color: rgb(var(--clr-wb-light), 0.15);
     border-radius: 3rem;
-    border: solid var(--stroke-w) var(--c-stroke);
-    transition: background-color 200ms ease-out;
+    border: solid var(--stroke-w) rgb(var(--c-stroke));
+    transition:
+      background-color 200ms ease-out,
+      border 200ms ease-out;
     column-gap: 5%;
     row-gap: 1rem;
   }
@@ -160,7 +162,7 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
     a {
       transition: color 200ms ease-out;
       font-weight: 600;
-      color: var(--c-fg);
+      color: rgb(var(--c-fg));
       &:hover {
         color: rgb(var(--clr-accent));
       }
@@ -196,7 +198,7 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
           transition:
             fill 200ms ease-out,
             filter 200ms ease-out;
-          fill: var(--c-fg);
+          fill: rgb(var(--c-fg));
         }
       }
       &:hover {
@@ -233,13 +235,13 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
       top: 50%;
       right: 0;
       text-align: center;
-      color: var(--c-card-text);
+      color: rgb(var(--c-fg));
       padding: 0.5rem 0;
       width: 8rem;
-      background-color: var(--c-card-text-bg);
+      background-color: var(--c-pill-bg);
       border-radius: 999px;
       backdrop-filter: blur(20px);
-      border: solid var(--stroke-w) var(--c-stroke);
+      border: solid var(--stroke-w) rgb(var(--c-stroke));
       transform: translate(calc(100% + 1rem), -50%);
       transition: opacity 200ms ease-out;
     }
@@ -252,7 +254,7 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
       text-transform: uppercase;
       font-size: 0.8rem;
       font-weight: 700;
-      color: var(--c-lighter-text);
+      color: rgb(var(--c-fg), 0.6);
       letter-spacing: 0.06rem;
       margin-top: 0.5rem;
     }
@@ -270,13 +272,13 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
       transform 200ms ease-out;
     font-weight: 600;
     grid-column: 1 / span 2;
-    color: var(--c-fg);
+    color: rgb(var(--c-fg));
     padding: 1rem 1.4rem;
-    background-color: var(--c-card-text-bg);
+    background-color: var(--c-pill-bg);
     border-radius: 999px;
-    border: solid var(--stroke-w) var(--c-stroke);
+    border: solid var(--stroke-w) rgb(var(--c-stroke));
     &:hover {
-      background-color: var(--c-bg);
+      background-color: rgb(var(--c-bg));
       color: rgb(var(--clr-accent));
       transform: scale(1.03);
     }

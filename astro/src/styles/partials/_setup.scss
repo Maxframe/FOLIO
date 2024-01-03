@@ -13,11 +13,11 @@ body {
   font-family: "Manrope", sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  color: var(--c-fg);
+  color: rgb(var(--c-fg));
 }
 
 body {
-  background: var(--c-bg);
+  background: rgb(var(--c-bg));
   transition: background var(--modeswitch-transition-time) ease-out;
   overflow-x: hidden;
   position: relative;
@@ -41,7 +41,7 @@ p {
 a {
   text-decoration: none;
   font-weight: 600;
-  color: var(--c-fg);
+  color: rgb(var(--c-fg));
 }
 
 ul {
@@ -61,8 +61,8 @@ canvas {
 }
 
 ::selection {
-  background: var(--c-fg);
-  color: var(--c-bg);
+  background: rgb(var(--c-fg));
+  color: rgb(var(--c-bg));
 }
 
 button {

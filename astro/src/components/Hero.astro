@@ -70,7 +70,7 @@ const subtitleRight = heroData.heroText.subtitleRight;
       position: relative;
       transition: color var(--modeswitch-transition-time);
       margin-top: 0;
-      color: var(--c-fg);
+      color: rgb(var(--c-fg));
       user-select: none;
       text-align: center;
       line-height: 1.2;
@@ -157,7 +157,7 @@ const subtitleRight = heroData.heroText.subtitleRight;
     bottom: 0;
     left: 0;
     right: 0;
-    outline: solid var(--stroke-w) var(--c-stroke);
+    outline: solid var(--stroke-w) rgb(var(--c-stroke));
     background-color: rgb(var(--clr-wb-light), 0.15);
     transition: 200ms;
     &:hover {
@@ -178,7 +178,7 @@ const subtitleRight = heroData.heroText.subtitleRight;
       );
       top: calc(var(--hero-modeswitch-slider-dist) / 2);
       left: calc(var(--hero-modeswitch-h) / 2);
-      outline: solid var(--stroke-w) var(--c-stroke);
+      outline: solid var(--stroke-w) rgb(var(--c-stroke));
       transition: var(--modeswitch-transition-time);
     }
 
@@ -196,7 +196,7 @@ const subtitleRight = heroData.heroText.subtitleRight;
         height: 100%;
         left: 50%;
         fill: rgb(var(--clr-wb-dark), 0.2);
-        stroke: var(--c-stroke);
+        stroke: rgb(var(--c-stroke));
         stroke-width: calc(var(--stroke-w) / 2);
         transition: var(--modeswitch-transition-time);
       }
@@ -283,9 +283,9 @@ const subtitleRight = heroData.heroText.subtitleRight;
   ) {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) {
-        floatModeSwitch.classList.add("show-float");
+        floatModeSwitch.classList.add("showfloat");
       } else {
-        floatModeSwitch.classList.remove("show-float");
+        floatModeSwitch.classList.remove("showfloat");
       }
     });
   }, options);

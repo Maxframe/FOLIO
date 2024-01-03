@@ -23,6 +23,7 @@ const fProjectsData =
         <div class="card">
           <a href={project.slug} class="card-link">
             <div class="image-wrapper">
+              <div class="image-overlay" />
               <ImageBuilder
                 cls="thumbnail-image"
                 source={project.thumbnailImage}
@@ -73,6 +74,9 @@ const fProjectsData =
         }
         .card-link .image-wrapper {
           transform: translateX(calc(var(--card-offset) * -1));
+          .image-overlay {
+            background-color: rgb(var(--c-bg), 0);
+          }
         }
       }
 
@@ -86,17 +90,27 @@ const fProjectsData =
           overflow: hidden;
           height: 100%;
           transition: var(--card-transition-time);
-          outline: solid var(--stroke-w) var(--c-stroke);
-          background-color: var(--c-stroke);
+          outline: solid var(--stroke-w) rgb(var(--c-stroke));
+          background-color: rgb(var(--c-stroke));
           box-shadow: 0px 6px 10px -8px black;
+
+          .image-overlay {
+            position: absolute;
+            width: 100%;
+            border-radius: var(--card-radius);
+            height: 100%;
+            transition: background-color var(--card-transition-time);
+            background-color: rgb(var(--c-bg), 0.25);
+            z-index: 1;
+          }
         }
       }
       .card-title {
         position: absolute;
         right: 0;
         bottom: 1rem;
-        color: var(--c-card-text);
-        background-color: var(--c-card-text-bg);
+        color: rgb(var(--c-fg));
+        background-color: var(--c-pill-bg);
         padding: 1rem 1.4rem;
         margin: 0;
         border-radius: 999px;
@@ -105,7 +119,7 @@ const fProjectsData =
         z-index: 1;
         opacity: 0;
         font-weight: 700;
-        border: solid var(--stroke-w) var(--c-stroke);
+        border: solid var(--stroke-w) rgb(var(--c-stroke));
 
         backdrop-filter: blur(10px);
         transform: translateX(var(--card-offset));

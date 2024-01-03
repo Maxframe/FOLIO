@@ -77,9 +77,9 @@ if (allProjectData.projectsFeatured) {
       max-width: 20rem;
       font-size: var(--step-2);
       font-weight: 600;
-      background-color: var(--c-bg);
+      background-color: rgb(var(--c-bg));
       padding: 2rem;
-      outline: solid var(--stroke-w) var(--c-stroke);
+      outline: solid var(--stroke-w) rgb(var(--c-stroke));
       border-radius: var(--project-sm-radius);
       text-align: center;
       overflow: hidden;
@@ -101,15 +101,16 @@ if (allProjectData.projectsFeatured) {
         opacity: 0;
         inset: 0;
         transition: 0.2s ease-out;
-        background-color: var(--c-stroke);
+        background-color: rgb(var(--c-stroke));
+        border-radius: var(--project-sm-radius);
         .next-image-overlay {
           position: absolute;
           z-index: 1;
           inset: 0;
           background: linear-gradient(
             0deg,
-            var(--c-bg-90) 0%,
-            var(--c-bg) 100%
+            rgb(var(--c-bg), 0.9) 0%,
+            rgb(var(--c-bg)) 100%
           );
         }
       }
@@ -120,7 +121,7 @@ if (allProjectData.projectsFeatured) {
       svg {
         transition: stroke var(--modeswitch-transition-time);
         fill: rgb(var(--clr-wb-light));
-        stroke: var(--c-stroke);
+        stroke: rgb(var(--c-stroke));
         stroke-width: 3.5px;
         stroke-linecap: round;
         z-index: 2;

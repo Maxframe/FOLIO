@@ -35,7 +35,7 @@ const imageSize = decodeAssetId(source);
 ---
 
 <Image
-  class={cls}
+  class:list={[cls]}
   src={urlFor(source)
     .auto("format")
     .fit(fit ? fit : "clip")
