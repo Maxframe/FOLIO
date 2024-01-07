@@ -46,6 +46,8 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
 </style>
 
 <script>
-  document.querySelector("#copyright-date").textContent =
-    "2k" + new Date().getFullYear().toString().substring(2, 4);
+  document.addEventListener("astro:page-load", () => {
+    document.querySelector("#copyright-date").textContent =
+      "2k" + new Date().getFullYear().toString().substring(2, 4);
+  });
 </script>

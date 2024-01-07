@@ -98,40 +98,44 @@ const { classes, show, ...rest } = Astro.props as Props;
   }
 </style>
 
-<script is:inline>
-  /* Switches Light/darkmode accordingly*/
-  let mode = localStorage.getItem("mode");
-  const modeSwitch = document.querySelectorAll(".modeswitch");
+<script>
+  document.addEventListener("astro:page-load", () => {
+    /* Switches Light/darkmode accordingly*/
+    let mode = localStorage.getItem("mode");
+    const modeSwitch = document.querySelectorAll(".modeswitch");
 
-  const enableLightMode = () => {
-    document.body.classList.add("lightmode");
-    localStorage.setItem("mode", "light");
-  };
+    const enableLightMode = () => {
+      document.body.classList.add("lightmode");
+      localStorage.setItem("mode", "light");
+    };
 
-  const enableDarkMode = () => {
-    document.body.classList.remove("lightmode");
-    localStorage.setItem("mode", null);
-  };
+    const enableDarkMode = () => {
+      document.body.classList.remove("lightmode");
+      localStorage.setItem("mode", null);
+    };
 
-  modeSwitch.forEach(function (e) {
-    e.addEventListener("click", () => {
-      mode = localStorage.getItem("mode");
+    modeSwitch.forEach(function (e) {
+      e.addEventListener("click", () => {
+        mode = localStorage.getItem("mode");
 
-      if (mode !== "light") {
-        enableLightMode();
-      } else {
-        enableDarkMode();
-      }
+        if (mode !== "light") {
+          enableLightMode();
+        } else {
+          enableDarkMode();
+        }
+      });
     });
+
+    if (mode == "light") {
+      enableLightMode();
+    }
   });
+</script>
 
-  if (mode == "light") {
-    enableLightMode();
-  }
-
-  /* Disable Transition on pageload/refresh  */
-  document.addEventListener("DOMContentLoaded", function () {
-    let node = document.querySelector(".no-transition");
-    node.classList.remove("no-transition");
+<script>
+  document.addEventListener("astro:after-swap", () => {
+    localStorage.mode === "light"
+      ? document.body.classList.add("lightmode")
+      : document.body.classList.remove("lightmode");
   });
 </script>
