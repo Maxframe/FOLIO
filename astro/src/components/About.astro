@@ -88,29 +88,31 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
 </section>
 
 <script>
-  const copyContent = async () => {
-    try {
-      await navigator.clipboard.writeText(text);
-      toolTip.innerHTML = "Mail kopiert";
-    } catch (err) {
-      toolTip.innerHTML = "Irgendwas ist falsch gelaufen";
-    }
-    mailButton.classList.add("active");
-  };
+  document.addEventListener("astro:page-load", () => {
+    const copyContent = async () => {
+      try {
+        await navigator.clipboard.writeText(text);
+        toolTip.innerHTML = "Mail kopiert";
+      } catch (err) {
+        toolTip.innerHTML = "Irgendwas ist falsch gelaufen";
+      }
+      mailButton.classList.add("active");
+    };
 
-  const resetTooltip = () => {
-    mailButton.classList.remove("active");
+    const resetTooltip = () => {
+      mailButton.classList.remove("active");
 
-    setTimeout(() => (toolTip.innerHTML = toolTipText), 200);
-  };
+      setTimeout(() => (toolTip.innerHTML = toolTipText), 200);
+    };
 
-  let text = document.getElementById("mailText").innerHTML;
-  let mailButton = document.getElementById("mailButton");
-  let toolTip = document.getElementById("mailTooltip");
-  let toolTipText = document.getElementById("mailTooltip").innerHTML;
+    let text = document.getElementById("mailText").innerHTML;
+    let mailButton = document.getElementById("mailButton");
+    let toolTip = document.getElementById("mailTooltip");
+    let toolTipText = document.getElementById("mailTooltip").innerHTML;
 
-  mailButton.addEventListener("click", copyContent);
-  mailButton.addEventListener("mouseout", resetTooltip);
+    mailButton.addEventListener("click", copyContent);
+    mailButton.addEventListener("mouseout", resetTooltip);
+  });
 </script>
 
 <style lang="scss">

@@ -232,63 +232,67 @@ const subtitleRight = heroData.heroText.subtitleRight;
 </style>
 
 <script>
-  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+  document.addEventListener("astro:page-load", () => {
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-  let interval = null;
+    let interval = null;
 
-  const subLeftElement = document.querySelector(".sub-left") as HTMLElement;
-  subLeftElement.onmouseover = (event: any) => {
-    let iteration = 0;
+    const subLeftElement = document.querySelector(".sub-left") as HTMLElement;
+    subLeftElement.onmouseover = (event: any) => {
+      let iteration = 0;
 
-    clearInterval(interval);
+      clearInterval(interval);
 
-    const originalText = event.target.dataset.value;
-    const textLength = originalText.length;
-    const maxIterations = 6;
+      const originalText = event.target.dataset.value;
+      const textLength = originalText.length;
+      const maxIterations = 6;
 
-    interval = setInterval(() => {
-      event.target.innerText = originalText
-        .split("")
-        .map((originalLetter: string, index: number) => {
-          const changeIterations = Math.min(iteration - index, maxIterations);
-          if (changeIterations <= 0) {
-            return originalLetter;
-          } else if (changeIterations < maxIterations) {
-            return letters[Math.floor(Math.random() * 52)];
-          } else {
-            return originalText[index];
-          }
-        })
-        .join("");
+      interval = setInterval(() => {
+        event.target.innerText = originalText
+          .split("")
+          .map((originalLetter: string, index: number) => {
+            const changeIterations = Math.min(iteration - index, maxIterations);
+            if (changeIterations <= 0) {
+              return originalLetter;
+            } else if (changeIterations < maxIterations) {
+              return letters[Math.floor(Math.random() * 52)];
+            } else {
+              return originalText[index];
+            }
+          })
+          .join("");
 
-      iteration++;
-      if (iteration >= textLength + maxIterations) {
-        clearInterval(interval);
-      }
-    }, 17);
-  };
+        iteration++;
+        if (iteration >= textLength + maxIterations) {
+          clearInterval(interval);
+        }
+      }, 17);
+    };
+  });
 </script>
 <script>
-  /* Show/hide floating modeswitch */
-  const heroModeSwitch = document.querySelector(".modeswitch-wrapper");
-  const floatModeSwitch = document.querySelector(
-    ".floating-modeswitch-wrapper"
-  );
+  document.addEventListener("astro:page-load", () => {
+    /* Show/hide floating modeswitch */
+    const heroModeSwitch = document.querySelector(".modeswitch-wrapper");
+    const floatModeSwitch = document.querySelector(
+      ".floating-modeswitch-wrapper"
+    );
 
-  const options = {};
+    const options = {};
 
-  const heroObserver = new IntersectionObserver(function (
-    entries,
-    heroObserver
-  ) {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) {
-        floatModeSwitch.classList.add("showfloat");
-      } else {
-        floatModeSwitch.classList.remove("showfloat");
-      }
-    });
-  }, options);
+    const heroObserver = new IntersectionObserver(function (
+      entries,
+      heroObserver
+    ) {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          floatModeSwitch.classList.add("showfloat");
+        } else {
+          floatModeSwitch.classList.remove("showfloat");
+        }
+      });
+    }, options);
 
-  heroObserver.observe(heroModeSwitch);
+    heroObserver.observe(heroModeSwitch);
+  });
 </script>
