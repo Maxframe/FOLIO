@@ -21,7 +21,11 @@ const fProjectsData =
     {
       fProjectsData.projectsFeatured?.map((project: any) => (
         <div class="card">
-          <a href={project.slug} class="card-link">
+          <a
+            href={project.slug}
+            class="card-link"
+            aria-labelledby={project.slug}
+          >
             <div class="image-wrapper">
               <div class="image-overlay" />
               <ImageBuilder
@@ -33,8 +37,10 @@ const fProjectsData =
                 loading="eager"
               />
             </div>
+            <h3 class="card-title" id={project.slug}>
+              {project.projectName}
+            </h3>
           </a>
-          <h3 class="card-title">{project.projectName}</h3>
         </div>
       ))
     }
@@ -69,13 +75,15 @@ const fProjectsData =
       height: var(--card-h);
 
       &:hover > {
-        .card-title {
-          opacity: 1;
-        }
-        .card-link .image-wrapper {
-          transform: translateX(calc(var(--card-offset) * -1));
-          .image-overlay {
-            background-color: rgb(var(--c-bg), 0);
+        .card-link {
+          .card-title {
+            opacity: 1;
+          }
+          .image-wrapper {
+            transform: translateX(calc(var(--card-offset) * -1));
+            .image-overlay {
+              background-color: rgb(var(--c-bg), 0);
+            }
           }
         }
       }
@@ -104,28 +112,28 @@ const fProjectsData =
             z-index: 1;
           }
         }
-      }
-      .card-title {
-        position: absolute;
-        right: 0;
-        bottom: 1rem;
-        color: rgb(var(--c-fg));
-        background-color: var(--c-pill-bg);
-        padding: 1rem 1.4rem;
-        margin: 0;
-        border-radius: 999px;
-        font-size: 1.2rem;
-        text-align: center;
-        z-index: 1;
-        opacity: 0;
-        font-weight: 700;
-        border: solid var(--stroke-w) rgb(var(--c-stroke));
+        .card-title {
+          position: absolute;
+          right: 0;
+          bottom: 1rem;
+          color: rgb(var(--c-fg));
+          background-color: var(--c-pill-bg);
+          padding: 1rem 1.4rem;
+          margin: 0;
+          border-radius: 999px;
+          font-size: 1.2rem;
+          text-align: center;
+          z-index: 1;
+          opacity: 0;
+          font-weight: 700;
+          border: solid var(--stroke-w) rgb(var(--c-stroke));
 
-        backdrop-filter: blur(10px);
-        transform: translateX(var(--card-offset));
-        pointer-events: none;
+          backdrop-filter: blur(10px);
+          transform: translateX(var(--card-offset));
+          pointer-events: none;
 
-        transition: opacity var(--card-transition-time);
+          transition: opacity var(--card-transition-time);
+        }
       }
     }
   }
