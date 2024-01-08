@@ -13,7 +13,6 @@ const allProjectData = await sanityClient.fetch(
         projectName,
         "slug": slug.current,
         "thumbnailImage": thumbnailImage.asset._ref,
-        thumbAltText,
     }
 }`
 );
@@ -31,7 +30,6 @@ if (allProjectData.projectsFeatured) {
   nextProjectTitle = allProjectData.projectsFeatured[nextIndex]?.projectName;
   nextThumbnailImage =
     allProjectData.projectsFeatured[nextIndex]?.thumbnailImage;
-  nextThumbAltText = allProjectData.projectsFeatured[nextIndex]?.thumbAltText;
 }
 ---
 
@@ -43,7 +41,7 @@ if (allProjectData.projectsFeatured) {
           <ImageBuilder
             cls="next-image"
             source={nextThumbnailImage}
-            alt={nextThumbAltText}
+            alt={nextProjectTitle}
             w={320}
           />
           <div class="next-image-overlay" />

@@ -19,7 +19,7 @@ const fProjectsData =
   <h2 class="project-section-title">{fProjectsData.heading}</h2>
   <div class="projects-wrapper">
     {
-      fProjectsData.projectsFeatured?.map((project: any) => (
+      fProjectsData.projectsFeatured?.map((project: any, index: number) => (
         <div class="card">
           <a
             href={project.slug}
@@ -34,7 +34,7 @@ const fProjectsData =
                 alt={project.thumbAltText}
                 w={900}
                 h={400}
-                loading="eager"
+                loading={index === 0 ? "eager" : "lazy"}
               />
             </div>
             <h3 class="card-title" id={project.slug}>
@@ -143,12 +143,16 @@ const fProjectsData =
       margin-left: 0;
     }
 
-    .projects-wrapper .card > {
+    .projects-wrapper .card .card-link {
       .card-title {
         opacity: 1;
       }
-      .card-link .image-wrapper {
+      .image-wrapper {
         transform: translateX(calc(var(--card-offset) * -1));
+
+        .image-overlay {
+          background-color: rgb(var(--c-bg), 0);
+        }
       }
     }
   }

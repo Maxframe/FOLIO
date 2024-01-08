@@ -187,7 +187,6 @@ button {
   border: none;
 }
 
-/* Images */
 .thumbnail-image {
   -o-object-fit: cover;
      object-fit: cover;

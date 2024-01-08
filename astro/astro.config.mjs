@@ -1,5 +1,5 @@
 import { defineConfig } from "astro/config";
-import { sanityIntegration as sanity } from "@sanity/astro";
+import { sanityIntegration as sanity } from "@narration-sd/sanity-astro";
 // https://astro.build/config
 export default defineConfig({
   integrations: [

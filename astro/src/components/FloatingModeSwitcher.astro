@@ -11,7 +11,7 @@ const { classes, show, ...rest } = Astro.props as Props;
   class="floating-modeswitch-wrapper"
   class:list={[classes, { showfloat: show }]}
 >
-  <button class="modeswitch">
+  <button class="modeswitch" aria-label="Modeswitch Button">
     <div class="slider round">
       <div class="slidee round"></div>
     </div>
@@ -129,13 +129,5 @@ const { classes, show, ...rest } = Astro.props as Props;
     if (mode == "light") {
       enableLightMode();
     }
-  });
-</script>
-
-<script>
-  document.addEventListener("astro:after-swap", () => {
-    localStorage.mode === "light"
-      ? document.body.classList.add("lightmode")
-      : document.body.classList.remove("lightmode");
   });
 </script>

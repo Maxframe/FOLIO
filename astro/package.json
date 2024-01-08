@@ -6,12 +6,13 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "@sanity/astro": "^2.2.0",
+    "@astrojs/check": "^0.3.4",
+    "@narration-sd/sanity-astro": "^0.2.3",
     "@sanity/image-url": "^1.0.2",
     "astro": "^4.0.9",
     "astro-portabletext": "^0.9.6",
