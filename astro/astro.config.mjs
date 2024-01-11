@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import { sanityIntegration as sanity } from "@narration-sd/sanity-astro";
+import vercel from "@astrojs/vercel/static";
 // https://astro.build/config
 export default defineConfig({
   output: "static",
