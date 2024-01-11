@@ -89,34 +89,6 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
   </div>
 </section>
 
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const copyContent = async () => {
-      try {
-        await navigator.clipboard.writeText(text);
-        toolTip.innerHTML = "Mail kopiert";
-      } catch (err) {
-        toolTip.innerHTML = "Irgendwas ist falsch gelaufen";
-      }
-      mailButton.classList.add("active");
-    };
-
-    const resetTooltip = () => {
-      mailButton.classList.remove("active");
-
-      setTimeout(() => (toolTip.innerHTML = toolTipText), 200);
-    };
-
-    let text = document.getElementById("mailText").innerHTML;
-    let mailButton = document.getElementById("mailButton");
-    let toolTip = document.getElementById("mailTooltip");
-    let toolTipText = document.getElementById("mailTooltip").innerHTML;
-
-    mailButton.addEventListener("click", copyContent);
-    mailButton.addEventListener("mouseout", resetTooltip);
-  });
-</script>
-
 <style lang="scss">
   .about-section {
     max-width: var(--content-w);
@@ -320,3 +292,45 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
     }
   }
 </style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    let text: string,
+      mailButton: HTMLElement,
+      toolTip: HTMLElement,
+      toolTipText: string;
+
+    if (document.getElementById("mailText")) {
+      text = document.getElementById("mailText").innerHTML;
+    }
+    if (document.getElementById("mailButton")) {
+      mailButton = document.getElementById("mailButton");
+    }
+    if (document.getElementById("mailTooltip")) {
+      toolTip = document.getElementById("mailTooltip");
+      toolTipText = toolTip.innerHTML;
+    }
+
+    const copyContent = async () => {
+      if (!text || !toolTip) return;
+
+      try {
+        await navigator.clipboard.writeText(text);
+        toolTip.innerHTML = "Mail kopiert";
+      } catch (err) {
+        toolTip.innerHTML = "Irgendwas ist falsch gelaufen";
+      }
+      if (mailButton) mailButton.classList.add("active");
+    };
+
+    const resetTooltip = () => {
+      if (mailButton) mailButton.classList.remove("active");
+      if (toolTip) setTimeout(() => (toolTip.innerHTML = toolTipText), 200);
+    };
+
+    if (mailButton) {
+      mailButton.addEventListener("click", copyContent);
+      mailButton.addEventListener("mouseout", resetTooltip);
+    }
+  });
+</script>

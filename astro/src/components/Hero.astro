@@ -240,38 +240,43 @@ const subtitleRight = heroData.heroText.subtitleRight;
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
     let interval = null;
-
     const subLeftElement = document.querySelector(".sub-left") as HTMLElement;
-    subLeftElement.onmouseover = (event: any) => {
-      let iteration = 0;
 
-      clearInterval(interval);
+    if (subLeftElement) {
+      subLeftElement.onmouseover = (event: any) => {
+        let iteration = 0;
 
-      const originalText = event.target.dataset.value;
-      const textLength = originalText.length;
-      const maxIterations = 6;
+        clearInterval(interval);
 
-      interval = setInterval(() => {
-        event.target.innerText = originalText
-          .split("")
-          .map((originalLetter: string, index: number) => {
-            const changeIterations = Math.min(iteration - index, maxIterations);
-            if (changeIterations <= 0) {
-              return originalLetter;
-            } else if (changeIterations < maxIterations) {
-              return letters[Math.floor(Math.random() * 52)];
-            } else {
-              return originalText[index];
-            }
-          })
-          .join("");
+        const originalText = event.target.dataset.value;
+        const textLength = originalText.length;
+        const maxIterations = 6;
 
-        iteration++;
-        if (iteration >= textLength + maxIterations) {
-          clearInterval(interval);
-        }
-      }, 17);
-    };
+        interval = setInterval(() => {
+          event.target.innerText = originalText
+            .split("")
+            .map((originalLetter: string, index: number) => {
+              const changeIterations = Math.min(
+                iteration - index,
+                maxIterations
+              );
+              if (changeIterations <= 0) {
+                return originalLetter;
+              } else if (changeIterations < maxIterations) {
+                return letters[Math.floor(Math.random() * 52)];
+              } else {
+                return originalText[index];
+              }
+            })
+            .join("");
+
+          iteration++;
+          if (iteration >= textLength + maxIterations) {
+            clearInterval(interval);
+          }
+        }, 17);
+      };
+    }
   });
 </script>
 <script>
@@ -297,6 +302,8 @@ const subtitleRight = heroData.heroText.subtitleRight;
       });
     }, options);
 
-    heroObserver.observe(heroModeSwitch);
+    if (heroModeSwitch) {
+      heroObserver.observe(heroModeSwitch);
+    }
   });
 </script>

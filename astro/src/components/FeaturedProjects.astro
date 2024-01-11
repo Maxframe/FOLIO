@@ -139,19 +139,28 @@ const fProjectsData =
   }
 
   @media only screen and (max-width: 800px) {
+    :root {
+      --card-offset: 0;
+    }
     .project-section .project-section-title {
       margin-left: 0;
     }
 
-    .projects-wrapper .card .card-link {
-      .card-title {
-        opacity: 1;
+    .projects-wrapper .card {
+      &:hover > .card-link .image-wrapper {
+        transform: none;
       }
-      .image-wrapper {
-        transform: translateX(calc(var(--card-offset) * -1));
 
-        .image-overlay {
-          background-color: rgb(var(--c-bg), 0);
+      .card-link {
+        .card-title {
+          opacity: 1;
+        }
+        .image-wrapper {
+          width: calc(100% - 2rem);
+
+          .image-overlay {
+            background-color: rgb(var(--c-bg), 0);
+          }
         }
       }
     }
