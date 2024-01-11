@@ -81,8 +81,10 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
         ))
       }
     </div>
-    <a class="about-cv" href={aboutData.cvFile + "?dl="}
-      ><span>{aboutData.cvText}</span></a
+    <a
+      class="about-cv"
+      href={aboutData.cvFile + "?dl="}
+      data-umami-event="CV button"><span>{aboutData.cvText}</span></a
     >
   </div>
 </section>
@@ -152,10 +154,6 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
     font-size: var(--step-3);
     transition: color 200ms ease-out;
     margin-bottom: 0.5rem;
-  }
-
-  .about-description > * {
-    transition: color 200ms ease-out;
   }
 
   .about-social-wrapper {

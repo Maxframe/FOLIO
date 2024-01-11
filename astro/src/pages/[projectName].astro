@@ -62,53 +62,55 @@ const { project } = Astro.props as { project: ProjectType };
     />
   </div>
 
-  <div class="project-container">
-    <div class="project-card"></div>
-    <div class="project-title-wrapper">
-      <h1 class="project-title">{project.projectName}</h1>
-    </div>
+  <div class="project-overflow-container">
+    <main class="project-container">
+      <div class="project-card"></div>
+      <div class="project-title-wrapper">
+        <h1 class="project-title">{project.projectName}</h1>
+      </div>
 
-    <div class="infosection-wrapper">
-      <div class="tag-description-wrapper">
-        <div class="tag-list">
-          {project.tags?.map((tag: string) => <span class="tag">{tag}</span>)}
+      <div class="infosection-wrapper">
+        <div class="tag-description-wrapper">
+          <div class="tag-list">
+            {project.tags?.map((tag: string) => <span class="tag">{tag}</span>)}
+          </div>
+
+          <div class="description block-wrapper">
+            <PortableText value={project.description} />
+          </div>
         </div>
-
-        <div class="description block-wrapper">
-          <PortableText value={project.description} />
+        <div class="info-snippet-wrapper">
+          <div class="info-snippet">
+            <h3>Kontext</h3>
+            <p>{project.infoSnippets?.contextText}</p>
+          </div>
+          <div class="info-snippet">
+            <h3>Rolle</h3>
+            <p>{project.infoSnippets?.roleText}</p>
+          </div>
+          <div class="info-snippet">
+            <h3>Tools</h3>
+            <p>{project.infoSnippets?.techText}</p>
+          </div>
+          {
+            project.AddiInfoSnippets?.map((snippet: any) => (
+              <div class="info-snippet add-info-snippet">
+                <h3>{snippet.snippetTitle}</h3>
+                <p>{snippet.snippetText}</p>
+              </div>
+            ))
+          }
         </div>
       </div>
-      <div class="info-snippet-wrapper">
-        <div class="info-snippet">
-          <h3>Kontext</h3>
-          <p>{project.infoSnippets?.contextText}</p>
-        </div>
-        <div class="info-snippet">
-          <h3>Rolle</h3>
-          <p>{project.infoSnippets?.roleText}</p>
-        </div>
-        <div class="info-snippet">
-          <h3>Tools</h3>
-          <p>{project.infoSnippets?.techText}</p>
-        </div>
+
+      <div class="sections-wrapper">
         {
-          project.AddiInfoSnippets?.map((snippet: any) => (
-            <div class="info-snippet add-info-snippet">
-              <h3>{snippet.snippetTitle}</h3>
-              <p>{snippet.snippetText}</p>
-            </div>
+          project.content?.map((section: any) => (
+            <ProjectSections sectionContent={section} />
           ))
         }
       </div>
-    </div>
-
-    <div class="sections-wrapper">
-      {
-        project.content?.map((section: any) => (
-          <ProjectSections sectionContent={section} />
-        ))
-      }
-    </div>
+    </main>
   </div>
   <NextProjectLink currentSlug={project.slug.current} />
 </ProjectLayout>
@@ -128,107 +130,112 @@ const { project } = Astro.props as { project: ProjectType };
     z-index: -2;
   }
 
-  .project-container {
-    position: relative;
-    max-width: var(--project-content-w);
-    margin: calc(var(--project-container-offset) * -1) auto 0;
-    padding: 0 var(--content-px);
-    display: grid;
-    grid-template-columns: repeat(18, 1fr);
-    grid-template-rows: auto;
-    column-gap: var(--project-grid-gap);
-    row-gap: var(--project-sections-gap);
-
-    .project-card {
-      position: absolute;
-      background-color: rgb(var(--c-bg));
-      border-radius: var(--project-md-radius);
-      backdrop-filter: blur(40px);
-      width: 100%;
-      height: 100%;
-      grid-column: 2 / calc(var(--project-grid-nr) - 1);
-      border: solid var(--stroke-w) rgb(var(--c-stroke));
-      z-index: -1;
-      transition:
-        background-color var(--modeswitch-transition-time),
-        border var(--modeswitch-transition-time);
-    }
-
-    .project-title-wrapper {
-      height: calc(var(--project-container-offset) * 2);
-      display: flex;
-      grid-column: 3 / calc(var(--project-grid-nr) - 2);
-      justify-content: center;
-      align-items: center;
-      margin-bottom: -5rem;
-
-      .project-title {
-        font-size: var(--step-4);
-        font-weight: 800;
-        line-height: 1;
-        transform: translateY(-25%);
-        text-align: center;
-      }
-    }
-
-    .infosection-wrapper {
+  .project-overflow-container {
+    width: 100%;
+    overflow-x: hidden;
+    margin-top: calc(var(--project-container-offset) * -1);
+    .project-container {
+      position: relative;
       display: grid;
+      margin: 0 auto;
+      padding: 0 var(--content-px);
+      max-width: var(--project-content-w);
       grid-template-columns: repeat(18, 1fr);
       grid-template-rows: auto;
-      grid-column: 1 / var(--project-grid-nr);
       column-gap: var(--project-grid-gap);
       row-gap: var(--project-sections-gap);
-      .tag-description-wrapper {
-        grid-column: 3 / 12;
 
-        .tag-list {
-          display: flex;
-          flex-wrap: wrap;
-          column-gap: 1.2rem;
-          row-gap: 1rem;
-          font-weight: 600;
-          text-transform: uppercase;
+      .project-card {
+        position: absolute;
+        background-color: rgb(var(--c-bg));
+        border-radius: var(--project-md-radius);
+        backdrop-filter: blur(40px);
+        width: 100%;
+        height: 100%;
+        grid-column: 2 / calc(var(--project-grid-nr) - 1);
+        border: solid var(--stroke-w) rgb(var(--c-stroke));
+        z-index: -1;
+        transition:
+          background-color var(--modeswitch-transition-time),
+          border var(--modeswitch-transition-time);
+      }
+
+      .project-title-wrapper {
+        height: calc(var(--project-container-offset) * 2);
+        display: flex;
+        grid-column: 3 / calc(var(--project-grid-nr) - 2);
+        justify-content: center;
+        align-items: center;
+        margin-bottom: -5rem;
+
+        .project-title {
+          font-size: var(--step-4);
+          font-weight: 800;
+          line-height: 1;
+          transform: translateY(-25%);
           text-align: center;
-          letter-spacing: 0.05rem;
-          margin-top: -0.2rem;
-          margin-bottom: 1.5rem;
-
-          .tag {
-            font-size: 0.8rem;
-            padding: 0.5rem 1.1rem;
-            border-radius: 999rem;
-            background-color: rgb(var(--clr-wb-light), 0.2);
-            border: solid var(--stroke-w) rgb(var(--c-stroke));
-            font-weight: 700;
-            letter-spacing: 0.06rem;
-          }
-        }
-        .description {
         }
       }
-      .info-snippet-wrapper {
-        grid-column: 13 / 17;
 
-        .info-snippet {
-          margin-bottom: 2rem;
+      .infosection-wrapper {
+        display: grid;
+        grid-template-columns: repeat(18, 1fr);
+        grid-template-rows: auto;
+        grid-column: 1 / var(--project-grid-nr);
+        column-gap: var(--project-grid-gap);
+        row-gap: var(--project-sections-gap);
+        .tag-description-wrapper {
+          grid-column: 3 / 12;
 
-          h3 {
+          .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            column-gap: 1.2rem;
+            row-gap: 1rem;
+            font-weight: 600;
             text-transform: uppercase;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: rgb(var(--c-fg), 0.6);
-            letter-spacing: 0.06rem;
-            margin-bottom: 0.3em;
+            text-align: center;
+            letter-spacing: 0.05rem;
+            margin-top: -0.2rem;
+            margin-bottom: 1.5rem;
+
+            .tag {
+              font-size: 0.8rem;
+              padding: 0.5rem 1.1rem;
+              border-radius: 999rem;
+              background-color: rgb(var(--clr-wb-light), 0.2);
+              border: solid var(--stroke-w) rgb(var(--c-stroke));
+              font-weight: 700;
+              letter-spacing: 0.06rem;
+            }
+          }
+          .description {
+          }
+        }
+        .info-snippet-wrapper {
+          grid-column: 13 / 17;
+
+          .info-snippet {
+            margin-bottom: 2rem;
+
+            h3 {
+              text-transform: uppercase;
+              font-size: 0.8rem;
+              font-weight: 700;
+              color: rgb(var(--c-fg), 0.6);
+              letter-spacing: 0.06rem;
+              margin-bottom: 0.3em;
+            }
           }
         }
       }
-    }
-    .sections-wrapper {
-      grid-column: 1 / var(--project-grid-nr);
-      margin-bottom: var(--project-sections-gap);
-      display: flex;
-      flex-direction: column;
-      row-gap: var(--project-sections-gap);
+      .sections-wrapper {
+        grid-column: 1 / var(--project-grid-nr);
+        margin-bottom: var(--project-sections-gap);
+        display: flex;
+        flex-direction: column;
+        row-gap: var(--project-sections-gap);
+      }
     }
   }
 
@@ -236,7 +243,7 @@ const { project } = Astro.props as { project: ProjectType };
     :root {
       --content-px: 1rem;
     }
-    .project-container {
+    .project-overflow-container .project-container {
       margin-left: -10px;
       width: calc(100% + 20px);
       padding: 0;

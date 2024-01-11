@@ -1,20 +1,20 @@
 /* Switches Light/darkmode accordingly*/
-let mode = localStorage.getItem("mode");
+let mode = sessionStorage.getItem("mode");
 const modeSwitch = document.querySelectorAll(".modeswitch");
 
 const enableLightMode = () => {
   document.body.classList.add("lightmode");
-  localStorage.setItem("mode", "light");
+  sessionStorage.setItem("mode", "light");
 };
 
 const enableDarkMode = () => {
   document.body.classList.remove("lightmode");
-  localStorage.setItem("mode", "dark");
+  sessionStorage.setItem("mode", "dark");
 };
 
 modeSwitch.forEach(function (e) {
   e.addEventListener("click", () => {
-    mode = localStorage.getItem("mode");
+    mode = sessionStorage.getItem("mode");
 
     if (mode == "dark") {
       enableLightMode();

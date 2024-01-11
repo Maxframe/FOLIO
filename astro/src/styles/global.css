@@ -187,6 +187,22 @@ button {
   border: none;
 }
 
+.block-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.block-wrapper > * {
+  transition: color 200ms ease-out;
+}
+.block-wrapper a {
+  font-weight: 700;
+  transition: color 200ms ease-out;
+}
+.block-wrapper a:hover {
+  color: rgb(var(--clr-accent));
+}
+
 .thumbnail-image {
   -o-object-fit: cover;
      object-fit: cover;
@@ -230,12 +246,6 @@ button {
   transform: scale(1.01);
   transform-origin: center;
   transition: var(--card-transition-time);
-}
-
-.block-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
 }
 
 @media only screen and (max-width: 800px) {

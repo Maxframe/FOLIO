@@ -11,7 +11,11 @@ const { classes, show, ...rest } = Astro.props as Props;
   class="floating-modeswitch-wrapper"
   class:list={[classes, { showfloat: show }]}
 >
-  <button class="modeswitch" aria-label="Modeswitch Button">
+  <button
+    class="modeswitch"
+    aria-label="Modeswitch Button"
+    data-umami-event="Floating Modeswitch"
+  >
     <div class="slider round">
       <div class="slidee round"></div>
     </div>
@@ -101,22 +105,22 @@ const { classes, show, ...rest } = Astro.props as Props;
 <script>
   document.addEventListener("astro:page-load", () => {
     /* Switches Light/darkmode accordingly*/
-    let mode = localStorage.getItem("mode");
+    let mode = sessionStorage.getItem("mode");
     const modeSwitch = document.querySelectorAll(".modeswitch");
 
     const enableLightMode = () => {
       document.body.classList.add("lightmode");
-      localStorage.setItem("mode", "light");
+      sessionStorage.setItem("mode", "light");
     };
 
     const enableDarkMode = () => {
       document.body.classList.remove("lightmode");
-      localStorage.setItem("mode", null);
+      sessionStorage.setItem("mode", null);
     };
 
     modeSwitch.forEach(function (e) {
       e.addEventListener("click", () => {
-        mode = localStorage.getItem("mode");
+        mode = sessionStorage.getItem("mode");
 
         if (mode !== "light") {
           enableLightMode();

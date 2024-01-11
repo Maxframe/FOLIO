@@ -69,3 +69,20 @@ button {
   background: none;
   border: none;
 }
+
+.block-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+
+  & > * {
+    transition: color 200ms ease-out;
+  }
+  a {
+    font-weight: 700;
+    transition: color 200ms ease-out;
+    &:hover {
+      color: rgb(var(--clr-accent));
+    }
+  }
+}
