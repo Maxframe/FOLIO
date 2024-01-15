@@ -1,62 +1,23 @@
 ---
-import FrontpageLayout from "../layouts/FrontpageLayout.astro";
-import Nav from "../components/Nav.astro";
-import Hero from "../components/Hero.astro";
-import FeaturedProjects from "../components/FeaturedProjects.astro";
-import About from "../components/About.astro";
-import FloatingModeSwitcher from "../components/FloatingModeSwitcher.astro";
-import Footer from "../components/Footer.astro";
-import Language from "../components/Language.astro";
+import { Picture } from "astro:assets";
+import { urlFor } from "../utils/urlForImage";
 
-import BgLayer from "../components/BgLayer.astro";
+import { sanityClient } from "sanity:client";
+
+const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
+    "aboutImage": aboutImage.asset._ref,
+    aboutAltText,
+}`);
+
+console.log(aboutData.aboutImage);
 ---
 
-<FrontpageLayout title="Portfolio Website">
-  <Nav />
-  <!--   <Language /> -->
+<p>Test</p>
 
-  <Hero />
-  <FeaturedProjects />
-  <About />
-  <Footer />
-  <BgLayer />
-  <FloatingModeSwitcher />
-</FrontpageLayout>
-
-<style lang="scss">
-  @media screen and (max-width: 52rem) {
-    .projects-wrapper {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .about-section {
-      grid-auto-flow: row;
-      grid-template-columns: none;
-      margin-left: 0;
-      padding: 2rem;
-    }
-
-    .about-text {
-      margin-top: -4rem;
-    }
-
-    .about-image-wrapper {
-      transform: translate(0, -5rem);
-      max-width: 15rem;
-    }
-  }
-  @media screen and (max-width: 32rem) {
-    .container {
-      padding: 0 1.2rem;
-    }
-    .projects-wrapper {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media only screen and (hover: none), (max-width: 32rem) {
-    .copyright {
-      margin-bottom: 5.5rem;
-    }
-  }
-</style>
+<Picture
+  src={urlFor(aboutData.aboutImage).url()}
+  width={700}
+  height={700}
+  formats={["avif", "webp"]}
+  alt={aboutData.aboutAltText}
+/>

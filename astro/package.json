@@ -14,8 +14,9 @@
     "@astrojs/check": "^0.3.4",
     "@narration-sd/sanity-astro": "^0.2.3",
     "@sanity/image-url": "^1.0.2",
-    "astro": "^4.0.9",
+    "astro": "^4.1.2",
     "astro-portabletext": "^0.9.6",
+    "astro-sanity-picture": "^0.2.0",
     "sass": "^1.69.4"
   }
 }
