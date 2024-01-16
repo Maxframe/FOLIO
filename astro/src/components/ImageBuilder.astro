@@ -34,7 +34,6 @@ let maxWidth = w ? w : 1280;
 const defaultWidths = [320, 640, 960, 1280];
 
 const widths = defaultWidths.filter((width) => width <= maxWidth);
-const generateSrcSet = (width: number) => `${source}?w=${width} ${width}w`;
 ---
 
 <picture>
