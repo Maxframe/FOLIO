@@ -40,6 +40,11 @@
   transition: var(--card-transition-time);
 }
 
+.single-image,
+.double-image {
+  border-radius: var(--project-sm-radius);
+}
+
 @media only screen and (max-width: 800px) {
   :root {
     --project-sections-gap: 4rem;

@@ -140,8 +140,8 @@ const { sectionContent } = Astro.props as Props;
     }
 
     .rtl-title {
-    text-align: left;
-    grid-row-start: 1;
+      text-align: left;
+      grid-row-start: 1;
     }
   }
 
@@ -152,8 +152,11 @@ const { sectionContent } = Astro.props as Props;
     grid-column: 1 / var(--project-grid-nr);
     column-gap: var(--project-grid-gap);
 
+    
+
     .caption-text {
       text-align: center;
+      padding-top: 0.5rem;
     }
   }
 
@@ -170,7 +173,6 @@ const { sectionContent } = Astro.props as Props;
   }
 
   .image-wrapper {
-    border-radius: var(--project-sm-radius);
     overflow: hidden;
   }
 
