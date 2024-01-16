@@ -18,16 +18,16 @@ const { sectionContent } = Astro.props as Props;
           gridColumnEnd: `calc(${sectionContent.imageSettings.gridEnd} * 2 - 1)`,
         }}
       >
-        <div class="image-wrapper">    
+        <figure class="image-wrapper">    
         <ImageBuilder
           cls="single-image"
           source={sectionContent.sImage.asset._ref}
           alt={sectionContent.altText}
         />
-        </div>  
         {sectionContent.captionText && (
-        <p class="caption-text">{sectionContent.captionText}</p>
+        <figcaption class="caption-text">{sectionContent.captionText}</figcaption>
         )}
+        </figure>  
       </div>
     </div>
   ) : (
@@ -123,7 +123,7 @@ const { sectionContent } = Astro.props as Props;
     .text-section-title {
       text-align: right;
       text-transform: uppercase;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 700;
       color: rgb(var(--c-fg),0.6);
       letter-spacing: 0.06rem;
@@ -132,6 +132,7 @@ const { sectionContent } = Astro.props as Props;
 
     .text-section-text {
       font-size: var(--step-1);
+      line-height: 1.6;
       font-weight: 500;
     }
     .rtl-text {

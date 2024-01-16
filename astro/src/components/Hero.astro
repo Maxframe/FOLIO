@@ -289,10 +289,7 @@ const subtitleRight = heroData.heroText.subtitleRight;
 
     const options = {};
 
-    const heroObserver = new IntersectionObserver(function (
-      entries,
-      heroObserver
-    ) {
+    const heroObserver = new IntersectionObserver(function (entries) {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) {
           floatModeSwitch.classList.add("showfloat");

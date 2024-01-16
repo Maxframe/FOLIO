@@ -124,7 +124,7 @@ body {
   scroll-behavior: smooth;
   font-family: "Manrope", sans-serif;
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.7;
   color: rgb(var(--c-fg));
 }
 
@@ -169,7 +169,8 @@ canvas {
           user-select: none;
   -o-object-fit: cover;
      object-fit: cover;
-  height: auto;
+  height: 100%;
+  background-color: rgb(var(--c-fg)), 0.1;
 }
 
 ::-moz-selection {

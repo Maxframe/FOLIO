@@ -58,7 +58,6 @@ const { project } = Astro.props as { project: ProjectType };
       source={project.thumbnailImage.asset._ref}
       alt={project.thumbAltText}
       loading="eager"
-      w={1250}
     />
   </div>
 
@@ -200,7 +199,7 @@ const { project } = Astro.props as { project: ProjectType };
             margin-bottom: 1.5rem;
 
             .tag {
-              font-size: 0.8rem;
+              font-size: 0.75rem;
               padding: 0.5rem 1.1rem;
               border-radius: 999rem;
               background-color: rgb(var(--clr-wb-light), 0.2);
@@ -220,7 +219,7 @@ const { project } = Astro.props as { project: ProjectType };
 
             h3 {
               text-transform: uppercase;
-              font-size: 0.8rem;
+              font-size: 0.75rem;
               font-weight: 700;
               color: rgb(var(--c-fg), 0.6);
               letter-spacing: 0.06rem;
