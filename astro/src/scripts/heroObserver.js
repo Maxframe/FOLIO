@@ -4,7 +4,7 @@ const floatModeSwitch = document.querySelector(".floating-modeswitch-wrapper");
 
 const options = {};
 
-const heroObserver = new IntersectionObserver(function (entries, heroObserver) {
+const heroObserver = new IntersectionObserver(function (entries) {
   entries.forEach((entry) => {
     if (!entry.isIntersecting) {
       floatModeSwitch.classList.add("show-float");

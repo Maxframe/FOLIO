@@ -20,7 +20,6 @@ const allProjectData = await sanityClient.fetch(
 let nextProjectSlug = "";
 let nextProjectTitle = "";
 let nextThumbnailImage = "";
-let nextThumbAltText = "";
 if (allProjectData.projectsFeatured) {
   const currentIndex = allProjectData.projectsFeatured.findIndex(
     (project: any) => project.slug === currentSlug
