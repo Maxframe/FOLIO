@@ -1,6 +1,6 @@
 ---
 import { sanityClient } from "sanity:client";
-import ImageBuilder from "./ImageBuilder.astro";
+import ImageBuilder from "../utils/ImageBuilder.astro";
 
 const fProjectsData =
   await sanityClient.fetch(`*[_type == 'projectsSection'][0]{
@@ -131,7 +131,11 @@ const fProjectsData =
           transform: translateX(var(--card-offset));
           pointer-events: none;
 
-          transition: opacity var(--card-transition-time);
+          transition:
+            opacity var(--card-transition-time),
+            color var(--card-transition-time),
+            background-color var(--card-transition-time),
+            border var(--card-transition-time);
         }
       }
     }

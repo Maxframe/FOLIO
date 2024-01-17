@@ -3,13 +3,13 @@ import ProjectLayout from "../layouts/ProjectLayout.astro";
 import { sanityClient } from "sanity:client";
 import { PortableText } from "astro-portabletext";
 
-import Nav from "../components/Nav.astro";
-import ProjectSections from "../components/ProjectSections.astro";
-import NextProjectLink from "../components/NextProjectLink.astro";
-import ImageBuilder from "../components/ImageBuilder.astro";
-import Footer from "../components/Footer.astro";
-import BgLayer from "../components/BgLayer.astro";
-import FloatingModeSwitcher from "../components/FloatingModeSwitcher.astro";
+import Nav from "../components/ui/Nav.astro";
+import ProjectSections from "../components/project/ProjectSections.astro";
+import NextProjectLink from "../components/project/NextProjectLink.astro";
+import ImageBuilder from "../components/utils/ImageBuilder.astro";
+import Footer from "../components/ui/Footer.astro";
+import BgLayer from "../components/ui/BgLayer.astro";
+import FloatingModeSwitcher from "../components/ui/FloatingModeSwitcher.astro";
 
 type ProjectType = {
   projectName: string;

@@ -1,7 +1,7 @@
 ---
 import { sanityClient } from "sanity:client";
 import { PortableText } from "astro-portabletext";
-import ImageBuilder from "./ImageBuilder.astro";
+import ImageBuilder from "../utils/ImageBuilder.astro";
 
 const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
   aboutTitle,
