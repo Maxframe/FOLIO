@@ -1,5 +1,5 @@
 ---
-import FrontpageLayout from "../layouts/FrontpageLayout.astro";
+import Layout from "../layouts/Layout.astro";
 import Nav from "../components/ui/Nav.astro";
 import Hero from "../components/front/Hero.astro";
 import FeaturedProjects from "../components/front/FeaturedProjects.astro";
@@ -10,7 +10,7 @@ import Footer from "../components/ui/Footer.astro";
 import BgLayer from "../components/ui/BgLayer.astro";
 ---
 
-<FrontpageLayout title="Portfolio Website">
+<Layout title="Portfolio Website">
   <Nav />
   <!--   <Language /> -->
 
@@ -20,7 +20,7 @@ import BgLayer from "../components/ui/BgLayer.astro";
   <Footer />
   <BgLayer />
   <FloatingModeSwitcher />
-</FrontpageLayout>
+</Layout>
 
 <style lang="scss">
   @media screen and (max-width: 52rem) {

@@ -1,8 +1,8 @@
 ---
-import ProjectLayout from "../layouts/ProjectLayout.astro";
 import { sanityClient } from "sanity:client";
 import { PortableText } from "astro-portabletext";
 
+import Layout from "../layouts/Layout.astro";
 import Nav from "../components/ui/Nav.astro";
 import ProjectSections from "../components/project/ProjectSections.astro";
 import NextProjectLink from "../components/project/NextProjectLink.astro";
@@ -50,7 +50,7 @@ export async function getStaticPaths() {
 const { project } = Astro.props as { project: ProjectType };
 ---
 
-<ProjectLayout title={project.projectName}>
+<Layout title={project.projectName}>
   <Nav />
   <div class="image-wrapper hero-image-wrapper">
     <ImageBuilder
@@ -112,10 +112,10 @@ const { project } = Astro.props as { project: ProjectType };
     </main>
   </div>
   <NextProjectLink currentSlug={project.slug.current} />
-</ProjectLayout>
-<Footer />
-<BgLayer />
-<FloatingModeSwitcher show />
+  <Footer />
+  <BgLayer />
+  <FloatingModeSwitcher show />
+</Layout>
 
 <style lang="scss">
   .image-wrapper {
