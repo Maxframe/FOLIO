@@ -1,6 +1,7 @@
 {
-  "name": "",
-  "short_name": "",
+  "name": "Max Werner Portfolio",
+  "short_name": "Max Werner",
+  "description": "Portfoliowebsite von Max Werner, Designer digitaler und interaktiver Medien.",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
