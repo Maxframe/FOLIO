@@ -3,8 +3,8 @@ import { urlFor } from "../../utils/urlForImage";
 
 export interface Props {
   source: string;
-  cls?: string;
   alt?: string;
+  cls?: string;
   w?: number;
   fit?:
     | "clip"
@@ -15,8 +15,17 @@ export interface Props {
     | "scale"
     | "min" /* More info: https://www.sanity.io/docs/image-urls#fit-45b29dc6f09f */;
   loading?: "eager" | "lazy";
+  vert?: boolean;
 }
-const { source, alt, cls, w, fit, loading = "lazy" } = Astro.props as Props;
+const {
+  source,
+  alt,
+  cls,
+  w,
+  fit,
+  loading = "lazy",
+  vert,
+} = Astro.props as Props;
 
 const pattern = /^image-([a-f\d]+)-(\d+x\d+)-(\w+)$/;
 const decodeAssetId = (id: string) => {
@@ -38,6 +47,18 @@ const widths = defaultWidths.filter((width) => width <= maxWidth);
 
 <picture>
   {
+    vert && (
+      <source
+        media={`(max-width: ${defaultWidths[2]}px) and (min-height: ${defaultWidths[1]}px) and (max-aspect-ratio: 3/2)`}
+        srcset={urlFor(source)
+          .auto("format")
+          .fit(fit ? fit : "clip")
+          .height(1280)
+          .url()}
+      />
+    )
+  }
+  {
     widths.map((width) => (
       <source
         media={`(max-width: ${width}px)`}
@@ -49,6 +70,7 @@ const widths = defaultWidths.filter((width) => width <= maxWidth);
       />
     ))
   }
+
   <img
     src={urlFor(source)
       .auto("format")
