@@ -52,7 +52,7 @@ const { project } = Astro.props as { project: ProjectType };
 
 <Layout title={project.projectName}>
   <Nav />
-  <div class="image-wrapper hero-image-wrapper">
+  <div class="project-hero-image-wrapper image-wrapper">
     <ImageBuilder
       cls="project-hero-image"
       source={project.thumbnailImage.asset._ref}
@@ -124,7 +124,7 @@ const { project } = Astro.props as { project: ProjectType };
     margin: auto;
   }
 
-  .hero-image-wrapper {
+  .project-hero-image-wrapper {
     position: relative;
     padding: var(--nav-height) var(--content-px) 0;
     z-index: -2;

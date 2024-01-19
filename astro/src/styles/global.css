@@ -163,6 +163,7 @@ video,
 canvas {
   display: block;
   max-width: 100%;
+  color: transparent;
   width: 100%;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -234,12 +235,12 @@ button {
   width: 100%;
   height: calc(100vh - var(--nav-height) - 3rem);
   max-height: 1250px;
-  background-color: var(--clr-wb-neutral);
   -o-object-fit: cover;
      object-fit: cover;
   max-width: var(--hero-w);
   margin: auto;
   border-radius: var(--project-md-radius);
+  background-color: rgb(var(--c-fg), 0.1);
 }
 
 .next-image {

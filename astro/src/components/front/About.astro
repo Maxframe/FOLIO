@@ -1,16 +1,22 @@
 ---
 import { sanityClient } from "sanity:client";
-import { PortableText } from "astro-portabletext";
 import ImageBuilder from "../utils/ImageBuilder.astro";
+import { PortableText } from "astro-portabletext";
 
 const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
   aboutTitle,
   "slug": slug.current,
-  "aboutImage": aboutImage.asset._ref,
-  aboutAltText,
+  
+  "image": aboutImage.image.asset._ref,
+  "alt": aboutImage.image.asset.alt,
+  "lqip": aboutImage.image.asset->metadata.lqip,
+  "aspectRatio": aboutImage.asset->metadata.dimensions.aspectRatio,
+
+
   aboutText,
-   aboutTextBlock,
-   "mailLinkLabel": contactLinks.mailLinkLabel,
+  aboutTextBlock,
+  
+  "mailLinkLabel": contactLinks.mailLinkLabel,
   "mailLink": contactLinks.mailLink,
   "addLinksLabel": contactLinks.addLinksLabel,
   contactLinks {
@@ -20,6 +26,7 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
       contactType,
     } 
   },
+
   "cvFile": cvFile.asset->url,
   "cvText": cvFile.cvText,
 }`);
@@ -28,10 +35,11 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
 <section class="about-section" id={aboutData.slug}>
   <div class="about-wrapper">
     <div class="about-image-wrapper">
+      <img src={aboutData.lqip} alt="" srcset="" />
       <ImageBuilder
         cls="about-image"
-        source={aboutData.aboutImage}
-        alt={aboutData.thumbAltText}
+        source={aboutData.image}
+        alt={aboutData.alt}
         w={500}
       />
     </div>

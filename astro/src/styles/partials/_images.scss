@@ -22,11 +22,11 @@
   width: 100%;
   height: calc(100vh - var(--nav-height) - 3rem);
   max-height: 1250px;
-  background-color: var(--clr-wb-neutral);
   object-fit: cover;
   max-width: var(--hero-w);
   margin: auto;
   border-radius: var(--project-md-radius);
+  background-color: rgb(var(--c-fg), 0.1);
 }
 
 .next-image {

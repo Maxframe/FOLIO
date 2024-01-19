@@ -9,6 +9,7 @@ import sectionVideo from "./sectionVideo";
 import ui from "./ui";
 import projectsSection from "./projectsSection";
 import project from "./project";
+import figure from "./figure";
 
 export const schemaTypes = [
   hero,
@@ -24,4 +25,5 @@ export const schemaTypes = [
   sectionVideo,
 
   blockContent,
+  figure,
 ];
