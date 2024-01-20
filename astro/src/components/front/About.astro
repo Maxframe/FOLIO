@@ -8,9 +8,9 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
   "slug": slug.current,
   
   "image": aboutImage.image.asset._ref,
-  "alt": aboutImage.image.asset.alt,
+  "alt": aboutImage.image.alt,
   "lqip": aboutImage.image.asset->metadata.lqip,
-  "aspectRatio": aboutImage.asset->metadata.dimensions.aspectRatio,
+  "ratio": aboutImage.image.asset->metadata.dimensions.aspectRatio,
 
 
   aboutText,
@@ -35,11 +35,12 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
 <section class="about-section" id={aboutData.slug}>
   <div class="about-wrapper">
     <div class="about-image-wrapper">
-      <img src={aboutData.lqip} alt="" srcset="" />
       <ImageBuilder
         cls="about-image"
         source={aboutData.image}
         alt={aboutData.alt}
+        lqip={aboutData.lqip}
+        ratio={aboutData.ratio}
         w={500}
       />
     </div>
@@ -102,7 +103,7 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
     margin: 0 auto;
     padding: 0 var(--content-px);
     padding-top: calc(var(--nav-height) + var(--about-img-offset));
-    margin-top: calc((var(--nav-height) + var(--about-img-offset)) * -1);
+
     overflow-x: hidden;
   }
 
@@ -127,6 +128,11 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
       calc((var(--about-img-offset) * -1) - var(--stroke-w)),
       calc(var(--about-img-offset) * -1)
     );
+    width: calc(100% + var(--about-img-offset));
+    border-radius: var(--md-radius);
+    overflow: hidden;
+    height: fit-content;
+    outline: solid var(--stroke-w) rgb(var(--c-stroke));
   }
 
   .about-title {
@@ -280,6 +286,8 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
         margin: -6rem auto 0;
         display: flex;
         justify-content: center;
+        max-width: 22rem;
+        width: 100%;
       }
 
       .about-label {

@@ -9,8 +9,10 @@ const fProjectsData =
     projectsFeatured[]->{
         projectName,
         "slug": slug.current,
-        "thumbnailImage": thumbnailImage.asset._ref,
-        thumbAltText
+        "thumbnailImage": thumbnailImage.image.asset._ref,
+        "thumbAltText": thumbnailImage.image.alt,
+        "lqip": thumbnailImage.image.asset->metadata.lqip,
+        "ratio": thumbnailImage.image.asset->metadata.dimensions.aspectRatio,
     }  
 }`);
 ---
@@ -31,6 +33,8 @@ const fProjectsData =
               <ImageBuilder
                 cls="thumbnail-image"
                 source={project.thumbnailImage}
+                lqip={project.lqip}
+                ratio={project.ratio}
                 alt={project.thumbAltText}
                 w={900}
                 loading={index === 0 ? "eager" : "lazy"}
