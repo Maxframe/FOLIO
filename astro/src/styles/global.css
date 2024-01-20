@@ -20,8 +20,8 @@
   --card-offset: 1rem;
   --about-img-offset: 5rem;
   --project-content-w: 70rem;
-  --project-md-radius: 2rem;
-  --project-sm-radius: 1rem;
+  --md-radius: 2rem;
+  --sm-radius: 1rem;
   --project-container-offset: 5rem;
   --project-grid-columns: 10;
   --project-grid-nr: calc(var(--project-grid-columns) * 2 - 1);
@@ -163,6 +163,7 @@ video,
 canvas {
   display: block;
   max-width: 100%;
+  color: transparent;
   width: 100%;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -223,23 +224,15 @@ button {
   max-width: calc(100% + var(--about-img-offset));
   width: calc(100% + var(--about-img-offset));
   height: auto;
-  border-radius: 2rem;
   box-shadow: 0px 6px 10px -8px black;
-  outline: solid var(--stroke-w) rgb(var(--c-stroke));
   background-color: rgb(var(--c-stroke));
   transition: var(--card-transition-time);
 }
 
 .project-hero-image {
   width: 100%;
-  height: calc(100vh - var(--nav-height) - 3rem);
-  max-height: 1250px;
-  background-color: var(--clr-wb-neutral);
   -o-object-fit: cover;
      object-fit: cover;
-  max-width: var(--hero-w);
-  margin: auto;
-  border-radius: var(--project-md-radius);
 }
 
 .next-image {
@@ -247,16 +240,11 @@ button {
      object-fit: cover;
   height: 100%;
   width: 100%;
-  border-radius: var(--project-sm-radius);
+  border-radius: var(--sm-radius);
   padding: 6px;
   transform: scale(1.01);
   transform-origin: center;
   transition: var(--card-transition-time);
-}
-
-.single-image,
-.double-image {
-  border-radius: var(--project-sm-radius);
 }
 
 @media only screen and (max-width: 800px) {
@@ -265,16 +253,5 @@ button {
   }
   .thumbnail-image {
     filter: brightness(1);
-  }
-  .project-hero-image {
-    border-radius: 0;
-  }
-  .single-image,
-  .double-image {
-    border-radius: 0;
-  }
-  .about-image {
-    max-width: 22rem;
-    width: 100%;
   }
 }/*# sourceMappingURL=global.css.map */

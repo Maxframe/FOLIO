@@ -8,25 +8,9 @@ export default defineType({
   icon: ImageIcon,
   fields: [
     defineField({
-      title: "Image",
+      title: "Single Image",
       name: "sImage",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
-    }),
-    defineField({
-      title: "Alt",
-      name: "altText",
-      type: "string",
-      description: "Was ist im Bild zu sehen?",
-      validation: (Rule) => [Rule.required()],
-    }),
-    defineField({
-      title: "Optional Caption",
-      name: "captionText",
-      type: "string",
-      description: "Gibt es dazu was zu sagen?",
+      type: "figure",
     }),
     defineField({
       title: "Image Settings",
@@ -61,8 +45,8 @@ export default defineType({
   ],
   preview: {
     select: {
-      img: "sImage",
-      altText: "altText",
+      img: "sImage.image",
+      altText: "sImage.alt",
     },
     prepare(select) {
       const { altText, img } = select;

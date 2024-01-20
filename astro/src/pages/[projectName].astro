@@ -11,55 +11,56 @@ import Footer from "../components/ui/Footer.astro";
 import BgLayer from "../components/ui/BgLayer.astro";
 import FloatingModeSwitcher from "../components/ui/FloatingModeSwitcher.astro";
 
-type ProjectType = {
-  projectName: string;
-  slug: {
-    current: string;
-  };
-  thumbnailImage: {
-    asset: {
-      _ref: string;
-    };
-  };
-  thumbAltText: string;
-  tags: string[];
-  description: any;
-  infoSnippets: {
-    contextText: string;
-    roleText: string;
-    techText: string;
-  };
-  AddiInfoSnippets: Array<{
-    snippetTitle: string;
-    snippetText: string;
-  }>;
-  content?: any[];
-};
-
 export async function getStaticPaths() {
   const allProjectData = await sanityClient.fetch(
-    `*[_type == 'projectsSection'][0]{projectsFeatured[]->}`
+    `*[_type == 'projectsSection'][0]{
+      projectsFeatured[]->{
+        projectName,
+        "slug": slug.current,
+
+        "thumbnailImage": thumbnailImage.image.asset._ref,
+        "thumbAltText": thumbnailImage.image.alt,
+        "lqip": thumbnailImage.image.asset->metadata.lqip,
+        "ratio": thumbnailImage.image.asset->metadata.dimensions.aspectRatio,
+
+        description,
+        "contextText": infoSnippets.contextText,
+        "roleText": infoSnippets.roleText,
+        "techText": infoSnippets.techText,
+         
+        AddiInfoSnippets[] {
+          snippetText,
+          snippetTitle,
+        },
+      }
+    }`
   );
-  return allProjectData.projectsFeatured?.map((project: ProjectType) => {
+  return allProjectData.projectsFeatured?.map((project: any) => {
     return {
-      params: { projectName: project.slug.current },
+      params: { projectName: project.slug },
       props: { project },
     };
   });
 }
-const { project } = Astro.props as { project: ProjectType };
+
+const { project } = Astro.props as { project: any };
 ---
 
 <Layout title={project.projectName}>
   <Nav />
-  <div class="image-wrapper hero-image-wrapper">
-    <ImageBuilder
-      cls="project-hero-image"
-      source={project.thumbnailImage.asset._ref}
-      alt={project.thumbAltText}
-      loading="eager"
-      vert
-    />
+
+  <div class="project-hero-image-container">
+    <div class="project-hero-image-wrapper image-wrapper">
+      <ImageBuilder
+        cls="project-hero-image"
+        source={project.thumbnailImage}
+        lqip={project.lqip}
+        ratio={project.ratio}
+        alt={project.thumbAltText}
+        loading="eager"
+        vert
+      />
+    </div>
   </div>
 
   <div class="project-overflow-container">
@@ -82,15 +83,15 @@ const { project } = Astro.props as { project: ProjectType };
         <div class="info-snippet-wrapper">
           <div class="info-snippet">
             <h3>Kontext</h3>
-            <p>{project.infoSnippets?.contextText}</p>
+            <p>{project.contextText}</p>
           </div>
           <div class="info-snippet">
             <h3>Rolle</h3>
-            <p>{project.infoSnippets?.roleText}</p>
+            <p>{project.roleText}</p>
           </div>
           <div class="info-snippet">
             <h3>Tools</h3>
-            <p>{project.infoSnippets?.techText}</p>
+            <p>{project.techText}</p>
           </div>
           {
             project.AddiInfoSnippets?.map((snippet: any) => (
@@ -104,15 +105,11 @@ const { project } = Astro.props as { project: ProjectType };
       </div>
 
       <div class="sections-wrapper">
-        {
-          project.content?.map((section: any) => (
-            <ProjectSections sectionContent={section} />
-          ))
-        }
+        <ProjectSections currentSlug={project.slug} />
       </div>
     </main>
   </div>
-  <NextProjectLink currentSlug={project.slug.current} />
+  <NextProjectLink currentSlug={project.slug} />
   <Footer />
   <BgLayer />
   <FloatingModeSwitcher show />
@@ -120,14 +117,21 @@ const { project } = Astro.props as { project: ProjectType };
 
 <style lang="scss">
   .image-wrapper {
-    max-width: var(--hero-w);
     margin: auto;
   }
 
-  .hero-image-wrapper {
-    position: relative;
+  .project-hero-image-container {
     padding: var(--nav-height) var(--content-px) 0;
-    z-index: -2;
+
+    .project-hero-image-wrapper {
+      max-height: 1280px;
+      max-width: 1280px;
+      height: calc(100dvh - var(--nav-height) - 3rem);
+      position: relative;
+      border-radius: var(--md-radius);
+      overflow: hidden;
+      z-index: -2;
+    }
   }
 
   .project-overflow-container {
@@ -148,7 +152,7 @@ const { project } = Astro.props as { project: ProjectType };
       .project-card {
         position: absolute;
         background-color: rgb(var(--c-bg));
-        border-radius: var(--project-md-radius);
+        border-radius: var(--md-radius);
         backdrop-filter: blur(40px);
         width: 100%;
         height: 100%;
@@ -263,8 +267,11 @@ const { project } = Astro.props as { project: ProjectType };
       }
     }
 
-    .hero-image-wrapper {
+    .project-hero-image-container {
       padding: var(--nav-height) 0 0;
+      .project-hero-image-wrapper {
+        border-radius: 0;
+      }
     }
   }
 </style>

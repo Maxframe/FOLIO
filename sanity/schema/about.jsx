@@ -24,7 +24,7 @@ export default defineType({
     }),
     defineField({
       name: "aboutTextBlock",
-      title: "Text Block",
+      title: "Über mich",
       description: "Wer bin ich?",
       type: "array",
       of: [defineArrayMember({ type: "block" })],
@@ -32,20 +32,8 @@ export default defineType({
     defineField({
       name: "aboutImage",
       title: "About Image",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
-      validation: (Rule) => [Rule.required()],
+      type: "figure",
     }),
-    defineField({
-      title: "Alt",
-      name: "aboutAltText",
-      type: "string",
-      description: "Was ist im Bild zu sehen?",
-      validation: (Rule) => [Rule.required()],
-    }),
-
     {
       name: "cvFile",
       title: "CV",

@@ -1,116 +1,141 @@
 ---
+import { sanityClient } from "sanity:client";
 import ImageBuilder from "../utils/ImageBuilder.astro";
 import { PortableText } from "astro-portabletext";
 
 export interface Props {
-  sectionContent: any;
+  currentSlug: any;
 }
-const { sectionContent } = Astro.props as Props;
+const { currentSlug } = Astro.props as Props;
+
+const projectData = await sanityClient.fetch(
+  `*[_type == 'project' && slug.current == '${currentSlug}'][0]{
+      content[] {
+      ...,
+      _type == 'sectionImageSingle' => {
+        'sLqip': sImage.image.asset->metadata.lqip,
+        'sRatio': sImage.image.asset->metadata.dimensions.aspectRatio
+      },
+      _type == 'sectionImageDouble' => {
+        'dLqipLeft': dImage.dImageLeft.image.asset->metadata.lqip,
+        'dRatioLeft': dImage.dImageLeft.image.asset->metadata.dimensions.aspectRatio,
+        'dLqipRight': dImage.dImageRight.image.asset->metadata.lqip,
+        'dRatioRight': dImage.dImageRight.image.asset->metadata.dimensions.aspectRatio
+      },
+    }
+  }`
+);
+
+
 ---
 
 {
-  sectionContent._type === "sectionImageSingle" ? (
+projectData.content?.map((section: any) => {
+  switch (section._type) {
+    case "sectionText":
+      return (
+       <div class="text-section">
+        {section.rightToLeft ? (
+        <h3
+            class="text-section-title rtl-title"
+            style={{
+              gridColumnStart: `span 3`,
+              gridColumnEnd: `calc(${section.textGridPos} * 2 + 7)`,
+            }}
+          >
+          {section.sectionTitle}
+        </h3>
+        <div
+          class="text-section-text block-wrapper rtl-text"
+          style={{
+            gridColumnStart: `calc(${section.textGridPos} * 2 - 4)`,
+            gridColumnEnd: `span 8`,
+          }}
+        >
+          <PortableText value={section.sectionText} />
+        </div>
+        ) : (<h3
+          class="text-section-title"
+          style={{
+            gridColumnStart: `span 3`,
+            gridColumnEnd: `calc(${section.textGridPos} * 2 - 1)`,
+          }}
+        >
+          {section.sectionTitle}
+        </h3>
+        <div
+          class="text-section-text block-wrapper"
+          style={{
+            gridColumnStart: `calc(${section.textGridPos} * 2 - 1)`,
+            gridColumnEnd: `span 8`,
+          }}
+        >
+          <PortableText value={section.sectionText} />
+        </div>
+      )}
+    </div>
+      );
+    
+    case "sectionImageSingle":
+    return (
+
     <div class="single-image-section">
       <div
         class="single-image-wrapper"
         style={{
-          gridColumnStart: `calc(${sectionContent.imageSettings.gridBegin} * 2 - 1)`,
-          gridColumnEnd: `calc(${sectionContent.imageSettings.gridEnd} * 2 - 1)`,
+          gridColumnStart: `calc(${section.imageSettings.gridBegin} * 2 - 1)`,
+          gridColumnEnd: `calc(${section.imageSettings.gridEnd} * 2 - 1)`,
         }}
       >
-        <figure class="image-wrapper">    
+        <div class="image-wrapper">    
         <ImageBuilder
           cls="single-image"
-          source={sectionContent.sImage.asset._ref}
-          alt={sectionContent.altText}
+          source={section.sImage.image.asset._ref} 
+          alt={section.sImage.image.alt}
+          lqip={section.sLqip}
+          ratio={section.sRatio}
         />
-        {sectionContent.captionText && (
-        <figcaption class="caption-text">{sectionContent.captionText}</figcaption>
-        )}
-        </figure>  
+       
+        </div>  
       </div>
     </div>
-  ) : (
-    ""
-  )
-}
-{
-  sectionContent._type === "sectionImageDouble" ? (
-    <div class="double-image-section">
+     );
+
+     case "sectionImageDouble":
+      return (
+<div class="double-image-section">
       <div class="double-image-wrapper image-wrapper"
       style={{
-        gridColumnStart: `calc(${sectionContent.gridBeginLeft} * 2 - 1)`,
-        gridColumnEnd: `calc(${sectionContent.gridEndLeft} * 2 - 1)`,
+        gridColumnStart: `calc(${section.imageSettings.gridBeginLeft} * 2 - 1)`,
+        gridColumnEnd: `calc(${section.imageSettings.gridEndLeft} * 2 - 1)`,
       }}>
         <ImageBuilder
           cls="double-image double-image-left"
-          source={sectionContent.dImageLeft.asset._ref}
-          alt={sectionContent.altTextLeft}
+          source={section.dImage.dImageLeft.image.asset._ref}
+          alt={section.dImage.dImageLeft.image.alt}
+          lqip={section.dLqipLeft}
+          ratio={section.dRatioLeft}
         />
       </div>
       <div class="double-image-wrapper image-wrapper"
       style={{
-        gridColumnStart: `calc(${sectionContent.gridBeginRight} * 2 - 1)`,
-        gridColumnEnd: `calc(${sectionContent.gridEndRight} * 2 - 1)`,
+        gridColumnStart: `calc(${section.imageSettings.gridBeginRight} * 2 - 1)`,
+        gridColumnEnd: `calc(${section.imageSettings.gridEndRight} * 2 - 1)`,
       }}>
         <ImageBuilder
           cls="double-image double-image-right"
-          source={sectionContent.dImageRight.asset._ref}
-          alt={sectionContent.altTextRight}
+          source={section.dImage.dImageRight.image.asset._ref}
+          alt={section.dImage.dImageRight.image.alt}
+          lqip={section.dLqipRight}
+          ratio={section.dRatioRight}
         />
       </div>
     </div>
-  ) : (
-    ""
-  )
+      );
+  };
+})
 }
-{
-  sectionContent._type === "sectionText" ? (
-    <div class="text-section">
-      {sectionContent.rightToLeft ? (
-      <h3
-          class="text-section-title rtl-title"
-          style={{
-            gridColumnStart: `span 3`,
-            gridColumnEnd: `calc(${sectionContent.textGridPos} * 2 + 7)`,
-          }}
-        >
-        {sectionContent.sectionTitle}
-      </h3>
-      <div
-        class="text-section-text block-wrapper rtl-text"
-        style={{
-          gridColumnStart: `calc(${sectionContent.textGridPos} * 2 - 4)`,
-          gridColumnEnd: `span 8`,
-        }}
-      >
-        <PortableText value={sectionContent.sectionText} />
-      </div>
-      ) : (<h3
-        class="text-section-title"
-        style={{
-          gridColumnStart: `span 3`,
-          gridColumnEnd: `calc(${sectionContent.textGridPos} * 2 - 1)`,
-        }}
-      >
-        {sectionContent.sectionTitle}
-      </h3>
-      <div
-        class="text-section-text block-wrapper"
-        style={{
-          gridColumnStart: `calc(${sectionContent.textGridPos} * 2 - 1)`,
-          gridColumnEnd: `span 8`,
-        }}
-      >
-        <PortableText value={sectionContent.sectionText} />
-      </div>
-      )}
-      
-    </div>
-  ) : (
-    ""
-  )
-}
+
 
 <style lang="scss">
   /* define:vars={{ textGridPos, sImageGridBegin, sImageGridEnd }} */
@@ -125,7 +150,7 @@ const { sectionContent } = Astro.props as Props;
       text-transform: uppercase;
       font-size: 0.75rem;
       font-weight: 700;
-      color: rgb(var(--c-fg),0.6);
+      color: rgb(var(--c-fg), 0.6);
       letter-spacing: 0.06rem;
       margin-top: 0.5rem;
     }
@@ -153,8 +178,6 @@ const { sectionContent } = Astro.props as Props;
     grid-column: 1 / var(--project-grid-nr);
     column-gap: var(--project-grid-gap);
 
-    
-
     .caption-text {
       text-align: center;
       padding-top: 0.5rem;
@@ -166,19 +189,18 @@ const { sectionContent } = Astro.props as Props;
     grid-template-columns: repeat(18, 1fr);
     grid-template-rows: auto;
     column-gap: var(--project-grid-gap);
-   
+
     .double-image-wrapper {
       height: fit-content;
     }
-
   }
 
   .image-wrapper {
     overflow: hidden;
+    border-radius: var(--sm-radius);
   }
 
   @media only screen and (max-width: 800px) {
-
     .text-section {
       .text-section-text,
       .text-section-title {
@@ -186,8 +208,7 @@ const { sectionContent } = Astro.props as Props;
         text-align: left;
       }
     }
-    
-    
+
     .single-image-section {
       .single-image-wrapper {
         grid-column: -3 / 3 !important;

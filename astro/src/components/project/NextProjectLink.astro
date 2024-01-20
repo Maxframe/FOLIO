@@ -1,6 +1,6 @@
 ---
 import { sanityClient } from "sanity:client";
-import ImageBuilder from "../utils/ImageBuilder.astro";
+import { urlFor } from "../../utils/urlForImage";
 
 export interface Props {
   currentSlug: string;
@@ -12,7 +12,9 @@ const allProjectData = await sanityClient.fetch(
   `*[_type == 'projectsSection'][0]{projectsFeatured[]->{
         projectName,
         "slug": slug.current,
-        "thumbnailImage": thumbnailImage.asset._ref,
+        "thumbnailImage": thumbnailImage.image.asset._ref,
+        "lqip": thumbnailImage.image.asset->metadata.lqip,
+        "ratio": thumbnailImage.image.asset->metadata.dimensions.aspectRatio,
     }
 }`
 );
@@ -37,12 +39,16 @@ if (allProjectData.projectsFeatured) {
     <div class="next-project-wrapper">
       <a class="next-project-button" href={"/" + nextProjectSlug}>
         <div class="next-image-wrapper">
-          <ImageBuilder
-            cls="next-image"
-            source={nextThumbnailImage}
+          <img
+            class="next-image"
+            src={urlFor(nextThumbnailImage)
+              .auto("format")
+              .fit("clip")
+              .width(320)
+              .url()}
             alt={nextProjectTitle}
-            w={320}
           />
+
           <div class="next-image-overlay" />
         </div>
         <svg
@@ -77,7 +83,7 @@ if (allProjectData.projectsFeatured) {
       background-color: rgb(var(--c-bg));
       padding: 2rem;
       outline: solid var(--stroke-w) rgb(var(--c-stroke));
-      border-radius: var(--project-sm-radius);
+      border-radius: var(--sm-radius);
       text-align: center;
       overflow: hidden;
       transition:
@@ -99,7 +105,7 @@ if (allProjectData.projectsFeatured) {
         inset: 0;
         transition: 0.2s ease-out;
         background-color: rgb(var(--c-stroke));
-        border-radius: var(--project-sm-radius);
+        border-radius: var(--sm-radius);
         .next-image-overlay {
           position: absolute;
           z-index: 1;

@@ -1,16 +1,22 @@
 ---
 import { sanityClient } from "sanity:client";
-import { PortableText } from "astro-portabletext";
 import ImageBuilder from "../utils/ImageBuilder.astro";
+import { PortableText } from "astro-portabletext";
 
 const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
   aboutTitle,
   "slug": slug.current,
-  "aboutImage": aboutImage.asset._ref,
-  aboutAltText,
+  
+  "image": aboutImage.image.asset._ref,
+  "alt": aboutImage.image.alt,
+  "lqip": aboutImage.image.asset->metadata.lqip,
+  "ratio": aboutImage.image.asset->metadata.dimensions.aspectRatio,
+
+
   aboutText,
-   aboutTextBlock,
-   "mailLinkLabel": contactLinks.mailLinkLabel,
+  aboutTextBlock,
+  
+  "mailLinkLabel": contactLinks.mailLinkLabel,
   "mailLink": contactLinks.mailLink,
   "addLinksLabel": contactLinks.addLinksLabel,
   contactLinks {
@@ -20,6 +26,7 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
       contactType,
     } 
   },
+
   "cvFile": cvFile.asset->url,
   "cvText": cvFile.cvText,
 }`);
@@ -30,8 +37,10 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
     <div class="about-image-wrapper">
       <ImageBuilder
         cls="about-image"
-        source={aboutData.aboutImage}
-        alt={aboutData.thumbAltText}
+        source={aboutData.image}
+        alt={aboutData.alt}
+        lqip={aboutData.lqip}
+        ratio={aboutData.ratio}
         w={500}
       />
     </div>
@@ -94,7 +103,7 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
     margin: 0 auto;
     padding: 0 var(--content-px);
     padding-top: calc(var(--nav-height) + var(--about-img-offset));
-    margin-top: calc((var(--nav-height) + var(--about-img-offset)) * -1);
+
     overflow-x: hidden;
   }
 
@@ -119,6 +128,11 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
       calc((var(--about-img-offset) * -1) - var(--stroke-w)),
       calc(var(--about-img-offset) * -1)
     );
+    width: calc(100% + var(--about-img-offset));
+    border-radius: var(--md-radius);
+    overflow: hidden;
+    height: fit-content;
+    outline: solid var(--stroke-w) rgb(var(--c-stroke));
   }
 
   .about-title {
@@ -272,6 +286,8 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
         margin: -6rem auto 0;
         display: flex;
         justify-content: center;
+        max-width: 22rem;
+        width: 100%;
       }
 
       .about-label {

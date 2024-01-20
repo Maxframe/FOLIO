@@ -23,24 +23,23 @@ export default defineType({
       },
       validation: (Rule) => [Rule.required()],
     }),
-
     defineField({
       name: "thumbnailImage",
       title: "Thumbnail Image",
-      type: "image",
-      description: "minWidth: 1200px",
-      options: {
-        hotspot: true,
-      },
-      validation: (Rule) => [Rule.required()],
+      type: "figure",
     }),
     defineField({
-      title: "Alt",
-      name: "thumbAltText",
-      type: "string",
-      description: "Was ist im Bild zu sehen?",
-      validation: (Rule) => [Rule.required()],
+      name: "altHeroImage",
+      title: "Alternative Hero Image?",
+      type: "boolean",
     }),
+    defineField({
+      name: "heroImage",
+      title: "Hero Image",
+      type: "figure",
+      hidden: ({ document }) => !document?.altHeroImage,
+    }),
+
     defineField({
       name: "tags",
       title: "Tags",
@@ -107,11 +106,14 @@ export default defineType({
       },
     }),
   ],
+  initialValue: {
+    altHeroImage: false,
+  },
 
   preview: {
     select: {
       title: "projectName",
-      media: "thumbnailImage",
+      media: "thumbnailImage.image",
     },
   },
 });
