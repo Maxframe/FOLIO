@@ -20,8 +20,13 @@ export async function getStaticPaths() {
 
         "thumbnailImage": thumbnailImage.image.asset._ref,
         "thumbAltText": thumbnailImage.image.alt,
-        "lqip": thumbnailImage.image.asset->metadata.lqip,
-        "ratio": thumbnailImage.image.asset->metadata.dimensions.aspectRatio,
+        "thumbLqip": thumbnailImage.image.asset->metadata.lqip,
+        "thumbRatio": thumbnailImage.image.asset->metadata.dimensions.aspectRatio,
+
+        "heroImage": heroImage.image.asset._ref,
+        "heroAltText": heroImage.image.alt,
+        "heroLqip": heroImage.image.asset->metadata.lqip,
+        "heroRatio": heroImage.image.asset->metadata.dimensions.aspectRatio,
 
         description,
         tags,
@@ -52,15 +57,29 @@ const { project } = Astro.props as { project: any };
 
   <div class="project-hero-image-container">
     <div class="project-hero-image-wrapper image-wrapper">
-      <ImageBuilder
-        cls="project-hero-image"
-        source={project.thumbnailImage}
-        lqip={project.lqip}
-        ratio={project.ratio}
-        alt={project.thumbAltText}
-        loading="eager"
-        vert
-      />
+      {
+        project.heroImage ? (
+          <ImageBuilder
+            cls="project-hero-image"
+            source={project.heroImage}
+            lqip={project.thumbLqip}
+            ratio={project.thumbLqip}
+            alt={project.thumbAltText}
+            loading="eager"
+            vert
+          />
+        ) : (
+          <ImageBuilder
+            cls="project-hero-image"
+            source={project.thumbnailImage}
+            lqip={project.heroLqip}
+            ratio={project.heroRatio}
+            alt={project.heroAltText}
+            loading="eager"
+            vert
+          />
+        )
+      }
     </div>
   </div>
 

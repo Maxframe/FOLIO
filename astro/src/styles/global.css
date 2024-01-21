@@ -26,7 +26,7 @@
   --project-grid-columns: 10;
   --project-grid-nr: calc(var(--project-grid-columns) * 2 - 1);
   --project-grid-gap: 1.8%;
-  --project-sections-gap: 6rem;
+  --project-sections-gap: 7rem;
   --modeswitch-transition-time: 400ms;
   --card-transition-time: 300ms;
   --hover-transition: 200ms ease-out;
