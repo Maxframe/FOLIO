@@ -200,7 +200,7 @@ button {
   gap: 0.8rem;
 }
 .block-wrapper > * {
-  transition: color 200ms ease-out;
+  transition: color var(--modeswitch-transition-time);
 }
 .block-wrapper a {
   font-weight: 700;

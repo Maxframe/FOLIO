@@ -24,6 +24,7 @@ export async function getStaticPaths() {
         "ratio": thumbnailImage.image.asset->metadata.dimensions.aspectRatio,
 
         description,
+        tags,
         "contextText": infoSnippets.contextText,
         "roleText": infoSnippets.roleText,
         "techText": infoSnippets.techText,
@@ -73,9 +74,9 @@ const { project } = Astro.props as { project: any };
       <div class="infosection-wrapper">
         <div class="tag-description-wrapper">
           {
-            project.tags && (
+            project.tags?.length > 0 && (
               <div class="tag-list">
-                {project.tags?.map((tag: string) => (
+                {project.tags.map((tag: string) => (
                   <span class="tag">{tag}</span>
                 ))}
               </div>
@@ -183,6 +184,7 @@ const { project } = Astro.props as { project: any };
           line-height: 1;
           transform: translateY(-25%);
           text-align: center;
+          transition: color var(--modeswitch-transition-time);
         }
       }
 
@@ -216,6 +218,10 @@ const { project } = Astro.props as { project: any };
               border: solid var(--stroke-w) rgb(var(--c-stroke));
               font-weight: 700;
               letter-spacing: 0.06rem;
+              transition:
+                color var(--modeswitch-transition-time),
+                background-color var(--modeswitch-transition-time),
+                border var(--modeswitch-transition-time);
             }
           }
           .description {
@@ -234,6 +240,10 @@ const { project } = Astro.props as { project: any };
               color: rgb(var(--c-fg), 0.6);
               letter-spacing: 0.06rem;
               margin-bottom: 0.3em;
+              transition: color var(--modeswitch-transition-time);
+            }
+            p {
+              transition: color var(--modeswitch-transition-time);
             }
           }
         }

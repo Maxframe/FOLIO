@@ -82,7 +82,7 @@ button {
   gap: 0.8rem;
 
   & > * {
-    transition: color 200ms ease-out;
+    transition: color var(--modeswitch-transition-time);
   }
   a {
     font-weight: 700;

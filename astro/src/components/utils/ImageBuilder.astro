@@ -47,8 +47,8 @@ const decodeAssetId = (id: string) => {
 };
 const imageSize = decodeAssetId(source);
 
-let maxWidth = w ? w : 1280;
 const defaultWidths = [320, 640, 960, 1280];
+let maxWidth = w ? w : 1280;
 
 const widths = defaultWidths.filter((width) => width <= maxWidth);
 ---
@@ -57,50 +57,49 @@ const widths = defaultWidths.filter((width) => width <= maxWidth);
   <div class:list={["wrapper", cls]}>
     <div style={`padding-bottom: ${100 / ratio}%`} aria-hidden="true"></div>
     <img class="lqip" src={lqip} class="" alt="" aria-hidden="true" />
-    {
-      vert && (
-        <source
-          media={`(max-width: ${defaultWidths[2]}px) and (min-height: ${defaultWidths[1]}px) and (max-aspect-ratio: 3/2)`}
-          srcset={urlFor(source)
-            .auto("format")
-            .fit(fit ? fit : "clip")
-            .height(1280)
-            .url()}
-        />
-      )
-    }
-    {
-      widths.map((width) => (
-        <source
-          media={`(max-width: ${width}px)`}
-          srcset={`${urlFor(source)
-            .auto("format")
-            .fit(fit ? fit : "clip")
-            .width(width)
-            .url()} ${width}w`}
-        />
-      ))
-    }
-
-    <img
-      src={urlFor(source)
-        .auto("format")
-        .fit(fit ? fit : "clip")
-        .width(maxWidth)
-        .url()}
-      alt={alt ? alt : ""}
-      class="source"
-      width={imageSize.size.width}
-      height={imageSize.size.height}
-      loading={loading}
-      draggable="false"
-    />
+    <picture>
+      {
+        vert && (
+          <source
+            media={`(max-width: ${defaultWidths[2]}px) and (min-height: ${defaultWidths[2]}px) and (max-aspect-ratio: 3/2)`}
+            srcset={urlFor(source)
+              .auto("format")
+              .fit(fit ? fit : "clip")
+              .height(1280)
+              .url()}
+          />
+        )
+      }
+      {
+        widths.map((width) => (
+          <source
+            media={`(max-width: ${width}px)`}
+            srcset={`${urlFor(source)
+              .auto("format")
+              .fit(fit ? fit : "clip")
+              .width(width)
+              .url()} ${width}w`}
+          />
+        ))
+      }
+      <img
+        src={urlFor(source)
+          .auto("format")
+          .fit(fit ? fit : "clip")
+          .width(maxWidth)
+          .url()}
+        alt={alt ? alt : ""}
+        class="source"
+        loading={loading}
+        draggable="false"
+      />
+    </picture>
   </div>
   {
     caption && (
       <figcaption>
         {captionUrl ? (
-          <a href={captionUrl}>
+          <a href={captionUrl} target="_blank" rel="noopener">
             <span>{caption}</span>
           </a>
         ) : (
