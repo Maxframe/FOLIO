@@ -32,6 +32,7 @@ export default defineType({
       name: "altHeroImage",
       title: "Alternative Hero Image?",
       type: "boolean",
+      initialValue: false,
     }),
     defineField({
       name: "heroImage",

@@ -248,10 +248,12 @@ const { project } = Astro.props as { project: any };
         }
         .info-snippet-wrapper {
           grid-column: 13 / 17;
+          display: grid;
+          grid-template-columns: 1fr;
+          column-gap: 3rem;
+          row-gap: 2rem;
 
           .info-snippet {
-            margin-bottom: 2rem;
-
             h3 {
               text-transform: uppercase;
               font-size: 0.75rem;
@@ -269,7 +271,7 @@ const { project } = Astro.props as { project: any };
       }
       .sections-wrapper {
         grid-column: 1 / var(--project-grid-nr);
-        margin-bottom: var(--project-sections-gap);
+        margin-bottom: calc(var(--project-sections-gap) * 1.5);
         display: flex;
         flex-direction: column;
         row-gap: var(--project-sections-gap);
@@ -286,14 +288,16 @@ const { project } = Astro.props as { project: any };
       .infosection-wrapper {
         .tag-description-wrapper {
           grid-column: 3 / -3;
-          row-gap: var(--project-sections-gap);
           .tag-list {
             justify-content: center;
+            margin-bottom: 3rem;
           }
         }
 
         .info-snippet-wrapper {
           grid-column: 3 / -3;
+          grid-template-columns: 1fr 1fr;
+          column-gap: 3rem;
         }
       }
       .sections-wrapper {
