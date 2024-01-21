@@ -8,6 +8,7 @@ export interface Props {
   lqip: string;
   ratio: number;
   caption?: string;
+  captionUrl?: string;
   w?: number;
   fit?:
     | "clip"
@@ -27,6 +28,7 @@ const {
   lqip,
   ratio,
   caption,
+  captionUrl,
   w,
   fit,
   loading = "lazy",
@@ -51,50 +53,69 @@ const defaultWidths = [320, 640, 960, 1280];
 const widths = defaultWidths.filter((width) => width <= maxWidth);
 ---
 
-<figure class="wrapper">
-  <div style={`padding-bottom: ${100 / ratio}%`} aria-hidden="true"></div>
-  <img class="lqip" src={lqip} class="" alt="" aria-hidden="true" />
+<figure class="container">
+  <div class:list={["wrapper", cls]}>
+    <div style={`padding-bottom: ${100 / ratio}%`} aria-hidden="true"></div>
+    <img class="lqip" src={lqip} class="" alt="" aria-hidden="true" />
+    {
+      vert && (
+        <source
+          media={`(max-width: ${defaultWidths[2]}px) and (min-height: ${defaultWidths[1]}px) and (max-aspect-ratio: 3/2)`}
+          srcset={urlFor(source)
+            .auto("format")
+            .fit(fit ? fit : "clip")
+            .height(1280)
+            .url()}
+        />
+      )
+    }
+    {
+      widths.map((width) => (
+        <source
+          media={`(max-width: ${width}px)`}
+          srcset={`${urlFor(source)
+            .auto("format")
+            .fit(fit ? fit : "clip")
+            .width(width)
+            .url()} ${width}w`}
+        />
+      ))
+    }
+
+    <img
+      src={urlFor(source)
+        .auto("format")
+        .fit(fit ? fit : "clip")
+        .width(maxWidth)
+        .url()}
+      alt={alt ? alt : ""}
+      class="source"
+      width={imageSize.size.width}
+      height={imageSize.size.height}
+      loading={loading}
+      draggable="false"
+    />
+  </div>
   {
-    vert && (
-      <source
-        media={`(max-width: ${defaultWidths[2]}px) and (min-height: ${defaultWidths[1]}px) and (max-aspect-ratio: 3/2)`}
-        srcset={urlFor(source)
-          .auto("format")
-          .fit(fit ? fit : "clip")
-          .height(1280)
-          .url()}
-      />
+    caption && (
+      <figcaption>
+        {captionUrl ? (
+          <a href={captionUrl}>
+            <span>{caption}</span>
+          </a>
+        ) : (
+          <span>{caption}</span>
+        )}
+      </figcaption>
     )
   }
-  {
-    widths.map((width) => (
-      <source
-        media={`(max-width: ${width}px)`}
-        srcset={`${urlFor(source)
-          .auto("format")
-          .fit(fit ? fit : "clip")
-          .width(width)
-          .url()} ${width}w`}
-      />
-    ))
-  }
-
-  <img
-    src={urlFor(source)
-      .auto("format")
-      .fit(fit ? fit : "clip")
-      .width(maxWidth)
-      .url()}
-    alt={alt ? alt : ""}
-    class:list={["source", cls]}
-    width={imageSize.size.width}
-    height={imageSize.size.height}
-    loading={loading}
-    draggable="false"
-  />
 </figure>
 
 <style>
+  .container {
+    text-align: center;
+    height: 100%;
+  }
   .wrapper {
     position: relative;
     overflow: hidden;
@@ -116,6 +137,19 @@ const widths = defaultWidths.filter((width) => width <= maxWidth);
   .source {
     opacity: 0;
     transition: opacity 400ms ease-out;
+  }
+
+  .border {
+    border: solid var(--stroke-w) rgb(var(--c-stroke));
+    transition: border var(--modeswitch-transition-time);
+  }
+
+  .round {
+    border-radius: var(--sm-radius);
+  }
+
+  figcaption {
+    transition: color var(--modeswitch-transition-time);
   }
   .loaded {
     opacity: 1;

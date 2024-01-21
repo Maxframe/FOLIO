@@ -82,13 +82,14 @@ if (allProjectData.projectsFeatured) {
       font-weight: 600;
       background-color: rgb(var(--c-bg));
       padding: 2rem;
-      outline: solid var(--stroke-w) rgb(var(--c-stroke));
+      border: solid var(--stroke-w) rgb(var(--c-stroke));
+      border-radius: var(--project-sm-radius);
       border-radius: var(--sm-radius);
       text-align: center;
       overflow: hidden;
       transition:
         background-color var(--modeswitch-transition-time),
-        outline var(--modeswitch-transition-time);
+        border var(--modeswitch-transition-time);
 
       &:hover {
         span {
@@ -115,6 +116,7 @@ if (allProjectData.projectsFeatured) {
             rgb(var(--c-bg), 0.9) 0%,
             rgb(var(--c-bg)) 100%
           );
+          transition: background var(--modeswitch-transition-time);
         }
       }
       span {

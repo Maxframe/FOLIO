@@ -8,9 +8,9 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
   "slug": slug.current,
   
   "image": aboutImage.image.asset._ref,
-  "alt": aboutImage.image.alt,
   "lqip": aboutImage.image.asset->metadata.lqip,
   "ratio": aboutImage.image.asset->metadata.dimensions.aspectRatio,
+  "alt": aboutImage.alt,
 
 
   aboutText,
@@ -117,8 +117,8 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
     border-radius: 3rem;
     border: solid var(--stroke-w) rgb(var(--c-stroke));
     transition:
-      background-color 200ms ease-out,
-      border 200ms ease-out;
+      background-color var(--modeswitch-transition-time),
+      border var(--modeswitch-transition-time);
     column-gap: 5%;
     row-gap: 1rem;
   }
@@ -133,19 +133,20 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
     overflow: hidden;
     height: fit-content;
     outline: solid var(--stroke-w) rgb(var(--c-stroke));
+    transition: outline var(--modeswitch-transition-time);
   }
 
   .about-title {
     font-size: var(--step-3);
-    transition: color 200ms ease-out;
+    transition: color var(--modeswitch-transition-time);
     margin-bottom: 0.5rem;
   }
 
   .about-social-wrapper {
-    transition: color 200ms ease-out;
+    transition: color var(--modeswitch-transition-time);
 
     a {
-      transition: color 200ms ease-out;
+      transition: color var(--modeswitch-transition-time);
       font-weight: 600;
       color: rgb(var(--c-fg));
       &:hover {
@@ -173,16 +174,16 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
         font-weight: 600;
         font-size: var(--step-2);
         transition:
-          color 200ms ease-out,
-          filter 200ms ease-out;
+          color var(--modeswitch-transition-time),
+          filter var(--modeswitch-transition-time);
       }
       svg {
         width: 22px;
         transform: translateY(3px);
         path {
           transition:
-            fill 200ms ease-out,
-            filter 200ms ease-out;
+            fill var(--modeswitch-transition-time),
+            filter var(--modeswitch-transition-time);
           fill: rgb(var(--c-fg));
         }
       }
@@ -228,7 +229,7 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
       backdrop-filter: blur(20px);
       border: solid var(--stroke-w) rgb(var(--c-stroke));
       transform: translate(calc(100% + 1rem), -50%);
-      transition: opacity 200ms ease-out;
+      transition: opacity var(--modeswitch-transition-time);
     }
   }
 
@@ -242,6 +243,7 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
       color: rgb(var(--c-fg), 0.6);
       letter-spacing: 0.06rem;
       margin-top: 0.5rem;
+      transition: color var(--modeswitch-transition-time);
     }
   }
 
@@ -251,10 +253,6 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
 
   .about-cv {
     text-align: center;
-    transition:
-      color 200ms ease-out,
-      background-color 200ms ease-out,
-      transform 200ms ease-out;
     font-weight: 600;
     grid-column: 1 / span 2;
     color: rgb(var(--c-fg));
@@ -262,6 +260,12 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
     background-color: var(--c-pill-bg);
     border-radius: 999px;
     border: solid var(--stroke-w) rgb(var(--c-stroke));
+    transition:
+      color var(--modeswitch-transition-time),
+      background-color var(--modeswitch-transition-time),
+      transform var(--hover-transition),
+      border var(--modeswitch-transition-time);
+
     &:hover {
       background-color: rgb(var(--c-bg));
       color: rgb(var(--clr-accent));

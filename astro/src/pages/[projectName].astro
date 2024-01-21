@@ -72,10 +72,15 @@ const { project } = Astro.props as { project: any };
 
       <div class="infosection-wrapper">
         <div class="tag-description-wrapper">
-          <div class="tag-list">
-            {project.tags?.map((tag: string) => <span class="tag">{tag}</span>)}
-          </div>
-
+          {
+            project.tags && (
+              <div class="tag-list">
+                {project.tags?.map((tag: string) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            )
+          }
           <div class="description block-wrapper">
             <PortableText value={project.description} />
           </div>
@@ -151,7 +156,7 @@ const { project } = Astro.props as { project: any };
 
       .project-card {
         position: absolute;
-        background-color: rgb(var(--c-bg));
+        background-color: var(--c-pill-bg);
         border-radius: var(--md-radius);
         backdrop-filter: blur(40px);
         width: 100%;
