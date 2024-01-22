@@ -140,8 +140,8 @@ const widths = defaultWidths.filter((width) => width <= maxWidth);
   }
 
   .border {
-    border: solid var(--stroke-w) rgb(var(--c-stroke));
-    transition: border var(--modeswitch-transition-time);
+    outline: solid var(--stroke-w) rgb(var(--c-stroke));
+    transition: outline var(--modeswitch-transition-time);
   }
 
   .round {
@@ -150,6 +150,7 @@ const widths = defaultWidths.filter((width) => width <= maxWidth);
 
   figcaption {
     transition: color var(--modeswitch-transition-time);
+    margin-top: 0.2em;
   }
   .loaded {
     opacity: 1;
