@@ -146,7 +146,6 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
     transition: color var(--modeswitch-transition-time);
 
     a {
-      transition: color var(--modeswitch-transition-time);
       font-weight: 600;
       color: rgb(var(--c-fg));
       &:hover {
@@ -174,16 +173,16 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
         font-weight: 600;
         font-size: var(--step-2);
         transition:
-          color var(--modeswitch-transition-time),
-          filter var(--modeswitch-transition-time);
+          color var(--hover-transition),
+          filter var(--hover-transition);
       }
       svg {
         width: 22px;
         transform: translateY(3px);
         path {
           transition:
-            fill var(--modeswitch-transition-time),
-            filter var(--modeswitch-transition-time);
+            fill var(--hover-transition),
+            filter var(--hover-transition);
           fill: rgb(var(--c-fg));
         }
       }

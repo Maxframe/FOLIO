@@ -64,6 +64,18 @@ export default defineType({
           description: "Range: 1-10",
           validation: (Rule) => [Rule.required(), Rule.min(1), Rule.max(10)],
         }),
+        {
+          name: "isDarkImageLeft",
+          title: "Border for dark Image",
+          type: "boolean",
+          initialValue: false,
+        },
+        {
+          name: "isDarkImageRight",
+          title: "Border for dark Image",
+          type: "boolean",
+          initialValue: false,
+        },
       ],
     }),
   ],

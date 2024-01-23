@@ -1,9 +1,11 @@
-export default {
+import { defineType, defineField, defineArrayMember } from "sanity";
+
+export default defineType({
   title: "Block Content",
   name: "blockContent",
   type: "array",
-  of: [
-    {
+  of: defineArrayMember([
+    defineField({
       title: "Block",
       type: "block",
       styles: [
@@ -22,8 +24,22 @@ export default {
         ],
         annotations: [
           {
-            title: "URL",
+            title: "Internal link",
             name: "link",
+            type: "object",
+            fields: [
+              {
+                name: "reference",
+                type: "reference",
+                title: "Reference",
+                weak: true,
+                to: [{ type: "project" }],
+              },
+            ],
+          },
+          {
+            title: "External link",
+            name: "ExternalLink",
             type: "object",
             fields: [
               {
@@ -31,11 +47,15 @@ export default {
                 name: "href",
                 type: "url",
               },
+              {
+                title: "Open in new tab",
+                name: "blank",
+                type: "boolean",
+              },
             ],
           },
         ],
       },
-    },
-    { type: "figure" },
-  ],
-};
+    }),
+  ]),
+});

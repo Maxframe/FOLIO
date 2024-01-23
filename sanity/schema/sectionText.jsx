@@ -11,6 +11,8 @@ export default defineType({
       name: "sectionTitle",
       title: "Optional Title",
       type: "string",
+      description:
+        "Beispiele: Wer ist der Kunde? Wer ist die Zielgruppe? Was sind die Anforderungen oder Bedürfnisse? Welche Lösung wurde gefunden? Was waren die Resultate? Welche Herausforderungen hat es gegeben? Was hat man daraus gelernt?",
     }),
     defineField({
       name: "sectionText",
@@ -24,7 +26,7 @@ export default defineType({
       title: "Text Grid Position",
       type: "number",
       description: "Links = 3 / Rechts = 5",
-      validation: (Rule) => [Rule.min(3), Rule.max(5)],
+      validation: (Rule) => [Rule.required(), Rule.min(3), Rule.max(5)],
     }),
     defineField({
       name: "rightToLeft",
