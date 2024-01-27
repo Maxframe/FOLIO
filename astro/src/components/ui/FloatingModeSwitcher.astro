@@ -121,27 +121,38 @@ const { classes, show } = Astro.props as Props;
     let touchStartX = 0;
     let touchEndX = 0;
 
-    const handleGesture = () => {
-      mode = sessionStorage.getItem("mode");
-      if (touchEndX < touchStartX) enableDarkMode();
+    if (mode == "light") {
+      enableLightMode();
+    }
+
+    const handleTouchGesture = () => {
       if (touchEndX > touchStartX) enableLightMode();
+      if (touchEndX < touchStartX) enableDarkMode();
+    };
+
+    const handleMouseGesture = () => {
+      // Invert the logic for mouse gestures if needed
+      if (touchEndX < touchStartX) enableLightMode();
+      if (touchEndX > touchStartX) enableDarkMode();
     };
 
     modeSwitch.forEach(function (e) {
+      // Touch Events
       e.addEventListener("touchstart", (touchStartEvent: TouchEvent) => {
         touchStartX = touchStartEvent.changedTouches[0].screenX;
       });
 
       e.addEventListener("touchend", (touchEndEvent: TouchEvent) => {
         touchEndX = touchEndEvent.changedTouches[0].screenX;
-        handleGesture();
+        handleTouchGesture();
       });
 
+      // Mouse Events
       e.addEventListener("mousedown", (mouseDownEvent: MouseEvent) => {
         touchStartX = mouseDownEvent.screenX;
         const mouseUpHandler = (mouseUpEvent: MouseEvent) => {
           touchEndX = mouseUpEvent.screenX;
-          handleGesture();
+          handleMouseGesture();
           document.removeEventListener("mouseup", mouseUpHandler);
         };
         document.addEventListener("mouseup", mouseUpHandler);
@@ -156,9 +167,5 @@ const { classes, show } = Astro.props as Props;
         }
       });
     });
-
-    if (mode == "light") {
-      enableLightMode();
-    }
   });
 </script>
