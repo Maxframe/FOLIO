@@ -210,6 +210,11 @@ button {
   color: rgb(var(--clr-accent));
 }
 
+.description p {
+  -webkit-hyphens: auto;
+          hyphens: auto;
+}
+
 @media screen and (max-width: 800px) {
   :root {
     --content-px: 1rem;

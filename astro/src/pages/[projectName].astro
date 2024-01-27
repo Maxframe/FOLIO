@@ -244,7 +244,8 @@ const { project } = Astro.props as { project: any };
                 border var(--modeswitch-transition-time);
             }
           }
-          .description {
+          .description > * {
+            hyphens: auto;
           }
         }
         .info-snippet-wrapper {
@@ -255,7 +256,7 @@ const { project } = Astro.props as { project: any };
           row-gap: 2rem;
 
           .info-snippet {
-            h3 {
+            h2 {
               text-transform: uppercase;
               font-size: 0.75rem;
               font-weight: 700;
@@ -311,6 +312,15 @@ const { project } = Astro.props as { project: any };
       .project-hero-image-wrapper {
         border-radius: 0;
       }
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    .project-overflow-container
+      .project-container
+      .infosection-wrapper
+      .info-snippet-wrapper {
+      grid-template-columns: auto;
     }
   }
 </style>

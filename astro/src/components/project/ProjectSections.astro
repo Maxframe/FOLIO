@@ -102,6 +102,7 @@ const projectData = await sanityClient.fetch(
                   ratio={section.sRatio}
                   caption={section.sImage.caption}
                   captionUrl={section.sImage.captionUrl}
+                  isDark={section.imageSettings.isDarkImage}
                 />
               </div>
             </div>
@@ -126,6 +127,7 @@ const projectData = await sanityClient.fetch(
                 ratio={section.dRatioLeft}
                 caption={section.dImage.dImageLeft.caption}
                 captionUrl={section.dImage.dImageLeft.captionUrl}
+                isDark={section.imageSettings.isDarkImageLeft}
               />
             </div>
             <div
@@ -143,6 +145,7 @@ const projectData = await sanityClient.fetch(
                 ratio={section.dRatioRight}
                 caption={section.dImage.dImageRight.caption}
                 captionUrl={section.dImage.dImageRight.captionUrl}
+                isDark={section.imageSettings.isDarkImageRight}
               />
             </div>
           </div>

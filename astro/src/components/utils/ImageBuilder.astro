@@ -20,6 +20,7 @@ export interface Props {
     | "min" /* More info: https://www.sanity.io/docs/image-urls#fit-45b29dc6f09f */;
   loading?: "eager" | "lazy";
   vert?: boolean;
+  isDark?: boolean;
 }
 const {
   source,
@@ -33,6 +34,7 @@ const {
   fit,
   loading = "lazy",
   vert,
+  isDark = false,
 } = Astro.props as Props;
 
 const pattern = /^image-([a-f\d]+)-(\d+x\d+)-(\w+)$/;
@@ -54,7 +56,7 @@ const widths = defaultWidths.filter((width) => width <= maxWidth);
 ---
 
 <figure class="container">
-  <div class:list={["wrapper", cls]}>
+  <div class:list={["wrapper", { "dark-border": isDark }, cls]}>
     <div style={`padding-bottom: ${100 / ratio}%`} aria-hidden="true"></div>
     <img class="lqip loading" src={lqip} alt="" aria-hidden="true" />
     <picture>
@@ -151,6 +153,14 @@ const widths = defaultWidths.filter((width) => width <= maxWidth);
   .source {
     opacity: 0;
     transition: opacity 400ms ease-out;
+  }
+
+  .dark-border {
+    border: solid 2px rgb(var(--clr-wb-light), 0.05);
+    transition: border var(--modeswitch-transition-time);
+  }
+  body.lightmode .dark-border {
+    border: solid 0px rgb(var(--clr-wb-light), 0);
   }
 
   .border {
