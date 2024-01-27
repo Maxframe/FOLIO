@@ -84,7 +84,7 @@ const { project } = Astro.props as { project: any };
     </div>
 
     <div class="project-overflow-container">
-      <main class="project-container">
+      <div class="project-container">
         <div class="project-card"></div>
         <div class="project-title-wrapper">
           <h1 class="project-title">{project.projectName}</h1>
@@ -132,7 +132,7 @@ const { project } = Astro.props as { project: any };
         <div class="sections-wrapper">
           <ProjectSections currentSlug={project.slug} />
         </div>
-      </main>
+      </div>
     </div>
     <NextProjectLink currentSlug={project.slug} />
   </main>
