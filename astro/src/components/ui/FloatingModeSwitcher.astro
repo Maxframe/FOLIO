@@ -118,10 +118,37 @@ const { classes, show } = Astro.props as Props;
       sessionStorage.setItem("mode", null);
     };
 
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    const handleGesture = () => {
+      mode = sessionStorage.getItem("mode");
+      if (touchEndX > touchStartX) enableDarkMode();
+      if (touchEndX < touchStartX) enableLightMode();
+    };
+
     modeSwitch.forEach(function (e) {
+      e.addEventListener("touchstart", (touchStartEvent: TouchEvent) => {
+        touchStartX = touchStartEvent.changedTouches[0].screenX;
+      });
+
+      e.addEventListener("touchend", (touchEndEvent: TouchEvent) => {
+        touchEndX = touchEndEvent.changedTouches[0].screenX;
+        handleGesture();
+      });
+
+      e.addEventListener("mousedown", (mouseDownEvent: MouseEvent) => {
+        touchStartX = mouseDownEvent.screenX;
+        const mouseUpHandler = (mouseUpEvent: MouseEvent) => {
+          touchEndX = mouseUpEvent.screenX;
+          handleGesture();
+          document.removeEventListener("mouseup", mouseUpHandler);
+        };
+        document.addEventListener("mouseup", mouseUpHandler);
+      });
+
       e.addEventListener("click", () => {
         mode = sessionStorage.getItem("mode");
-
         if (mode !== "light") {
           enableLightMode();
         } else {
