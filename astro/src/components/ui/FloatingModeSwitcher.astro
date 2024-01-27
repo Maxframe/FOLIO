@@ -123,8 +123,8 @@ const { classes, show } = Astro.props as Props;
 
     const handleGesture = () => {
       mode = sessionStorage.getItem("mode");
-      if (touchEndX > touchStartX) enableDarkMode();
-      if (touchEndX < touchStartX) enableLightMode();
+      if (touchEndX < touchStartX) enableDarkMode();
+      if (touchEndX > touchStartX) enableLightMode();
     };
 
     modeSwitch.forEach(function (e) {
