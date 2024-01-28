@@ -63,7 +63,7 @@ const widths = defaultWidths.filter((width) => width <= maxWidth);
       {
         vert && (
           <source
-            media={`(max-width: ${defaultWidths[2]}px) and (min-height: ${defaultWidths[2]}px) and (max-aspect-ratio: 3/2)`}
+            media={`(max-width: ${defaultWidths[2]}px) and (min-height: ${defaultWidths[1]}px) and (max-aspect-ratio: 3/2)`}
             srcset={urlFor(source)
               .auto("format")
               .fit(fit ? fit : "clip")
