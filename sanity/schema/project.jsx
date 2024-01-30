@@ -6,17 +6,34 @@ export default defineType({
   title: "Project",
   type: "document",
   icon: DocumentsIcon,
+  groups: [
+    {
+      name: "main",
+      title: "Main",
+    },
+    {
+      name: "thumb",
+      title: "Thumb Image",
+    },
+
+    {
+      name: "sections",
+      title: "Sections",
+    },
+  ],
   fields: [
     defineField({
       name: "projectName",
       title: "Project Name",
       type: "string",
+      group: "main",
       validation: (Rule) => [Rule.required()],
     }),
     defineField({
       name: "slug",
       title: "Slug",
       type: "slug",
+      group: "main",
       options: {
         source: "projectName",
         maxLength: 96,
@@ -27,17 +44,20 @@ export default defineType({
       name: "thumbnailImage",
       title: "Thumbnail Image",
       type: "figure",
+      group: "thumb",
     }),
     defineField({
       name: "altHeroImage",
       title: "Alternative Hero Image?",
       type: "boolean",
       initialValue: false,
+      group: "thumb",
     }),
     defineField({
       name: "heroImage",
       title: "Hero Image",
       type: "figure",
+      group: "thumb",
       hidden: ({ document }) => !document?.altHeroImage,
     }),
 
@@ -46,6 +66,7 @@ export default defineType({
       title: "Tags",
       type: "array",
       of: [defineArrayMember({ type: "string" })],
+      group: "main",
       options: {
         layout: "tags",
       },
@@ -55,12 +76,14 @@ export default defineType({
       title: "Initial Description",
       type: "array",
       of: [defineArrayMember({ type: "block" })],
+      group: "main",
       description: "Was ist es? Was macht es? Und für wen ist es?",
     }),
     defineField({
       name: "infoSnippets",
       title: "Info Snippets",
       type: "object",
+      group: "main",
       fields: [
         {
           name: "contextText",
@@ -94,6 +117,7 @@ export default defineType({
       name: "content",
       title: "Content",
       type: "array",
+      group: "sections",
       of: [
         { type: "sectionText" },
         { type: "sectionImageSingle" },

@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { Stack, Block, BlockInput } from "@sanity/ui";
+import { Stack, Text, TextInput } from "@sanity/ui";
 import { set, unset } from "sanity";
 
 export const MyCustomStringInput = (props) => {
@@ -15,8 +15,8 @@ export const MyCustomStringInput = (props) => {
 
   return (
     <Stack space={2}>
-      <BlockInput {...elementProps} onChange={handleChange} value={value} />
-      <Block>Characters: {value.length}</Block>
+      <TextInput {...elementProps} onChange={handleChange} value={value} />
+      <Text>Characters: {value.length}</Text>
     </Stack>
   );
 };
