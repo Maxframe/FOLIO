@@ -34,15 +34,20 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
 
 <section class="about-section" id={aboutData.slug}>
   <div class="about-wrapper">
-    <div class="about-image-wrapper">
-      <ImageBuilder
-        cls="about-image"
-        source={aboutData.image}
-        alt={aboutData.alt}
-        lqip={aboutData.lqip}
-        ratio={aboutData.ratio}
-        w={500}
-      />
+    <div class="about-image-container-1">
+      <div class="about-image-container-2">
+        <div class="about-image-wrapper">
+          <ImageBuilder
+            cls="about-image"
+            source={aboutData.image}
+            alt={aboutData.alt}
+            lqip={aboutData.lqip}
+            ratio={aboutData.ratio}
+            w={500}
+          />
+        </div>
+        <span id="helper" class="hidden"></span>
+      </div>
     </div>
     <div class="about-text">
       <h1 class="about-title">{aboutData.aboutTitle}</h1>
@@ -98,6 +103,19 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
 </section>
 
 <style lang="scss">
+  #helper {
+    color: white;
+    padding: 0.2em;
+    border-radius: 5%;
+    background-color: grey;
+
+    position: absolute;
+    z-index: 0;
+  }
+
+  .hidden {
+    display: none;
+  }
   .about-section {
     max-width: var(--content-w);
     margin: 0 auto;
@@ -350,5 +368,89 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
       mailButton.addEventListener("click", copyContent);
       mailButton.addEventListener("mouseout", resetTooltip);
     }
+  });
+</script>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    // Init
+    const container = document.querySelector(
+      ".about-image-wrapper"
+    ) as HTMLElement | null;
+    const inner = container.querySelector(".container") as HTMLElement | null;
+    const helper = document.getElementById("helper") as HTMLElement | null;
+
+    console.log(container, inner);
+
+    if (!container || !inner || !helper) {
+      console.error("One or more elements were not found!");
+      return;
+    }
+
+    // Mouse
+    const mouse = {
+      _x: 0,
+      _y: 0,
+      x: 0,
+      y: 0,
+      updatePosition(event: MouseEvent) {
+        this.x = event.clientX - this._x;
+        this.y = (event.clientY - this._y) * -1;
+      },
+      setOrigin(e: HTMLElement) {
+        this._x = e.offsetLeft + Math.floor(e.offsetWidth / 2);
+        this._y = e.offsetTop + Math.floor(e.offsetHeight / 2);
+      },
+      show() {
+        return "(" + this.x + ", " + this.y + ")";
+      },
+    };
+
+    mouse.setOrigin(container);
+
+    //--------------------------------------------------
+
+    var counter = 0;
+    var updateRate = 1;
+    var isTimeToUpdate = function () {
+      return counter++ % updateRate === 0;
+    };
+
+    //--------------------------------------------------
+
+    var onMouseEnterHandler = function (event: MouseEvent) {
+      helper.className = "";
+      update(event);
+    };
+
+    var onMouseLeaveHandler = function () {
+      inner.style.cssText = "";
+      helper.className = "hidden";
+    };
+
+    var onMouseMoveHandler = function (event: MouseEvent) {
+      if (isTimeToUpdate()) {
+        update(event);
+      }
+      displayMousePositionHelper(event);
+    };
+
+    //--------------------------------------------------
+
+    var update = function (event: any) {
+      mouse.updatePosition(event);
+    };
+
+    var displayMousePositionHelper = function (event: MouseEvent) {
+      helper.innerHTML = mouse.show();
+      helper.style.top = `${event.clientY - container.offsetTop}px`;
+      helper.style.left = `${event.clientX - container.offsetLeft}px`;
+    };
+
+    //--------------------------------------------------
+
+    container.onmouseenter = onMouseEnterHandler;
+    container.onmouseleave = onMouseLeaveHandler;
+    container.onmousemove = onMouseMoveHandler;
   });
 </script>
