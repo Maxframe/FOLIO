@@ -272,7 +272,7 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
     }
   }
 
-  @media screen and (max-width: 800px) {
+  @media screen and (width <= 800px) {
     .about-wrapper {
       grid-template-columns: 1fr;
       grid-template-rows: 1fr;

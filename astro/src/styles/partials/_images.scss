@@ -30,7 +30,7 @@
   transition: var(--card-transition-time);
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (width <= 800px) {
   :root {
     --project-sections-gap: 4rem;
   }

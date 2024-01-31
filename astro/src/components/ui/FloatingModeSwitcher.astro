@@ -95,7 +95,7 @@ const { classes, show } = Astro.props as Props;
     }
   }
 
-  @media only screen and (max-width: 800px) {
+  @media only screen and (width <= 800px) {
     .floating-modeswitch-wrapper {
       bottom: calc(var(--content-px) * 2);
     }

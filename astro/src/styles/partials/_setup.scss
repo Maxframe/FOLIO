@@ -97,7 +97,7 @@ button {
   hyphens: auto;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (width <= 800px) {
   :root {
     --content-px: 1rem;
     --featured-offset: 7rem;

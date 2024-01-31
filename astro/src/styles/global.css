@@ -71,43 +71,55 @@
 
 @font-face {
   font-family: "Manrope";
-  src: local("Manrope Extra Bold"), url("/fonts/Manrope-ExtraBold.woff2") format("woff2"), url("/fonts//Manrope-ExtraBold.woff") format("woff");
+  src: local("Manrope Extra Bold"),
+    url("/fonts/Manrope-ExtraBold.woff2") format("woff2"),
+    url("/fonts//Manrope-ExtraBold.woff") format("woff");
   font-weight: 800;
   font-style: normal;
 }
 @font-face {
   font-family: "Manrope";
-  src: local("Manrope Bold"), url("/fonts/Manrope-Bold.woff2") format("woff2"), url("/fonts/Manrope-Bold.woff") format("woff");
+  src: local("Manrope Bold"), url("/fonts/Manrope-Bold.woff2") format("woff2"),
+    url("/fonts/Manrope-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
 }
 @font-face {
   font-family: "Manrope";
-  src: local("Manrope Semibold"), url("/fonts/Manrope-SemiBold.woff2") format("woff2"), url("/fonts/Manrope-SemiBold.woff") format("woff");
+  src: local("Manrope Semibold"),
+    url("/fonts/Manrope-SemiBold.woff2") format("woff2"),
+    url("/fonts/Manrope-SemiBold.woff") format("woff");
   font-weight: 600;
   font-style: normal;
 }
 @font-face {
   font-family: "Manrope";
-  src: local("Manrope Medium"), url("/fonts/Manrope-Medium.woff2") format("woff2"), url("/fonts/Manrope-Medium.woff") format("woff");
+  src: local("Manrope Medium"),
+    url("/fonts/Manrope-Medium.woff2") format("woff2"),
+    url("/fonts/Manrope-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
 }
 @font-face {
   font-family: "Manrope";
-  src: local("Manrope Regular"), url("/fonts/Manrope-Regular.woff2") format("woff2"), url("/fonts/Manrope-Regular.woff") format("woff");
+  src: local("Manrope Regular"),
+    url("/fonts/Manrope-Regular.woff2") format("woff2"),
+    url("/fonts/Manrope-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: "Manrope";
-  src: local("Manrope Light"), url("/fonts/Manrope-Light.woff2") format("woff2"), url("/fonts/Manrope-Light.woff") format("woff");
+  src: local("Manrope Light"), url("/fonts/Manrope-Light.woff2") format("woff2"),
+    url("/fonts/Manrope-Light.woff") format("woff");
   font-weight: 300;
   font-style: normal;
 }
 @font-face {
   font-family: "Manrope";
-  src: local("Manrope Extra Light"), url("/fonts/Manrope-ExtraLight.woff2") format("woff2"), url("/fonts/Manrope-ExtraLight.woff") format("woff");
+  src: local("Manrope Extra Light"),
+    url("/fonts/Manrope-ExtraLight.woff2") format("woff2"),
+    url("/fonts/Manrope-ExtraLight.woff") format("woff");
   font-weight: 200;
   font-style: normal;
 }
@@ -145,7 +157,7 @@ body {
 
 p {
   -webkit-hyphens: manual;
-          hyphens: manual;
+  hyphens: manual;
 }
 
 a {
@@ -171,10 +183,10 @@ canvas {
   color: transparent;
   width: 100%;
   -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  user-select: none;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   height: 100%;
   background-color: rgb(var(--c-fg)), 0.1;
 }
@@ -212,10 +224,10 @@ button {
 
 .description p {
   -webkit-hyphens: auto;
-          hyphens: auto;
+  hyphens: auto;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (width <= 800px) {
   :root {
     --content-px: 1rem;
     --featured-offset: 7rem;
@@ -223,7 +235,7 @@ button {
 }
 .thumbnail-image {
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   height: 100%;
   width: 100%;
   transform: scale(1.01);
@@ -243,12 +255,12 @@ button {
 .project-hero-image {
   width: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .next-image {
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   height: 100%;
   width: 100%;
   border-radius: var(--sm-radius);
@@ -256,11 +268,11 @@ button {
   transition: var(--card-transition-time);
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (width <= 800px) {
   :root {
     --project-sections-gap: 4rem;
   }
   .thumbnail-image {
     filter: brightness(1);
   }
-}/*# sourceMappingURL=global.css.map */
+} /*# sourceMappingURL=global.css.map */

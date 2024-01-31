@@ -144,7 +144,7 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
     }
   }
 
-  @media only screen and (max-width: 800px) {
+  @media only screen and (width <= 800px) {
     .nav-content {
       justify-content: space-between;
       padding: 0 var(--content-px);
