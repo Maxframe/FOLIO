@@ -111,7 +111,7 @@ const subtitleRight = heroData.heroText.subtitleRight;
         .sub-right {
           position: relative;
           z-index: 1;
-          color: rgb(var(--clr-wb-dark));
+          color: rgb(var(--clr-wb-light) / 0.1);
         }
       }
       .hidden {
@@ -121,12 +121,11 @@ const subtitleRight = heroData.heroText.subtitleRight;
   }
   body.lightmode .hero-container h1 .sub-wrapper {
     .sub-left {
-      /*       color: rgb(var(--clr-wb-dark), 0.3);
- */
+      color: rgb(var(--clr-wb-dark) / 0.2);
     }
     .sub-right {
-      /*       color: rgb(var(--clr-wb-dark));
- */
+      color: rgb(var(--clr-wb-dark));
+
       &::after {
         position: absolute;
         content: "";
@@ -171,11 +170,11 @@ const subtitleRight = heroData.heroText.subtitleRight;
     left: 0;
     right: 0;
     outline: solid var(--stroke-w) rgb(var(--c-stroke));
-    background-color: rgb(var(--clr-wb-light), 0.15);
+    background-color: rgb(var(--clr-wb-light) / 0.1);
     transition: 200ms;
     &:hover {
       transform: scale(1.03);
-      background-color: rgb(var(--clr-wb-light), 0.2);
+      background-color: rgb(var(--clr-wb-light) / 0.15);
     }
 
     .slidee {
@@ -208,7 +207,7 @@ const subtitleRight = heroData.heroText.subtitleRight;
         width: 38%;
         height: 100%;
         left: 50%;
-        fill: rgb(var(--clr-wb-dark), 0.2);
+        fill: rgb(var(--clr-wb-dark) / 0.2);
         stroke: rgb(var(--c-stroke));
         stroke-width: calc(var(--stroke-w) / 2);
         transition: var(--modeswitch-transition-time);

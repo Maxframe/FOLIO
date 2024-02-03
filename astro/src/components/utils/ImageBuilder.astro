@@ -156,11 +156,11 @@ const widths = defaultWidths.filter((width) => width <= maxWidth);
   }
 
   .dark-border {
-    border: solid 2px rgb(var(--clr-wb-light), 0.05);
+    border: solid 2px rgb(var(--clr-wb-light) / 0.05);
     transition: border var(--modeswitch-transition-time);
   }
   body.lightmode .dark-border {
-    border: solid 0px rgb(var(--clr-wb-light), 0);
+    border: solid 0px rgb(var(--clr-wb-light) / 0);
   }
 
   .border {

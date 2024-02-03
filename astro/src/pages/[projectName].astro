@@ -62,9 +62,9 @@ const { project } = Astro.props as { project: any };
             <ImageBuilder
               cls="project-hero-image"
               source={project.heroImage}
-              lqip={project.thumbLqip}
-              ratio={project.thumbLqip}
-              alt={project.thumbAltText}
+              lqip={project.heroLqip}
+              ratio={project.heroRatio}
+              alt={project.heroAltText}
               loading="eager"
               vert
             />
@@ -72,9 +72,9 @@ const { project } = Astro.props as { project: any };
             <ImageBuilder
               cls="project-hero-image"
               source={project.thumbnailImage}
-              lqip={project.heroLqip}
-              ratio={project.heroRatio}
-              alt={project.heroAltText}
+              lqip={project.thumbLqip}
+              ratio={project.thumbRatio}
+              alt={project.thumbAltText}
               loading="eager"
               vert
             />
@@ -234,7 +234,7 @@ const { project } = Astro.props as { project: any };
               font-size: 0.75rem;
               padding: 0.5rem 1.1rem;
               border-radius: 999rem;
-              background-color: rgb(var(--clr-wb-light), 0.2);
+              background-color: rgb(var(--clr-wb-light) / 0.2);
               border: solid var(--stroke-w) rgb(var(--c-stroke));
               font-weight: 700;
               letter-spacing: 0.06rem;
@@ -261,7 +261,7 @@ const { project } = Astro.props as { project: any };
               text-transform: uppercase;
               font-size: 0.75rem;
               font-weight: 700;
-              color: rgb(var(--c-fg), 0.6);
+              color: rgb(var(--c-fg) / 0.6);
               letter-spacing: 0.06rem;
               margin-bottom: 0.3em;
               transition: color var(--modeswitch-transition-time);

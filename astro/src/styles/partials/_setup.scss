@@ -63,7 +63,7 @@ canvas {
   user-select: none;
   object-fit: cover;
   height: 100%;
-  background-color: rgb(var(--c-fg)), 0.1;
+  background-color: rgb(var(--c-fg)) / 0.1;
 }
 
 ::selection {

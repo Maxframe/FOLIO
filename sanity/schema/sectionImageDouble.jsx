@@ -66,13 +66,13 @@ export default defineType({
         }),
         {
           name: "isDarkImageLeft",
-          title: "Border for dark Image",
+          title: "Border for dark image",
           type: "boolean",
           initialValue: false,
         },
         {
           name: "isDarkImageRight",
-          title: "Border for dark Image",
+          title: "Border for dark image",
           type: "boolean",
           initialValue: false,
         },
