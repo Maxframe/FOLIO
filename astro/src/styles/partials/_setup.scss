@@ -87,6 +87,11 @@ button {
   a {
     font-weight: 700;
     transition: color 200ms ease-out;
+    color: color-mix(
+      in oklab,
+      rgb(var(--clr-accent)),
+      rgb(var(--clr-wb-light)) 65%
+    );
     &:hover {
       color: rgb(var(--clr-accent));
     }
