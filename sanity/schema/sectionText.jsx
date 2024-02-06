@@ -17,9 +17,8 @@ export default defineType({
     defineField({
       name: "sectionText",
       title: "Text",
-      type: "array",
+      type: "blockContent",
       description: "Try to keep it compact (max. 300 chars)",
-      of: [{ type: "block" }],
     }),
     defineField({
       name: "textGridPos",

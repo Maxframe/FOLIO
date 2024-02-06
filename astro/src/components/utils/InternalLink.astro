@@ -1,0 +1,8 @@
+---
+export type { Props } from "astro-portabletext/types";
+const props = Astro.props;
+---
+
+<a href={props.node.markDef.slug}>
+  <slot />
+</a>

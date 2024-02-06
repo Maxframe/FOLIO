@@ -26,8 +26,7 @@ export default defineType({
       name: "aboutTextBlock",
       title: "Über mich",
       description: "Wer bin ich?",
-      type: "array",
-      of: [defineArrayMember({ type: "block" })],
+      type: "blockContent",
     }),
     defineField({
       name: "aboutImage",
