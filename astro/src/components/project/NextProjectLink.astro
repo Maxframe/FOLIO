@@ -48,8 +48,6 @@ if (allProjectData.projectsFeatured) {
               .url()}
             alt={nextProjectTitle}
           />
-
-          <div class="next-image-overlay" />
         </div>
         <svg
           width="89"
@@ -104,17 +102,18 @@ if (allProjectData.projectsFeatured) {
         position: absolute;
         opacity: 0;
         inset: 0;
-        transition: 0.2s ease-out;
+        transition: opacity 0.2s ease-out;
         background-color: rgb(var(--c-stroke));
         border-radius: var(--sm-radius);
-        .next-image-overlay {
+
+        &::after {
+          content: "";
           position: absolute;
-          z-index: 1;
           inset: 0;
           background: linear-gradient(
             0deg,
-            rgb(var(--c-bg), 0.9) 0%,
-            rgb(var(--c-bg)) 100%
+            rgb(var(--c-bg)) 0%,
+            rgb(var(--c-bg) / 0.8) 100%
           );
           transition: background var(--modeswitch-transition-time);
         }
