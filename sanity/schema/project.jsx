@@ -74,8 +74,7 @@ export default defineType({
     defineField({
       name: "description",
       title: "Initial Description",
-      type: "array",
-      of: [defineArrayMember({ type: "block" })],
+      type: "blockContent",
       group: "main",
       description: "Was ist es? Was macht es? Und für wen ist es?",
     }),

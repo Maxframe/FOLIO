@@ -1,4 +1,5 @@
 import { defineType, defineField, defineArrayMember } from "sanity";
+import { LaunchIcon, LeaveIcon } from "@sanity/icons";
 
 export default defineType({
   title: "Block Content",
@@ -25,7 +26,8 @@ export default defineType({
         annotations: [
           {
             title: "Internal link",
-            name: "link",
+            name: "internalLink",
+            icon: LeaveIcon,
             type: "object",
             fields: [
               {
@@ -39,18 +41,14 @@ export default defineType({
           },
           {
             title: "External link",
-            name: "ExternalLink",
+            name: "externalLink",
+            icon: LaunchIcon,
             type: "object",
             fields: [
               {
                 title: "URL",
                 name: "href",
                 type: "url",
-              },
-              {
-                title: "Open in new tab",
-                name: "blank",
-                type: "boolean",
               },
             ],
           },

@@ -1,7 +1,7 @@
 ---
 import { sanityClient } from "sanity:client";
 import ImageBuilder from "../utils/ImageBuilder.astro";
-import { PortableText } from "astro-portabletext";
+import PortableText from "../utils/PortableText.astro";
 
 const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
   aboutTitle,
@@ -12,9 +12,16 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
   "ratio": aboutImage.image.asset->metadata.dimensions.aspectRatio,
   "alt": aboutImage.alt,
 
-
-  aboutText,
-  aboutTextBlock,
+  aboutTextBlock[]{
+    ...,
+    markDefs[]{
+      ...,
+      _type == "internalLink" => {
+        "slug": @.reference->slug.current
+      }
+    }
+  },
+  
   
   "mailLinkLabel": contactLinks.mailLinkLabel,
   "mailLink": contactLinks.mailLink,
