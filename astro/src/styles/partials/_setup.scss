@@ -34,8 +34,18 @@ body {
   transition: none !important;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
 p {
   hyphens: manual;
+  text-wrap: pretty;
 }
 
 a {
@@ -85,13 +95,9 @@ button {
     transition: color var(--modeswitch-transition-time);
   }
   a {
-    font-weight: 700;
-    transition: color 200ms ease-out;
-    color: color-mix(
-      in oklab,
-      rgb(var(--clr-accent)),
-      rgb(var(--clr-wb-light)) 65%
-    );
+    font-weight: 600;
+    color: color-mix(in oklab, rgb(var(--clr-accent)), rgb(var(--c-fg)) 60%);
+    transition: color var(--hover-transition);
     &:hover {
       color: rgb(var(--clr-accent));
     }
