@@ -107,6 +107,8 @@ const { classes, show } = Astro.props as Props;
     /* Switches Light/darkmode accordingly*/
     let mode = sessionStorage.getItem("mode");
     const modeSwitch = document.querySelectorAll(".modeswitch");
+    const subLeft = document.querySelector(".sub-left") as HTMLElement;
+    const subRight = document.querySelector(".sub-right") as HTMLElement;
 
     const enableLightMode = () => {
       document.body.classList.add("lightmode");
@@ -117,6 +119,11 @@ const { classes, show } = Astro.props as Props;
       document.body.classList.remove("lightmode");
       sessionStorage.setItem("mode", null);
     };
+
+    if (subLeft && subRight) {
+      subLeft.addEventListener("click", enableDarkMode);
+      subRight.addEventListener("click", enableLightMode);
+    }
 
     let touchStartX = 0;
     let touchEndX = 0;
