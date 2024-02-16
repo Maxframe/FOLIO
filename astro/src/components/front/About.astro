@@ -350,7 +350,7 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
 
     const resetTooltip = () => {
       if (mailButton) mailButton.classList.remove("active");
-      if (toolTip) setTimeout(() => (toolTip.innerHTML = toolTipText), 200);
+      if (toolTip) setTimeout(() => (toolTip.innerHTML = toolTipText), 250);
     };
 
     if (mailButton) {
