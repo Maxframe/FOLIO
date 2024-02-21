@@ -13,12 +13,13 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
   <div class="nav-content">
     <a class="nav-text" href={"/#" + projectsSLug.slug}>Projekte</a>
     <a class="logo" href="/#" aria-labelledby="logoLabel">
-      <span id="logoLabel" class="visually-hidden">Home</span>
       <svg
         viewBox="-2 -2 134 40"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        role="img"
       >
+        <title id="logoLabel">Homepage</title>
         <path
           d="M88.9803 0L82.1147 11.8856L76.6762 2.46108C76.0449 1.36713 76.8344 0 78.0974 0H88.9803Z"
           fill="rgb(var(--c-logo-bg))"></path>
