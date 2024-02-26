@@ -145,14 +145,22 @@ const { classes, show } = Astro.props as Props;
 
     modeSwitch.forEach(function (e) {
       // Touch Events
-      e.addEventListener("touchstart", (touchStartEvent: TouchEvent) => {
-        touchStartX = touchStartEvent.changedTouches[0].screenX;
-      });
+      e.addEventListener(
+        "touchstart",
+        (touchStartEvent: TouchEvent) => {
+          touchStartX = touchStartEvent.changedTouches[0].screenX;
+        },
+        { passive: true }
+      );
 
-      e.addEventListener("touchend", (touchEndEvent: TouchEvent) => {
-        touchEndX = touchEndEvent.changedTouches[0].screenX;
-        handleTouchGesture();
-      });
+      e.addEventListener(
+        "touchend",
+        (touchEndEvent: TouchEvent) => {
+          touchEndX = touchEndEvent.changedTouches[0].screenX;
+          handleTouchGesture();
+        },
+        { passive: true }
+      );
 
       // Mouse Events
       e.addEventListener("mousedown", (mouseDownEvent: MouseEvent) => {
