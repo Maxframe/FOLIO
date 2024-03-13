@@ -52,7 +52,7 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
   nav {
     position: fixed;
     display: flex;
-    user-select: none;
+    pointer-events: none;
     margin-top: calc(var(--nav-offset) * -1);
     height: calc(var(--nav-height) + var(--nav-offset) * 2);
     width: 100%;
@@ -80,6 +80,7 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
     margin: -0.5rem;
     opacity: 0.6;
     text-align: center;
+    pointer-events: all;
     transition: 0.2s ease-out;
 
     &:hover {
@@ -91,6 +92,7 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
     width: 9rem;
     display: flex;
     align-items: center;
+    pointer-events: all;
 
     .visually-hidden {
       position: absolute;
@@ -108,8 +110,8 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
     opacity: 1;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    pointer-events: none;
     transition: opacity var(--modeswitch-transition-time) ease-out;
-
     mask-image: linear-gradient(
       rgb(0, 0, 0),
       rgb(0, 0, 0) 60%,
