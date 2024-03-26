@@ -36,6 +36,7 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
 
   "cvFile": cvFile.asset->url,
   "cvText": cvFile.cvText,
+  "cvLink": cvFile.cvLink,
 }`);
 ---
 
@@ -97,8 +98,9 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
       }
     </div>
     <a
+      target="_blank"
       class="about-cv"
-      href={aboutData.cvFile + "?dl="}
+      href={aboutData.cvLink ? aboutData.cvLink : aboutData.cvFile + "?dl="}
       data-umami-event="CV button"><span>{aboutData.cvText}</span></a
     >
   </div>

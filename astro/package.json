@@ -8,13 +8,14 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "upgrade": "npx @astrojs/upgrade"
   },
   "dependencies": {
-    "@astrojs/check": "^0.5.7",
+    "@astrojs/check": "^0.5.10",
     "@sanity/astro": "^2.2.1",
     "@sanity/image-url": "^1.0.2",
-    "astro": "^4.5.1",
+    "astro": "^4.5.9",
     "astro-portabletext": "^0.9.6",
     "sass": "^1.70.0"
   }

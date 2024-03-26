@@ -38,11 +38,17 @@ export default defineType({
       title: "CV",
       type: "file",
       fields: [
-        {
+        defineArrayMember({
+          title: "CV Link",
+          description: "Alternativer Link für gehostetes CV",
+          name: "cvLink",
+          type: "url",
+        }),
+        defineArrayMember({
           name: "cvText",
           title: "Button Text",
           type: "string",
-        },
+        }),
       ],
     },
 
