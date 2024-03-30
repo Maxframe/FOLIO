@@ -1,8 +1,10 @@
 import { defineConfig } from "astro/config";
 import { sanityIntegration as sanity } from "@sanity/astro";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://maxwerner.ch",
   integrations: [
     sanity({
       projectId: "lctqiis2",
@@ -10,6 +12,7 @@ export default defineConfig({
       apiVersion: "v2021-03-25",
       useCdn: false,
     }),
+    sitemap(),
   ],
   prefetch: {
     prefetchAll: true,

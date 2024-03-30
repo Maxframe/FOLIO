@@ -258,13 +258,13 @@ const subtitleRight = heroData.heroText.subtitleRight;
     const changes = [];
     const subLeftElement = document.querySelector(".sub-left") as HTMLElement;
 
-    const animateText = (e) => {
+    const animateText = (e: Event) => {
       if (
         e.type === "click" ||
         (e.type === "mouseover" &&
           !document.body.classList.contains("lightmode"))
       ) {
-        const originalText = e.target.dataset.value;
+        const originalText = subLeftElement.dataset.value;
         const textLength = originalText.length;
         const maxIterations = 5;
         const speed = 20;
@@ -300,7 +300,7 @@ const subtitleRight = heroData.heroText.subtitleRight;
                 i--;
               }
             }
-            e.target.innerText = displayText.join("");
+            subLeftElement.innerText = displayText.join("");
 
             if (changes.length === 0) {
               clearInterval(interval);
