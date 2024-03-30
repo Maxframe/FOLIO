@@ -1,0 +1,71 @@
+---
+import { siteConfig } from "@/site-config";
+
+export type Props = {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+};
+
+const { title, description, ogImage } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+/* const socialImageURL = new URL(
+  ogImage ? ogImage : "/social-card.png",
+  Astro.url
+).href; */
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="manifest" href="/site.webmanifest" />
+
+{/* Icons / Favicon */}
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link href={canonicalURL} rel="canonical" />
+
+{/* Primary Meta Tags */}
+<title>
+  {
+    `${siteConfig.author} ${siteConfig.titleSeparator} ${title ? title : siteConfig.title}`
+  }
+</title>
+<meta content={siteConfig.author} name="author" />
+<meta content={description} name="description" />
+
+{/* Theme Colour */}
+<meta content="#181818" name="theme-color" />
+
+<!-- {/* Open Graph / Facebook */}
+<meta content={title} property="og:title" />
+<meta content={description} property="og:description" />
+<meta content={canonicalURL} property="og:url" />
+<meta content={siteConfig.title} property="og:site_name" />
+<meta content={siteConfig.ogLocale} property="og:locale" />
+<meta content={socialImageURL} property="og:image" />
+<meta content="1200" property="og:image:width" />
+<meta content="630" property="og:image:height" />
+
+{/* Twitter */}
+<meta content="summary_large_image" property="twitter:card" />
+<meta content={canonicalURL} property="twitter:url" />
+<meta content={title} property="twitter:title" />
+<meta content={description} property="twitter:description" />
+<meta content={socialImageURL} property="twitter:image" /> -->
+
+{/* Sitemap */}
+<link href="/sitemap-index.xml" rel="sitemap" />
+
+<meta content={Astro.generator} name="generator" />
+<meta
+  name="google-site-verification"
+  content="Km159pCRz3OiPKMuoK3GIViyKOqL3VQq9MACSUyJ8oY"
+/>
+<script
+  is:inline
+  defer
+  src="https://eu.umami.is/script.js"
+  data-website-id="b9af0983-6de4-4910-829a-90dc7dd8ee84"></script>
