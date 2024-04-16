@@ -42,15 +42,17 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
 
 <section class="about-section" id={aboutData.slug}>
   <div class="about-wrapper">
-    <div class="about-image-wrapper">
-      <ImageBuilder
-        cls="about-image"
-        source={aboutData.image}
-        alt={aboutData.alt}
-        lqip={aboutData.lqip}
-        ratio={aboutData.ratio}
-        w={500}
-      />
+    <div class="about-image-translate">
+      <div class="about-image-wrapper">
+        <ImageBuilder
+          cls="about-image"
+          source={aboutData.image}
+          alt={aboutData.alt}
+          lqip={aboutData.lqip}
+          ratio={aboutData.ratio}
+          w={500}
+        />
+      </div>
     </div>
     <div class="about-text">
       <h1 class="about-title">{aboutData.aboutTitle}</h1>
@@ -132,17 +134,20 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
     row-gap: 1rem;
   }
 
-  .about-image-wrapper {
+  .about-image-translate {
     transform: translate(
       calc((var(--about-img-offset) * -1) - var(--stroke-w)),
       calc(var(--about-img-offset) * -1)
     );
-    width: calc(100% + var(--about-img-offset));
-    border-radius: var(--md-radius);
-    overflow: hidden;
-    height: fit-content;
-    outline: solid var(--stroke-w) rgb(var(--c-stroke));
-    transition: outline var(--modeswitch-transition-time);
+
+    .about-image-wrapper {
+      width: calc(100% + var(--about-img-offset));
+      border-radius: var(--md-radius);
+      overflow: hidden;
+      height: fit-content;
+      outline: solid var(--stroke-w) rgb(var(--c-stroke));
+      transition: outline var(--modeswitch-transition-time);
+    }
   }
 
   .about-title {
@@ -293,7 +298,7 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
         grid-column: auto;
         grid-row: auto;
       }
-      .about-image-wrapper {
+      .about-image-translate {
         transform: translate(0);
         margin: -6rem auto 0;
         display: flex;
@@ -319,6 +324,25 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
     }
   }
 </style>
+
+<script>
+  import VanillaTilt from "vanilla-tilt";
+  document.addEventListener("astro:page-load", () => {
+    const element = document.querySelector(
+      ".about-image-wrapper"
+    ) as HTMLElement;
+    if (element) {
+      VanillaTilt.init(element, {
+        reverse: true,
+        max: 8,
+        perspective: 700,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.1,
+      });
+    }
+  });
+</script>
 
 <script>
   document.addEventListener("astro:page-load", () => {

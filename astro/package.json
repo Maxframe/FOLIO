@@ -17,7 +17,8 @@
     "@sanity/astro": "^2.2.1",
     "@sanity/image-url": "^1.0.2",
     "astro": "^4.5.12",
-    "astro-portabletext": "^0.9.6"
+    "astro-portabletext": "^0.9.6",
+    "vanilla-tilt": "^1.8.1"
   },
   "devDependencies": {
     "@astrojs/check": "^0.5.10"
