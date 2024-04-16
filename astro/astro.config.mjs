@@ -1,5 +1,5 @@
 import { defineConfig } from "astro/config";
-import { sanityIntegration as sanity } from "@sanity/astro";
+import sanity from "@sanity/astro";
 import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
