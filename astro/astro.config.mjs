@@ -14,9 +14,6 @@ export default defineConfig({
     }),
     sitemap(),
   ],
-  prefetch: {
-    prefetchAll: true,
-  },
   experimental: {
     clientPrerender: true,
   },
