@@ -19,8 +19,10 @@ const subtitleRight = heroData.heroText.subtitleRight;
 
 <section class="hero-container">
   <h1>
-    <span class="title highlight">{titleSpecial}</span>
-    <span class="title">{title}</span><br />
+    <div class="title-wrapper">
+      <span class="title highlight">{titleSpecial}</span>
+      <span class="title">{title}</span>
+    </div>
     <div class="sub-wrapper">
       <span class="sub sub-left" data-value={subtitleLeft}>{subtitleLeft}</span>
       <span class="sub sub-connect">{subtitleConnect}</span>
@@ -72,6 +74,9 @@ const subtitleRight = heroData.heroText.subtitleRight;
     padding: var(--nav-height) var(--content-px) 0;
 
     h1 {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
       position: relative;
       margin-top: 0;
       color: rgb(var(--c-fg));
@@ -79,21 +84,32 @@ const subtitleRight = heroData.heroText.subtitleRight;
       text-align: center;
       line-height: 1.2;
 
-      .title {
-        font-size: var(--step-5);
-        transition: color var(--modeswitch-transition-time);
-      }
-
-      .highlight {
-        color: rgb(var(--clr-accent));
+      .title-wrapper {
+        opacity: 0;
+        animation-name: titleAnimation;
+        animation-timing-function: ease;
+        animation-fill-mode: forwards;
+        animation-duration: 0.8s;
+        .title {
+          font-size: var(--step-5);
+          transition: color var(--modeswitch-transition-time);
+        }
+        .highlight {
+          color: rgb(var(--clr-accent));
+        }
       }
 
       .sub-wrapper {
-        padding: 1rem 0;
         display: flex;
         gap: 1rem;
         align-items: center;
         justify-content: center;
+        opacity: 0;
+        animation-name: titleAnimation;
+        animation-timing-function: ease;
+        animation-fill-mode: forwards;
+        animation-duration: 0.8s;
+        animation-delay: 0.2s;
         .sub {
           font-size: var(--step-1);
           font-weight: 600;
@@ -225,6 +241,19 @@ const subtitleRight = heroData.heroText.subtitleRight;
 
   .round {
     border-radius: 999rem;
+  }
+
+  @keyframes titleAnimation {
+    0% {
+      clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+      transform: translateY(-10px);
+      opacity: 0;
+    }
+    100% {
+      clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
 
   body.lightmode .slider .slidee {
