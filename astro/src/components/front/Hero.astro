@@ -80,6 +80,7 @@ const subtitleRight = heroData.heroText.subtitleRight;
       color: rgb(var(--c-fg));
       line-height: 1.2;
       user-select: none;
+      text-align: center;
 
       .title-wrapper {
         opacity: 0;
@@ -113,7 +114,7 @@ const subtitleRight = heroData.heroText.subtitleRight;
           font-weight: 600;
           transition: color var(--hover-transition);
           cursor: pointer;
-          padding: 0.5rem 0;
+          padding: 0.2rem 0;
         }
 
         .sub-left {
@@ -263,13 +264,13 @@ const subtitleRight = heroData.heroText.subtitleRight;
     transform: rotate(180deg);
   }
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (width <= 600px) {
     body .hero-container h1 .sub-wrapper {
       flex-direction: column;
-      gap: 0.6rem;
+      gap: 0;
 
       .sub {
-        font-size: var(--step-2);
+        font-size: var(--step-1);
       }
       .sub-connect {
         font-size: var(--step-0);

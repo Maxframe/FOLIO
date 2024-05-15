@@ -22,29 +22,23 @@ const fProjectsData =
   <div class="projects-wrapper">
     {
       fProjectsData.projectsFeatured?.map((project: any, index: number) => (
-        <div class="card">
-          <a
-            href={project.slug}
-            class="card-link"
-            aria-labelledby={project.slug}
-          >
-            <div class="image-wrapper">
-              <div class="image-overlay" />
-              <ImageBuilder
-                cls="thumbnail-image"
-                source={project.thumbnailImage}
-                lqip={project.lqip}
-                ratio={project.ratio}
-                alt={project.thumbAltText}
-                w={900}
-                loading={index === 0 ? "eager" : "lazy"}
-              />
-            </div>
-            <h2 class="card-title" id={project.slug}>
-              {project.projectName}
-            </h2>
-          </a>
-        </div>
+        <a href={project.slug} class="card" aria-labelledby={project.slug}>
+          <div class="image-wrapper">
+            <div class="image-overlay" />
+            <ImageBuilder
+              cls="thumbnail-image"
+              source={project.thumbnailImage}
+              lqip={project.lqip}
+              ratio={project.ratio}
+              alt={project.thumbAltText}
+              w={900}
+              loading={index === 0 ? "eager" : "lazy"}
+            />
+          </div>
+          <h2 class="card-title" id={project.slug}>
+            {project.projectName}
+          </h2>
+        </a>
       ))
     }
   </div>
@@ -73,73 +67,67 @@ const fProjectsData =
     width: 100%;
 
     .card {
+      display: block;
       position: relative;
       width: 100%;
       height: var(--card-h);
 
-      &:hover > {
-        .card-link {
-          .card-title {
-            opacity: 1;
-          }
-          .image-wrapper {
-            transform: translateX(calc(var(--card-offset) * -1));
-            .image-overlay {
-              background-color: rgb(var(--c-bg) / 0);
-            }
-          }
+      .image-wrapper {
+        border-radius: var(--card-radius);
+        overflow: hidden;
+        height: 100%;
+        transition: var(--card-transition-time);
+        outline: solid var(--stroke-w) rgb(var(--c-stroke));
+        background-color: rgb(var(--c-stroke));
+        box-shadow: 0px 6px 10px -8px black;
+
+        .image-overlay {
+          position: absolute;
+          width: 100%;
+          border-radius: var(--card-radius);
+          height: 100%;
+          transition: background-color var(--card-transition-time);
+          background-color: rgb(var(--c-bg) / 0.25);
+          z-index: 1;
         }
       }
-
-      .card-link {
+      .card-title {
         position: absolute;
-        width: 100%;
-        height: 100%;
+        right: 0;
+        bottom: 1rem;
+        color: rgb(var(--c-fg));
+        background-color: var(--c-pill-bg);
+        padding: 1rem 1.4rem;
+        margin: 0;
+        border-radius: 999px;
+        font-size: 1.2rem;
+        text-align: center;
+        z-index: 1;
+        opacity: 0;
+        font-weight: 700;
+        border: solid var(--stroke-w) rgb(var(--c-stroke));
 
-        .image-wrapper {
-          border-radius: var(--card-radius);
-          overflow: hidden;
-          height: 100%;
-          transition: var(--card-transition-time);
-          outline: solid var(--stroke-w) rgb(var(--c-stroke));
-          background-color: rgb(var(--c-stroke));
-          box-shadow: 0px 6px 10px -8px black;
+        backdrop-filter: blur(10px);
+        transform: translateX(var(--card-offset));
+        pointer-events: none;
 
-          .image-overlay {
-            position: absolute;
-            width: 100%;
-            border-radius: var(--card-radius);
-            height: 100%;
-            transition: background-color var(--card-transition-time);
-            background-color: rgb(var(--c-bg) / 0.25);
-            z-index: 1;
-          }
-        }
+        transition:
+          opacity var(--card-transition-time),
+          color var(--card-transition-time),
+          background-color var(--card-transition-time),
+          border var(--card-transition-time);
+      }
+
+      &:hover,
+      &:focus-visible {
         .card-title {
-          position: absolute;
-          right: 0;
-          bottom: 1rem;
-          color: rgb(var(--c-fg));
-          background-color: var(--c-pill-bg);
-          padding: 1rem 1.4rem;
-          margin: 0;
-          border-radius: 999px;
-          font-size: 1.2rem;
-          text-align: center;
-          z-index: 1;
-          opacity: 0;
-          font-weight: 700;
-          border: solid var(--stroke-w) rgb(var(--c-stroke));
-
-          backdrop-filter: blur(10px);
-          transform: translateX(var(--card-offset));
-          pointer-events: none;
-
-          transition:
-            opacity var(--card-transition-time),
-            color var(--card-transition-time),
-            background-color var(--card-transition-time),
-            border var(--card-transition-time);
+          opacity: 1;
+        }
+        .image-wrapper {
+          transform: translateX(calc(var(--card-offset) * -1));
+          .image-overlay {
+            background-color: rgb(var(--c-bg) / 0);
+          }
         }
       }
     }

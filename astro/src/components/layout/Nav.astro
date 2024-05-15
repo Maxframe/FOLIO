@@ -19,7 +19,7 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
         xmlns="http://www.w3.org/2000/svg"
         role="img"
       >
-        <title id="logoLabel">Homepage</title>
+        <title id="logoLabel">Go to Home</title>
         <path
           d="M88.9803 0L82.1147 11.8856L76.6762 2.46108C76.0449 1.36713 76.8344 0 78.0974 0H88.9803Z"
           fill="rgb(var(--c-logo-bg))"></path>
@@ -62,15 +62,26 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
   }
 
   .nav-content {
+    position: relative;
     height: var(--nav-height);
     display: flex;
     width: 100%;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: rgb(var(--c-bg), 0);
     gap: 1rem;
-    transition: background-color var(--modeswitch-transition-time) ease-out;
+    transition: var(--modeswitch-transition-time) ease-out;
+
+    &::after {
+      position: absolute;
+      content: "";
+      inset: 0;
+      opacity: 0;
+      background: rgb(var(--c-bg));
+      filter: blur(5px);
+      z-index: -1;
+      transition: var(--modeswitch-transition-time) ease-out;
+    }
   }
 
   .nav-text {
@@ -81,7 +92,7 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
     opacity: 0.6;
     text-align: center;
     pointer-events: all;
-    transition: 0.2s ease-out;
+    transition: var(--modeswitch-transition-time) ease-out;
 
     &:hover {
       opacity: 1;
@@ -93,15 +104,6 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
     display: flex;
     align-items: center;
     pointer-events: all;
-
-    .visually-hidden {
-      position: absolute;
-      width: 0;
-      height: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-    }
   }
 
   .nav-backdrop {
@@ -119,30 +121,22 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
     );
     z-index: -1;
     user-select: none;
-
-    &::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        rgba(var(--c-bg) / 0.5),
-        rgba(var(--c-bg) / 0.5) 30%,
-        rgba(0, 0, 0, 0)
-      );
-    }
+    background: linear-gradient(
+      rgba(var(--c-bg) / 0.5),
+      rgba(var(--c-bg) / 0.5) 30%,
+      rgba(0, 0, 0, 0)
+    );
   }
 
   body.lightmode {
-    /* .logo svg {
-      opacity: 1;
-    }
     .nav-backdrop {
-      backdrop-filter: blur(0px);
       opacity: 0;
     }
-    .nav-content {
+    .nav-content::after {
       background: rgb(var(--c-bg));
-    } */
+      filter: blur(0px);
+      opacity: 1;
+    }
   }
   .logo svg {
     width: 100%;
