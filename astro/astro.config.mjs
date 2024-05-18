@@ -6,6 +6,9 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://maxwerner.ch",
   server: { open: "/" },
+  image: {
+    domains: ["cdn.sanity.io"],
+  },
   integrations: [
     sanity({
       projectId: "lctqiis2",

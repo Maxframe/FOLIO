@@ -1,12 +1,13 @@
 ---
 import { sanityClient } from "sanity:client";
+
+import ImageBuilder from "../components/utils/ImageBuilder.astro";
 import PortableText from "../components/utils/PortableText.astro";
 
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/layout/Nav.astro";
 import ProjectSections from "../components/project/ProjectSections.astro";
 import NextProjectLink from "../components/project/NextProjectLink.astro";
-import ImageBuilder from "../components/utils/ImageBuilder.astro";
 import FloatingModeSwitcher from "../components/layout/FloatingModeSwitcher.astro";
 import Footer from "../components/layout/Footer.astro";
 import BgLayer from "../components/layout/BgLayer.astro";
@@ -63,7 +64,6 @@ const { project } = Astro.props as { project: any };
               cls="project-hero-image"
               source={project.heroImage}
               lqip={project.heroLqip}
-              ratio={project.heroRatio}
               alt={project.heroAltText}
               loading="eager"
               vert
@@ -73,7 +73,6 @@ const { project } = Astro.props as { project: any };
               cls="project-hero-image"
               source={project.thumbnailImage}
               lqip={project.thumbLqip}
-              ratio={project.thumbRatio}
               alt={project.thumbAltText}
               loading="eager"
               vert
