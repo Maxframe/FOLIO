@@ -1,35 +1,28 @@
 # FOLIO
 
-**Technisches Proof Of Concept für meine Portfolio-Website.** 
+**Technical proof of concept for my portfolio website.**
 
-**Erstellt mit Astro.js und Sanity CMS.**
+Created mainly using Astro.js and Sanity CMS.
+Currently hosted on Netlify.
 
-Studiengang Digital Ideation an der Hochschule Luzern
+Originally created during the digital Ideation programme at the Lucerne University of Applied Sciences and Arts
 
-Modul MEN5 - HS22
-
+Module MEN5 - HS22
 Mentor: Gordan Savičić
 
-Vorübersichtlich Live auf: https://fol1o.netlify.app/
+Nowadays mantained by me as a learning playground and a way to share my portfolio online.
 
-## Lokale Installation
-### Notwendige Software
+Live at: https://maxwerner.ch
 
-- Ein IDE deiner Wahl (z.B. [Visual Studio Code](https://code.visualstudio.com/Download))
-- Node Package Manager (kurz [NPM](https://nodejs.org/en/download/)) zum installieren der benötigten packages
+## Local installation
 
-### Anleitung
+### Necessary software
 
-Vom root-Ordner tippe `cd astro` ins Terminal, installiere dann mit `npm install` die packages und starte anschliessend den lokalen Server mit `npm run build`.
+- An IDE of your choice (e.g. [Visual Studio Code](https://code.visualstudio.com/Download))
+- Node Package Manager (short [NPM](https://nodejs.org/en/download/)) to install the required packages
 
-Link: http://127.0.0.1:3000/
+### Instructions
 
-### Optional: Einblick in Sanity Studio
+From the root folder type `cd astro` into the terminal, then install the packages by typing next `npm install` and then start the local server with `npm run build`.
 
-Um Zugriff auf das CMS Interface von diesem Projekt zu bekommen muss man zuerst die notwendigen packages installieren und dann sich anmelden (falls Zugriff erwünscht ist, bitte bei mir melden).
-
-Vom root-Ordner gebe `cd sanity` ins Terminal ein, dann `npm install` und anschliessend `npm run dev`.
-
-Link: http://localhost:3333/
-
-Es wird sich nun im Browser ein Fenster öffnen, wo man sich mit den notwendigen Kredentialien anmelden kann.
+Link after starting the local server: http://localhost:4321/
