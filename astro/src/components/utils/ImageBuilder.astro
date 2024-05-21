@@ -19,7 +19,7 @@ export interface Props {
     | "scale"
     | "min" /* More info: https://www.sanity.io/docs/image-urls#fit-45b29dc6f09f */;
   loading?: "eager" | "lazy";
-  gif?: boolean;
+  isGif?: boolean;
   vert?: boolean;
   isDark?: boolean;
 }
@@ -33,7 +33,7 @@ const {
   w,
   fit,
   loading = "lazy",
-  gif,
+  isGif,
   vert,
   isDark,
 } = Astro.props as Props;
@@ -71,7 +71,7 @@ let widths = defaultWidths.filter((width) => width < maxWidth);
       sizes={widths
         .map((width) => `(max-width: ${width}px) ${width}px`)
         .join(", ") + `, ${maxWidth}px`}
-      formats={["avif", "webp", "jpg"]}
+      formats={isGif ? ["gif"] : ["avif", "webp", "jpg"]}
       draggable="false"
       inferSize
     />
