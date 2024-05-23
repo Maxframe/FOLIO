@@ -8,6 +8,12 @@ export default defineConfig({
   server: { open: "/" },
   image: {
     domains: ["cdn.sanity.io"],
+    service: {
+      entrypoint: "astro/assets/services/sharp",
+      config: {
+        limitInputPixels: false,
+      },
+    },
   },
   integrations: [
     sanity({

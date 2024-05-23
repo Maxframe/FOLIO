@@ -20,14 +20,14 @@ export async function getStaticPaths() {
         "slug": slug.current,
 
         "thumbnailImage": thumbnailImage.image.asset._ref,
-        "thumbAltText": thumbnailImage.image.alt,
+        "thumbAltText": thumbnailImage.alt,
         "thumbLqip": thumbnailImage.image.asset->metadata.lqip,
-        "thumbRatio": thumbnailImage.image.asset->metadata.dimensions.aspectRatio,
+        "thumbIsGif": thumbnailImage.isGif,
 
         "heroImage": heroImage.image.asset._ref,
-        "heroAltText": heroImage.image.alt,
+        "heroAltText": heroImage.alt,
         "heroLqip": heroImage.image.asset->metadata.lqip,
-        "heroRatio": heroImage.image.asset->metadata.dimensions.aspectRatio,
+        "heroIsGif": heroImage.isGif,
 
         description,
         tags,
@@ -65,6 +65,7 @@ const { project } = Astro.props as { project: any };
               source={project.heroImage}
               lqip={project.heroLqip}
               alt={project.heroAltText}
+              isGif={project.heroIsGif}
               loading="eager"
               vert
             />
@@ -74,6 +75,7 @@ const { project } = Astro.props as { project: any };
               source={project.thumbnailImage}
               lqip={project.thumbLqip}
               alt={project.thumbAltText}
+              isGif={project.thumbIsGif}
               loading="eager"
               vert
             />

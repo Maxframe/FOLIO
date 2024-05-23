@@ -75,43 +75,6 @@ let widths = defaultWidths.filter((width) => width < maxWidth);
       draggable="false"
       inferSize
     />
-    <!-- <picture>
-      {
-        vert && (
-          <source
-            media={`(max-width: ${defaultWidths[2]}px) and (min-height: ${defaultWidths[1]}px) and (max-aspect-ratio: 3/2)`}
-            srcset={urlFor(source)
-              .auto("format")
-              .fit(fit ? fit : "clip")
-              .height(1280)
-              .url()}
-          />
-        )
-      }
-      {
-        widths.map((width) => (
-          <source
-            media={`(max-width: ${width}px)`}
-            srcset={`${urlFor(source)
-              .auto("format")
-              .fit(fit ? fit : "clip")
-              .width(width)
-              .url()} ${width}w`}
-          />
-        ))
-      }
-      <img
-        src={urlFor(source)
-          .auto("format")
-          .fit(fit ? fit : "clip")
-          .width(maxWidth)
-          .url()}
-        alt={alt ? alt : ""}
-        class="source"
-        loading={loading}
-        draggable="false"
-      />
-    </picture> -->
   </div>
   {
     caption && (
