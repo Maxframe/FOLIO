@@ -6,7 +6,6 @@ export interface Props {
   cls?: string;
   alt: string;
   lqip: string;
-  ratio: number;
   caption?: string;
   captionUrl?: string;
   w?: number;
@@ -25,19 +24,19 @@ export interface Props {
 const {
   source,
   cls,
-  alt,
+  alt = "",
   lqip,
-  ratio,
   caption,
   captionUrl,
   w,
-  fit,
+  fit = "clip",
   loading = "lazy",
   vert,
   isDark = false,
 } = Astro.props as Props;
 
 const pattern = /^image-([a-f\d]+)-(\d+x\d+)-(\w+)$/;
+
 const decodeAssetId = (id: string) => {
   const [, assetId, dimensions, format] = pattern.exec(id);
   const [width, height] = dimensions.split("x").map((v) => parseInt(v, 10));
@@ -50,25 +49,19 @@ const decodeAssetId = (id: string) => {
 const imageSize = decodeAssetId(source);
 
 const defaultWidths = [320, 640, 960, 1280];
-let maxWidth = w ? w : 1280;
-
-const widths = defaultWidths.filter((width) => width <= maxWidth);
+let maxWidth = w ? w : defaultWidths.slice(-1).pop();
+let widths = defaultWidths.filter((width) => width <= maxWidth);
 ---
 
 <figure class="container">
   <div class:list={["wrapper", { "dark-border": isDark }, cls]}>
-    <div style={`padding-bottom: ${100 / ratio}%`} aria-hidden="true"></div>
     <img class="lqip loading" src={lqip} alt="" aria-hidden="true" />
     <picture>
       {
         vert && (
           <source
             media={`(max-width: ${defaultWidths[2]}px) and (min-height: ${defaultWidths[1]}px) and (max-aspect-ratio: 3/2)`}
-            srcset={urlFor(source)
-              .auto("format")
-              .fit(fit ? fit : "clip")
-              .height(1280)
-              .url()}
+            srcset={urlFor(source).auto("format").fit(fit).height(1280).url()}
           />
         )
       }
@@ -78,22 +71,20 @@ const widths = defaultWidths.filter((width) => width <= maxWidth);
             media={`(max-width: ${width}px)`}
             srcset={`${urlFor(source)
               .auto("format")
-              .fit(fit ? fit : "clip")
+              .fit(fit)
               .width(width)
               .url()} ${width}w`}
           />
         ))
       }
       <img
-        src={urlFor(source)
-          .auto("format")
-          .fit(fit ? fit : "clip")
-          .width(maxWidth)
-          .url()}
-        alt={alt ? alt : ""}
+        src={urlFor(source).auto("format").fit(fit).width(maxWidth).url()}
+        alt={alt}
         class="source"
         loading={loading}
         draggable="false"
+        width={imageSize.size.width}
+        height={imageSize.size.height}
       />
     </picture>
   </div>
@@ -123,17 +114,12 @@ const widths = defaultWidths.filter((width) => width <= maxWidth);
     overflow: hidden;
     width: 100%;
     height: 100%;
-  }
-  img {
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    inset: 0;
-    object-fit: cover;
-    object-position: center;
+    background-color: rgb(var(--c-highlighted-bg) / 0.1);
   }
   .lqip {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
     filter: blur(10px);
   }
 
