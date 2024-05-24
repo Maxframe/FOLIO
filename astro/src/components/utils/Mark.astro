@@ -10,24 +10,6 @@ const { node, index, isInline, ...attrs } = props;
 
 const markTypeIs = (markType: string) => markType === props.node.markType;
 
-/* const components = {
-  InternalLink: ({ value, children }) => {
-    const { slug = {} } = value;
-    const href = `/${slug.current}`;
-    return <a href={href}>{children}</a>;
-  },
-  ExternalLink: ({ value, children }) => {
-    const { blank, href } = value;
-    return blank ? (
-      <a href={href} target="_blank" rel="noopener">
-        {children}
-      </a>
-    ) : (
-      <a href={href}>{children}</a>
-    );
-  },
-}; */
-
 const Cmp = markTypeIs("internalLink")
   ? InternalLink
   : markTypeIs("externalLink")
@@ -36,16 +18,3 @@ const Cmp = markTypeIs("internalLink")
 ---
 
 <Cmp {...props}><slot /></Cmp>
-
-<!-- : markTypeIs("externalLink") ? (
-
-  
-  <a
-    href={(node as unknown as Mark<{ href: string }>).markDef.href}
-    target="_blank"
-    rel="noopener"
-    {...attrs}
-  >
-    <slot />
-  </a>
-) -->

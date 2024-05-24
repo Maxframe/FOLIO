@@ -13,10 +13,10 @@
     "upgrade": "npx @astrojs/upgrade"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.1.4",
-    "@sanity/astro": "^3.0.1",
+    "@astrojs/sitemap": "^3.1.5",
+    "@sanity/astro": "^3.1.0",
     "@sanity/image-url": "^1.0.2",
-    "astro": "^4.8.6",
+    "astro": "^4.9.1",
     "astro-portabletext": "^0.10.0",
     "vanilla-tilt": "^1.8.1"
   },
