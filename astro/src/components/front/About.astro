@@ -308,8 +308,8 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
       grid-template-columns: 1fr;
       grid-template-rows: 1fr;
       row-gap: 2rem;
-      margin-left: calc(var(--card-offset) * -1);
-      width: calc(100% + var(--card-offset) * 2);
+      margin: 0;
+      width: 100%;
 
       & > * {
         grid-column: auto;

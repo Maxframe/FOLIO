@@ -132,29 +132,25 @@ const fProjectsData =
     }
   }
 
-  @media only screen and (width <= 800px) {
-    :root {
-      --card-offset: 0;
-    }
+  @media screen and (width <= 800px) {
     .project-section .project-section-title {
       margin-left: 0;
     }
+  }
 
+  @media screen and (pointer: coarse), screen and (hover: none) {
+    :root {
+      --card-offset: 0;
+    }
     .projects-wrapper .card {
-      &:hover > .card-link .image-wrapper {
-        transform: none;
+      .card-title {
+        opacity: 1;
       }
+      .image-wrapper {
+        width: calc(100% - 2rem);
 
-      .card-link {
-        .card-title {
-          opacity: 1;
-        }
-        .image-wrapper {
-          width: calc(100% - 2rem);
-
-          .image-overlay {
-            background-color: rgb(var(--c-bg), 0);
-          }
+        .image-overlay {
+          background-color: rgb(var(--c-bg), 0);
         }
       }
     }
