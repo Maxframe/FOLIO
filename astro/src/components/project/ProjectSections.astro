@@ -36,7 +36,7 @@ const projectData = await sanityClient.fetch(
             {section.rightToLeft ? (
               <>
                 {section.sectionTitle && (
-                  <h3
+                  <h2
                     class="text-section-title rtl-title"
                     style={{
                       gridColumnStart: `span 3`,
@@ -44,7 +44,7 @@ const projectData = await sanityClient.fetch(
                     }}
                   >
                     {section.sectionTitle}
-                  </h3>
+                  </h2>
                 )}
                 <div
                   class="text-section-text block-wrapper rtl-text"
@@ -59,7 +59,7 @@ const projectData = await sanityClient.fetch(
             ) : (
               <>
                 {section.sectionTitle && (
-                  <h3
+                  <h2
                     class="text-section-title"
                     style={{
                       gridColumnStart: `span 3`,
@@ -67,7 +67,7 @@ const projectData = await sanityClient.fetch(
                     }}
                   >
                     {section.sectionTitle}
-                  </h3>
+                  </h2>
                 )}
                 <div
                   class="text-section-text block-wrapper"

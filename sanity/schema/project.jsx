@@ -41,6 +41,13 @@ export default defineType({
       validation: (Rule) => [Rule.required()],
     }),
     defineField({
+      name: "subtitle",
+      title: "Subtitle",
+      type: "string",
+      group: "main",
+      validation: (Rule) => [Rule.required()],
+    }),
+    defineField({
       name: "thumbnailImage",
       title: "Thumbnail Image",
       type: "figure",

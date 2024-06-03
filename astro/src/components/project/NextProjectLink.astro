@@ -36,11 +36,11 @@ if (allProjectData.projectsFeatured) {
 
 {
   nextProjectSlug && (
-    <div class="next-project-wrapper">
-      <a class="next-project-button" href={"/" + nextProjectSlug}>
-        <div class="next-image-wrapper">
+    <div class="next">
+      <a class="next__project-button" href={"/" + nextProjectSlug}>
+        <div class="next__image-wrapper">
           <img
-            class="next-image"
+            class="image--next"
             src={urlFor(nextThumbnailImage)
               .auto("format")
               .fit("clip")
@@ -58,18 +58,18 @@ if (allProjectData.projectsFeatured) {
         >
           <path d="M47.9646 36.4204C46.0293 38.2803 42.9707 38.2803 41.0354 36.4204L14.9539 11.3551C11.7075 8.23514 13.916 2.75 18.4185 2.75L70.5815 2.75001C75.0841 2.75001 77.2925 8.23514 74.0461 11.3551L47.9646 36.4204Z" />
         </svg>
-        <span>Nächstes Projekt</span>
+        <span class="next__project-title">{nextProjectTitle}</span>
+        <span class="next__project-string">Nächstes Projekt</span>
       </a>
     </div>
   )
 }
 
 <style lang="scss">
-  .next-project-wrapper {
-    margin: 2rem auto 0;
+  .next {
     padding: 0 var(--content-px);
-    width: fit-content;
-    .next-project-button {
+    .next__project-button {
+      margin: 2rem auto 0;
       position: relative;
       display: flex;
       flex-direction: column;
@@ -87,18 +87,19 @@ if (allProjectData.projectsFeatured) {
       overflow: hidden;
       transition:
         background-color var(--modeswitch-transition-time),
+        box-shadow var(--hover-transition),
         border var(--modeswitch-transition-time);
 
       &:hover {
-        span {
+        .next__project-title {
           color: rgb(var(--clr-accent));
         }
-        .next-image-wrapper {
+        .next__image-wrapper {
           opacity: 1;
         }
       }
 
-      .next-image-wrapper {
+      .next__image-wrapper {
         position: absolute;
         opacity: 0;
         inset: 0;
@@ -118,8 +119,17 @@ if (allProjectData.projectsFeatured) {
           transition: background var(--modeswitch-transition-time);
         }
       }
-      span {
-        transition: 0.2s ease-out;
+      .next__project-string {
+        color: rgb(var(--c-fg));
+        transition: var(--hover-transition);
+        z-index: 2;
+        text-transform: uppercase;
+        letter-spacing: 0.06rem;
+        font-weight: 700;
+        font-size: 0.75rem;
+      }
+      .next__project-title {
+        transition: var(--hover-transition);
         z-index: 2;
       }
       svg {
@@ -133,8 +143,16 @@ if (allProjectData.projectsFeatured) {
     }
   }
 
+  body.lightmode .next__project-button {
+    box-shadow: 5px 5px 0 2px rgb(var(--c-stroke));
+
+    &:hover {
+      box-shadow: 8px 8px 0 2px rgb(var(--c-stroke));
+    }
+  }
+
   @media only screen and (width <= 800px) {
-    .next-project-wrapper .next-project-button .next-image-wrapper {
+    .next .next__project-button .next__image-wrapper {
       opacity: 1;
     }
   }

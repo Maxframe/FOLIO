@@ -46,6 +46,7 @@ const { classes, show } = Astro.props as Props;
       pointer-events: none;
 
       transition:
+        box-shadow var(--hover-transition),
         outline var(--modeswitch-transition-time),
         background-color var(--modeswitch-transition-time),
         transform 200ms;
@@ -87,6 +88,12 @@ const { classes, show } = Astro.props as Props;
     left: calc(var(--float-modeswitch-w) - var(--float-modeswitch-h) / 2);
   }
 
+  body.lightmode .modeswitch {
+    box-shadow: 5px 5px 0 2px rgb(var(--c-stroke));
+  }
+  body.lightmode .floating-modeswitch-wrapper:hover .modeswitch {
+    box-shadow: 8px 8px 0 2px rgb(var(--c-stroke));
+  }
   .showfloat {
     opacity: 1;
 

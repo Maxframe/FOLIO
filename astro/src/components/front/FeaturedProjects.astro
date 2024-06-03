@@ -8,6 +8,7 @@ const fProjectsData =
     "slug": slug.current,
     projectsFeatured[]->{
         projectName,
+        subtitle,
         "slug": slug.current,
         "thumbnailImage": thumbnailImage.image.asset._ref,
         "thumbAltText": thumbnailImage.alt,
@@ -17,26 +18,27 @@ const fProjectsData =
 }`);
 ---
 
-<section class="project-section" id={fProjectsData.slug}>
-  <h2 class="project-section-title">{fProjectsData.heading}</h2>
-  <div class="projects-wrapper">
+<section class="featured" id={fProjectsData.slug}>
+  <h2 class="featured__title">{fProjectsData.heading}</h2>
+  <div class="featured__projects-wrapper">
     {
       fProjectsData.projectsFeatured?.map((project: any, index: number) => (
         <a href={project.slug} class="card" aria-labelledby={project.slug}>
-          <div class="image-wrapper">
-            <div class="image-overlay" />
+          <div class="card__image-wrapper">
+            <div class="card__image-overlay" />
             <ImageBuilder
-              cls="thumbnail-image"
+              cls="image--thumbnail"
               source={project.thumbnailImage}
               lqip={project.lqip}
               alt={project.thumbAltText}
-              w={900}
+              w={1000}
               loading={index === 0 ? "eager" : "lazy"}
             />
           </div>
-          <h2 class="card-title" id={project.slug}>
-            {project.projectName}
-          </h2>
+          <div class="card__text" id={project.slug}>
+            <h3 class="card__text--title">{project.projectName}</h3>
+            <p class="card__text--subtitle">{project.subtitle}</p>
+          </div>
         </a>
       ))
     }
@@ -44,12 +46,12 @@ const fProjectsData =
 </section>
 
 <style lang="scss">
-  .project-section {
+  .featured {
     max-width: var(--content-w);
     margin: 0 auto;
-    padding: 0 var(--content-px);
+    padding: 0 2rem;
     margin-bottom: 10rem;
-    .project-section-title {
+    .featured__title {
       font-size: var(--step-3);
       padding-top: var(--nav-height);
       margin-top: calc(var(--nav-height) * -1);
@@ -59,7 +61,7 @@ const fProjectsData =
     }
   }
 
-  .projects-wrapper {
+  .featured__projects-wrapper {
     display: flex;
     flex-direction: column;
     gap: var(--card-gap);
@@ -71,16 +73,17 @@ const fProjectsData =
       width: 100%;
       height: var(--card-h);
 
-      .image-wrapper {
+      .card__image-wrapper {
         border-radius: var(--card-radius);
         overflow: hidden;
         height: 100%;
-        transition: var(--card-transition-time);
+        width: 100%;
+        transition: all var(--card-transition-time);
         outline: solid var(--stroke-w) rgb(var(--c-stroke));
         background-color: rgb(var(--c-stroke));
         box-shadow: 0px 6px 10px -8px black;
 
-        .image-overlay {
+        .card__image-overlay {
           position: absolute;
           width: 100%;
           border-radius: var(--card-radius);
@@ -90,25 +93,34 @@ const fProjectsData =
           z-index: 1;
         }
       }
-      .card-title {
+      .card__text {
         position: absolute;
         right: 0;
         bottom: 1rem;
         color: rgb(var(--c-fg));
         background-color: var(--c-pill-bg);
-        padding: 1rem 1.4rem;
+        padding: 1rem;
         margin: 0;
-        border-radius: 999px;
-        font-size: 1.2rem;
-        text-align: center;
+        border-radius: var(--card-radius);
+        text-align: right;
         z-index: 1;
         opacity: 0;
-        font-weight: 700;
-        border: solid var(--stroke-w) rgb(var(--c-stroke));
+        outline: solid var(--stroke-w) rgb(var(--c-stroke));
 
         backdrop-filter: blur(10px);
         transform: translateX(var(--card-offset));
         pointer-events: none;
+
+        .card__text--title {
+          font-size: 1.4rem;
+          font-weight: 800;
+        }
+        .card__text--subtitle {
+          font-size: 0.75rem;
+          text-transform: uppercase;
+          font-weight: 700;
+          letter-spacing: 0.06rem;
+        }
 
         transition:
           opacity var(--card-transition-time),
@@ -119,12 +131,13 @@ const fProjectsData =
 
       &:hover,
       &:focus-visible {
-        .card-title {
+        .card__text {
           opacity: 1;
         }
-        .image-wrapper {
-          transform: translateX(calc(var(--card-offset) * -1));
-          .image-overlay {
+        .card__image-wrapper {
+          transform: translate(calc(var(--card-offset) * -1));
+
+          .card__image-overlay {
             background-color: rgb(var(--c-bg) / 0);
           }
         }
@@ -133,23 +146,20 @@ const fProjectsData =
   }
 
   @media screen and (width <= 800px) {
-    .project-section .project-section-title {
+    .featured .featured__title {
       margin-left: 0;
     }
   }
 
   @media screen and (pointer: coarse), screen and (hover: none) {
-    :root {
-      --card-offset: 0;
-    }
-    .projects-wrapper .card {
-      .card-title {
+    .featured__projects-wrapper .card {
+      .card__text {
         opacity: 1;
       }
-      .image-wrapper {
-        width: calc(100% - 2rem);
+      .card__image-wrapper {
+        transform: translate(calc(var(--card-offset) * -1));
 
-        .image-overlay {
+        .card__image-overlay {
           background-color: rgb(var(--c-bg), 0);
         }
       }

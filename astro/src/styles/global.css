@@ -232,7 +232,7 @@ button {
     --featured-offset: 7rem;
   }
 }
-.thumbnail-image {
+.image--thumbnail {
   -o-object-fit: cover;
      object-fit: cover;
   height: 100%;
@@ -257,7 +257,7 @@ button {
      object-fit: cover;
 }
 
-.next-image {
+.image--next {
   -o-object-fit: cover;
      object-fit: cover;
   height: 100%;

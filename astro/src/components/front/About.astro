@@ -54,7 +54,7 @@ const aboutData = await sanityClient.fetch(`*[_type == 'about'][0]{
       </div>
     </div>
     <div class="about-text">
-      <h1 class="about-title">{aboutData.aboutTitle}</h1>
+      <h2 class="about-title">{aboutData.aboutTitle}</h2>
       <div class="about-description block-wrapper">
         <PortableText value={aboutData.aboutTextBlock} />
       </div>

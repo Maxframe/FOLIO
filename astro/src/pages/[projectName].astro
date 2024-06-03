@@ -63,7 +63,6 @@ const { project } = Astro.props as { project: any };
               cls="project-hero-image"
               source={project.heroImage}
               lqip={project.heroLqip}
-              ratio={project.heroRatio}
               alt={project.heroAltText}
               loading="eager"
               vert
@@ -73,7 +72,6 @@ const { project } = Astro.props as { project: any };
               cls="project-hero-image"
               source={project.thumbnailImage}
               lqip={project.thumbLqip}
-              ratio={project.thumbRatio}
               alt={project.thumbAltText}
               loading="eager"
               vert
@@ -96,7 +94,7 @@ const { project } = Astro.props as { project: any };
               project.tags?.length > 0 && (
                 <div class="tag-list">
                   {project.tags.map((tag: string) => (
-                    <span class="tag">{tag}</span>
+                    <p class="tag">{tag}</p>
                   ))}
                 </div>
               )
@@ -107,21 +105,21 @@ const { project } = Astro.props as { project: any };
           </div>
           <div class="info-snippet-wrapper">
             <div class="info-snippet">
-              <h2>Kontext</h2>
+              <h3>Kontext</h3>
               <p>{project.contextText}</p>
             </div>
             <div class="info-snippet">
-              <h2>Meine Rolle</h2>
+              <h3>Meine Rolle</h3>
               <p>{project.roleText}</p>
             </div>
             <div class="info-snippet">
-              <h2>Tools</h2>
+              <h3>Tools</h3>
               <p>{project.techText}</p>
             </div>
             {
               project.AddiInfoSnippets?.map((snippet: any) => (
                 <div class="info-snippet add-info-snippet">
-                  <h2>{snippet.snippetTitle}</h2>
+                  <h3>{snippet.snippetTitle}</h3>
                   <p>{snippet.snippetText}</p>
                 </div>
               ))
@@ -257,7 +255,7 @@ const { project } = Astro.props as { project: any };
           row-gap: 2rem;
 
           .info-snippet {
-            h2 {
+            h3 {
               text-transform: uppercase;
               font-size: 0.75rem;
               font-weight: 700;
