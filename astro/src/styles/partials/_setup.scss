@@ -104,10 +104,6 @@ button {
   }
 }
 
-.description p {
-  hyphens: auto;
-}
-
 @media screen and (width <= 800px) {
   :root {
     --content-px: 1rem;
