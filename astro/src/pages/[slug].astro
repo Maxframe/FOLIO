@@ -92,11 +92,11 @@ const { project } = Astro.props as { project: any };
           <div class="tag-description-wrapper">
             {
               project.tags?.length > 0 && (
-                <div class="tag-list">
+                <ul class="tag-list">
                   {project.tags.map((tag: string) => (
-                    <p class="tag">{tag}</p>
+                    <li class="tag">{tag}</li>
                   ))}
-                </div>
+                </ul>
               )
             }
             <div class="description block-wrapper">

@@ -20,29 +20,31 @@ const fProjectsData =
 
 <section class="featured" id={fProjectsData.slug}>
   <h2 class="featured__title">{fProjectsData.heading}</h2>
-  <div class="featured__projects-wrapper">
+  <ul class="featured__projects-wrapper">
     {
       fProjectsData.projectsFeatured?.map((project: any, index: number) => (
-        <a href={project.slug} class="card" aria-labelledby={project.slug}>
-          <div class="card__image-wrapper">
-            <div class="card__image-overlay" />
-            <ImageBuilder
-              cls="image--thumbnail"
-              source={project.thumbnailImage}
-              lqip={project.lqip}
-              alt={project.thumbAltText}
-              w={1000}
-              loading={index === 0 ? "eager" : "lazy"}
-            />
-          </div>
-          <div class="card__text" id={project.slug}>
-            <h3 class="card__text--title">{project.projectName}</h3>
-            <p class="card__text--subtitle">{project.subtitle}</p>
-          </div>
-        </a>
+        <li>
+          <a href={project.slug} class="card" aria-labelledby={project.slug}>
+            <div class="card__image-wrapper">
+              <div class="card__image-overlay" />
+              <ImageBuilder
+                cls="image--thumbnail"
+                source={project.thumbnailImage}
+                lqip={project.lqip}
+                alt={project.thumbAltText}
+                w={1000}
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+            </div>
+            <div class="card__text" id={project.slug}>
+              <h3 class="card__text--title">{project.projectName}</h3>
+              <p class="card__text--subtitle">{project.subtitle}</p>
+            </div>
+          </a>
+        </li>
       ))
     }
-  </div>
+  </ul>
 </section>
 
 <style lang="scss">
