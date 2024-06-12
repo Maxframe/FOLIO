@@ -4,7 +4,7 @@ import { urlFor } from "./utils/urlForImage";
 export const siteConfig: SiteConfig = {
   siteUrl: "https://maxwerner.ch",
   author: "Max Werner",
-  title: "Max Werner - Portfolio Website",
+  title: "Portfolio Website",
   titleSeparator: "|",
   description:
     "Website von Max Werner, Designer digitaler und interaktiver Medien.",
