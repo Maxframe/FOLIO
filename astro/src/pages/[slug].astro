@@ -43,7 +43,7 @@ export async function getStaticPaths() {
   );
   return allProjectData.projectsFeatured?.map((project: any) => {
     return {
-      params: { projectName: project.slug },
+      params: { slug: project.slug },
       props: { project },
     };
   });
@@ -155,6 +155,7 @@ const { project } = Astro.props as { project: any };
       border-radius: var(--md-radius);
       overflow: hidden;
       z-index: -2;
+      border: solid var(--stroke-w) rgb(var(--c-stroke));
     }
   }
 
@@ -307,11 +308,11 @@ const { project } = Astro.props as { project: any };
       padding: var(--nav-height) 0 0;
       .project-hero-image-wrapper {
         border-radius: 0;
+        border: unset;
       }
     }
   }
-
-  @media screen and (max-width: 450px) {
+  @media screen and (width <= 450px) {
     .project-overflow-container
       .project-container
       .infosection-wrapper

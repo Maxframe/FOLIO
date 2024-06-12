@@ -10,3 +10,7 @@ node_modules
 
 # Compiled sanity studio
 /dist
+
+# environment variables
+.env
+.env.production

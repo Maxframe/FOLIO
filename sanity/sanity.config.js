@@ -1,16 +1,18 @@
 import { defineConfig } from "sanity";
-import { deskTool } from "sanity/desk";
+import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 
 import { schemaTypes } from "./schema";
 import { myStructure } from "./deskStructure";
 
+console.log(process.env.SANITY_STUDIO_TITLE);
+
 export default defineConfig({
   title: "FOLIO",
-  projectId: "lctqiis2",
-  dataset: "production",
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID,
+  dataset: process.env.SANITY_STUDIO_DATASET,
   plugins: [
-    deskTool({
+    structureTool({
       structure: myStructure,
     }),
     visionTool(),

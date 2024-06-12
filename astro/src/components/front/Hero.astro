@@ -2,31 +2,26 @@
 import { sanityClient } from "sanity:client";
 
 const heroData = await sanityClient.fetch(`*[_type == 'hero'][0]{
-  heroText {
-    title,
-    titleSpecial,
-    subtitleLeft,
-    subtitleConnect,
-    subtitleRight
-  }
+  "title": heroText.title,
+  "titleSpecial": heroText.titleSpecial,
+  "subtitleLeft": heroText.subtitleLeft,
+  "subtitleConnect": heroText.subtitleConnect,
+  "subtitleRight": heroText.subtitleRight,
 }`);
-const title = heroData.heroText.title;
-const titleSpecial = heroData.heroText.titleSpecial;
-const subtitleLeft = heroData.heroText.subtitleLeft;
-const subtitleConnect = heroData.heroText.subtitleConnect;
-const subtitleRight = heroData.heroText.subtitleRight;
 ---
 
 <section class="hero-container">
   <h1>
     <div class="title-wrapper">
-      <span class="title highlight">{titleSpecial}</span>
-      <span class="title">{title}</span>
+      <span class="title highlight">{heroData.titleSpecial}</span>
+      <span class="title">{heroData.title}</span>
     </div>
     <div class="sub-wrapper">
-      <span class="sub sub-left" data-value={subtitleLeft}>{subtitleLeft}</span>
-      <span class="sub sub-connect">{subtitleConnect}</span>
-      <span class="sub sub-right">{subtitleRight}</span>
+      <span class="sub sub-left" data-value={heroData.subtitleLeft}
+        >{heroData.subtitleLeft}</span
+      >
+      <span class="sub sub-connect">{heroData.subtitleConnect}</span>
+      <span class="sub sub-right">{heroData.subtitleRight}</span>
     </div>
   </h1>
 

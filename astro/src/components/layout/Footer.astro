@@ -43,6 +43,12 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
       }
     }
   }
+
+  @media only screen and (width <= 800px) {
+    footer {
+      margin-top: 8rem;
+    }
+  }
 </style>
 
 <script>

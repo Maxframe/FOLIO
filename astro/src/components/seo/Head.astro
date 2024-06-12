@@ -10,11 +10,8 @@ export type Props = {
 const { title, description, ogImage } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-
-/* const socialImageURL = new URL(
-  ogImage ? ogImage : "/social-card.png",
-  Astro.url
-).href; */
+const socialImageURL = new URL(ogImage ? ogImage : "/og-image.png", Astro.url)
+  .href;
 ---
 
 <meta charset="UTF-8" />
@@ -39,7 +36,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 {/* Theme Colour */}
 <meta content="#181818" name="theme-color" />
 
-<!-- {/* Open Graph / Facebook */}
+{/* Open Graph / Facebook */}
 <meta content={title} property="og:title" />
 <meta content={description} property="og:description" />
 <meta content={canonicalURL} property="og:url" />
@@ -54,16 +51,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <meta content={canonicalURL} property="twitter:url" />
 <meta content={title} property="twitter:title" />
 <meta content={description} property="twitter:description" />
-<meta content={socialImageURL} property="twitter:image" /> -->
+<meta content={socialImageURL} property="twitter:image" />
 
 {/* Sitemap */}
 <link href="/sitemap-index.xml" rel="sitemap" />
 
-<meta content={Astro.generator} name="generator" />
 <meta
   name="google-site-verification"
   content="Km159pCRz3OiPKMuoK3GIViyKOqL3VQq9MACSUyJ8oY"
 />
+<meta content={Astro.generator} name="generator" />
 <script
   is:inline
   defer
