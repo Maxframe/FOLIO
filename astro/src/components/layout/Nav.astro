@@ -10,9 +10,9 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
 ---
 
 <nav>
-  <div class="nav-content">
-    <a class="nav-text" href={"/#" + projectsSLug.slug}>Projekte</a>
-    <a class="logo" href="/#" aria-labelledby="logoLabel">
+  <div class="nav__content">
+    <a class="nav__text" href={"/#" + projectsSLug.slug}>Projekte</a>
+    <a class="nav__logo" href="/#" aria-labelledby="logoLabel">
       <svg
         viewBox="-2 -2 134 40"
         fill="none"
@@ -43,9 +43,9 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
           fill="rgb(var(--c-logo-fg))"></path>
       </svg>
     </a>
-    <a class="nav-text" href={"/#" + aboutSlug.slug}>Über Mich</a>
+    <a class="nav__text" href={"/#" + aboutSlug.slug}>Über Mich</a>
   </div>
-  <div class="nav-backdrop"></div>
+  <div class="nav__backdrop"></div>
 </nav>
 
 <style lang="scss">
@@ -61,7 +61,7 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
     z-index: 99;
   }
 
-  .nav-content {
+  .nav__content {
     position: relative;
     height: var(--nav-height);
     display: flex;
@@ -84,13 +84,14 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
     }
   }
 
-  .nav-text {
+  .nav__text {
     color: rgb(var(--c-fg));
     font-weight: 600;
     padding: 0.5rem;
     margin: -0.5rem;
     opacity: 0.6;
     text-align: center;
+    flex: 0 0 auto;
     pointer-events: all;
     transition: var(--modeswitch-transition-time) ease-out;
 
@@ -99,14 +100,14 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
     }
   }
 
-  .logo {
+  .nav__logo {
     width: 9rem;
     display: flex;
     align-items: center;
     pointer-events: all;
   }
 
-  .nav-backdrop {
+  .nav__backdrop {
     position: absolute;
     inset: 0;
     opacity: 1;
@@ -132,13 +133,13 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
     .nav-backdrop {
       opacity: 0;
     }
-    .nav-content::after {
+    .nav__content::after {
       background: rgb(var(--c-bg));
       filter: blur(0px);
       opacity: 1;
     }
   }
-  .logo svg {
+  .nav__logo svg {
     width: 100%;
     stroke: rgb(var(--c-stroke));
     stroke-width: 3px;
