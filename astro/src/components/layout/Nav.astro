@@ -130,7 +130,7 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
   }
 
   body.lightmode {
-    .nav-backdrop {
+    .nav__backdrop {
       opacity: 0;
     }
     .nav__content::after {
@@ -157,7 +157,7 @@ const aboutSlug = await sanityClient.fetch(`*[_type == 'about'][0]{
   }
 
   @media only screen and (width <= 800px) {
-    .nav-content {
+    .nav__content {
       justify-content: space-between;
       padding: 0 var(--content-px);
     }

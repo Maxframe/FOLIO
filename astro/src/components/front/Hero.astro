@@ -10,52 +10,54 @@ const heroData = await sanityClient.fetch(`*[_type == 'hero'][0]{
 }`);
 ---
 
-<section class="hero-container">
-  <h1>
-    <div class="title-wrapper">
-      <span class="title highlight">{heroData.titleSpecial}</span>
-      <span class="title">{heroData.title}</span>
-    </div>
-    <div class="sub-wrapper">
-      <span class="sub sub-left" data-value={heroData.subtitleLeft}
-        >{heroData.subtitleLeft}</span
+<section class="hero">
+  <div class="hero__wrapper">
+    <h1 class="hero__title-wrapper">
+      <span class="hero__title highlight">{heroData.titleSpecial}</span>
+      <span class="hero__title">{heroData.title}</span>
+    </h1>
+    <h2 class="hero__subtitle-wrapper">
+      <span
+        class="hero__subtitle hero__subtitle--left"
+        data-text={heroData.subtitleLeft}>{heroData.subtitleLeft}</span
       >
-      <span class="sub sub-connect">{heroData.subtitleConnect}</span>
-      <span class="sub sub-right">{heroData.subtitleRight}</span>
-    </div>
-  </h1>
+      <span class="hero__subtitle hero__subtitle--connect"
+        >{heroData.subtitleConnect}</span
+      >
+      <span class="hero__subtitle hero__subtitle--right"
+        >{heroData.subtitleRight}</span
+      >
+    </h2>
+  </div>
 
-  <div class="modeswitch-wrapper">
-    <button
-      class="modeswitch"
-      title="Dark/Light Mode"
-      aria-label="Dark/Light Mode"
-      data-umami-event="Hero Modeswitch"
-    >
-      <div class="slider round">
-        <div class="slidee round">
-          <div class="arrow-wrapper">
-            <svg
-              width="21"
-              height="38"
-              viewBox="0 0 21 38"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M4.32182 35.4846L18.6959 20.1072C19.2785 19.484 19.2785 18.516 18.6959 17.8928L4.32182 2.51544C3.31729 1.4408 1.5159 2.15164 1.5159 3.62267L1.5159 34.3773C1.5159 35.8484 3.3173 36.5592 4.32182 35.4846Z"
-              ></path>
-            </svg>
-          </div>
+  <button
+    class="modeswitch"
+    title="Dark/Light Mode"
+    aria-label="Dark/Light Mode"
+    data-umami-event="Hero Modeswitch"
+  >
+    <div class="modeswitch__slider round">
+      <div class="modeswitch__slidee round">
+        <div class="modeswitch__arrow">
+          <svg
+            width="21"
+            height="38"
+            viewBox="0 0 21 38"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M4.32182 35.4846L18.6959 20.1072C19.2785 19.484 19.2785 18.516 18.6959 17.8928L4.32182 2.51544C3.31729 1.4408 1.5159 2.15164 1.5159 3.62267L1.5159 34.3773C1.5159 35.8484 3.3173 36.5592 4.32182 35.4846Z"
+            ></path>
+          </svg>
         </div>
       </div>
-    </button>
-  </div>
+    </div>
+  </button>
 </section>
 
 <style lang="scss">
-  .hero-container {
-    position: relative;
+  .hero {
     display: flex;
     height: calc(100dvh - var(--featured-offset));
     height: calc(100vh - var(--featured-offset));
@@ -67,23 +69,22 @@ const heroData = await sanityClient.fetch(`*[_type == 'hero'][0]{
     max-width: 1200px;
     margin: 0 auto;
     padding: var(--nav-height) var(--content-px) 0;
-
-    h1 {
-      position: relative;
+    .hero__wrapper {
       display: flex;
       flex-direction: column;
-      color: rgb(var(--c-fg));
-      line-height: 1.4;
-      user-select: none;
-      text-align: center;
-
-      .title-wrapper {
+      .hero__title-wrapper {
+        display: inline-block;
+        position: relative;
+        line-height: 1.4;
+        user-select: none;
+        text-align: center;
         opacity: 0;
+        color: rgb(var(--c-fg));
         animation-name: titleAnimation;
         animation-timing-function: ease;
         animation-fill-mode: forwards;
         animation-duration: 0.8s;
-        .title {
+        .hero__title {
           font-size: var(--step-5);
           transition: color var(--modeswitch-transition-time);
         }
@@ -91,8 +92,7 @@ const heroData = await sanityClient.fetch(`*[_type == 'hero'][0]{
           color: rgb(var(--clr-accent));
         }
       }
-
-      .sub-wrapper {
+      .hero__subtitle-wrapper {
         display: flex;
         gap: 1rem;
         align-items: center;
@@ -105,23 +105,24 @@ const heroData = await sanityClient.fetch(`*[_type == 'hero'][0]{
         animation-delay: 0.2s;
         padding: 0.2rem 0;
 
-        .sub {
+        .hero__subtitle {
           font-size: var(--step-1);
           font-weight: 600;
           transition: color var(--hover-transition);
           cursor: pointer;
+          text-align: center;
         }
 
-        .sub-left {
+        .hero__subtitle--left {
           font-weight: 500;
           font-family: monospace;
           color: rgb(var(--clr-wb-light));
         }
 
-        .sub-connect {
+        .hero__subtitle--connect {
         }
 
-        .sub-right {
+        .hero__subtitle--right {
           position: relative;
           z-index: 1;
           color: rgb(var(--clr-wb-light) / 0.35);
@@ -142,20 +143,21 @@ const heroData = await sanityClient.fetch(`*[_type == 'hero'][0]{
             z-index: -1;
           }
         }
-      }
-      .hidden {
-        color: rgb(var(--clr-wb-dark));
+        .hero__subtitle--right.highlight::after {
+          transform: scaleX(1);
+          transform-origin: bottom left;
+        }
       }
     }
   }
-  body.lightmode .hero-container h1 .sub-wrapper {
-    .sub-left {
+  body.lightmode .hero .hero__wrapper .hero__subtitle-wrapper {
+    .hero__subtitle--left {
       color: rgb(var(--clr-wb-dark) / 0.6);
       &:hover {
         color: rgb(var(--clr-wb-dark) / 1);
       }
     }
-    .sub-right {
+    .hero__subtitle--right {
       color: rgb(var(--clr-wb-dark));
 
       &:hover::after {
@@ -165,10 +167,6 @@ const heroData = await sanityClient.fetch(`*[_type == 'hero'][0]{
     }
   }
   /* Mode Switcher */
-  .modeswitch-wrapper {
-    display: flex;
-    align-items: center;
-  }
   .modeswitch {
     display: inline-block;
     position: relative;
@@ -180,7 +178,7 @@ const heroData = await sanityClient.fetch(`*[_type == 'hero'][0]{
     }
   }
 
-  .slider {
+  .modeswitch__slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -195,7 +193,7 @@ const heroData = await sanityClient.fetch(`*[_type == 'hero'][0]{
       background-color: rgb(var(--clr-wb-light) / 0.15);
     }
 
-    .slidee {
+    .modeswitch__slidee {
       position: absolute;
       transform-origin: center;
       transform: translate(-50%, 0%) rotate(0deg);
@@ -212,7 +210,7 @@ const heroData = await sanityClient.fetch(`*[_type == 'hero'][0]{
       transition: var(--modeswitch-transition-time);
     }
 
-    .arrow-wrapper {
+    .modeswitch__arrow {
       width: 100%;
       opacity: 1;
       height: 100%;
@@ -250,24 +248,24 @@ const heroData = await sanityClient.fetch(`*[_type == 'hero'][0]{
     }
   }
 
-  body.lightmode .slider .slidee {
+  body.lightmode .modeswitch__slider .modeswitch__slidee {
     left: calc(var(--hero-modeswitch-w) - var(--hero-modeswitch-h) / 2);
     transform: translate(-50%, 0%);
   }
 
-  body.lightmode .slider .slidee .arrow-wrapper {
+  body.lightmode .modeswitch__slider .modeswitch__slidee .modeswitch__arrow {
     transform: rotate(180deg);
   }
 
   @media only screen and (width <= 600px) {
-    body .hero-container h1 .sub-wrapper {
+    body .hero .hero__wrapper .hero__subtitle-wrapper {
       flex-direction: column;
       gap: 0;
 
-      .sub {
+      .hero__subtitle {
         font-size: var(--step-1);
       }
-      .sub-connect {
+      .hero__subtitle--connect {
         font-size: var(--step-0);
       }
     }
@@ -279,15 +277,18 @@ const heroData = await sanityClient.fetch(`*[_type == 'hero'][0]{
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     let interval = null;
     const changes = [];
-    const subLeftElement = document.querySelector(".sub-left") as HTMLElement;
+    const subLeftElement = document.querySelector(
+      ".hero__subtitle--left"
+    ) as HTMLElement;
+    const heroModeSwitch = document.querySelector(".modeswitch");
+    const floatModeSwitch = document.querySelector(
+      ".floating-modeswitch-wrapper"
+    );
+    const options = {};
 
-    const animateText = (e: Event) => {
-      if (
-        e.type === "click" ||
-        (e.type === "mouseover" &&
-          !document.body.classList.contains("lightmode"))
-      ) {
-        const originalText = subLeftElement.dataset.value;
+    const animateText = () => {
+      if (!document.body.classList.contains("lightmode")) {
+        const originalText = subLeftElement.dataset.text;
         const textLength = originalText.length;
         const maxIterations = 5;
         const speed = 20;
@@ -336,20 +337,10 @@ const heroData = await sanityClient.fetch(`*[_type == 'hero'][0]{
     if (subLeftElement) {
       subLeftElement.addEventListener("mouseover", animateText);
       subLeftElement.addEventListener("click", animateText);
+      heroModeSwitch.addEventListener("click", animateText);
     }
-  });
-</script>
 
-<script>
-  document.addEventListener("astro:page-load", () => {
     /* Show/hide floating modeswitch */
-    const heroModeSwitch = document.querySelector(".modeswitch-wrapper");
-    const floatModeSwitch = document.querySelector(
-      ".floating-modeswitch-wrapper"
-    );
-
-    const options = {};
-
     const heroObserver = new IntersectionObserver(function (entries) {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) {

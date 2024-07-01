@@ -31,6 +31,89 @@ const { title } = Astro.props;
     <script>
       document.addEventListener("astro:page-load", () => {
         document.body.classList.remove("no-transition");
+        let mode = sessionStorage.getItem("mode");
+        const modeSwitch = document.querySelectorAll(".modeswitch");
+
+        const subLeft = document.querySelector(".hero__subtitle--left");
+        const subRight = document.querySelector(".hero__subtitle--right");
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        const enableLightMode = () => {
+          document.body.classList.add("lightmode");
+          sessionStorage.setItem("mode", "light");
+          if (subLeft && subRight) {
+            subRight.classList.add("highlight");
+            setTimeout(function () {
+              subRight.classList.remove("highlight");
+            }, 400);
+          }
+        };
+
+        const enableDarkMode = () => {
+          document.body.classList.remove("lightmode");
+          sessionStorage.setItem("mode", null);
+        };
+
+        if (mode == "light") {
+          enableLightMode();
+        }
+
+        if (subLeft && subRight) {
+          subLeft.addEventListener("click", enableDarkMode);
+          subRight.addEventListener("click", enableLightMode);
+        }
+
+        const handleTouchGesture = () => {
+          if (touchEndX > touchStartX) enableLightMode();
+          if (touchEndX < touchStartX) enableDarkMode();
+        };
+
+        const handleMouseGesture = () => {
+          // Invert the logic for mouse gestures if needed
+          if (touchEndX < touchStartX) enableLightMode();
+          if (touchEndX > touchStartX) enableDarkMode();
+        };
+
+        modeSwitch.forEach(function (e) {
+          // Touch Events
+          e.addEventListener(
+            "touchstart",
+            (touchStartEvent: TouchEvent) => {
+              touchStartX = touchStartEvent.changedTouches[0].screenX;
+            },
+            { passive: true }
+          );
+
+          e.addEventListener(
+            "touchend",
+            (touchEndEvent: TouchEvent) => {
+              touchEndX = touchEndEvent.changedTouches[0].screenX;
+              handleTouchGesture();
+            },
+            { passive: true }
+          );
+
+          // Mouse Events
+          e.addEventListener("mousedown", (mouseDownEvent: MouseEvent) => {
+            touchStartX = mouseDownEvent.screenX;
+            const mouseUpHandler = (mouseUpEvent: MouseEvent) => {
+              touchEndX = mouseUpEvent.screenX;
+              handleMouseGesture();
+              document.removeEventListener("mouseup", mouseUpHandler);
+            };
+            document.addEventListener("mouseup", mouseUpHandler);
+          });
+
+          e.addEventListener("click", () => {
+            mode = sessionStorage.getItem("mode");
+            if (mode !== "light") {
+              enableLightMode();
+            } else {
+              enableDarkMode();
+            }
+          });
+        });
       });
     </script>
   </body>
