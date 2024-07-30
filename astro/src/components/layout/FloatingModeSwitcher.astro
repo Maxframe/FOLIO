@@ -7,10 +7,7 @@ export interface Props {
 const { classes, show } = Astro.props as Props;
 ---
 
-<div
-  class="floating-modeswitch-wrapper"
-  class:list={[classes, { showfloat: show }]}
->
+<div class:list={["floating-modeswitch-wrapper", classes, { showfloat: show }]}>
   <button
     class="modeswitch"
     aria-label="Modeswitch Button"
