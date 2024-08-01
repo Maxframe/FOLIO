@@ -2,3 +2,7 @@
 /node_modules
 
 yarn.lock
+
+# environment variables
+.env
+.env.production
