@@ -4,53 +4,49 @@ export interface Props {
   show?: boolean;
 }
 
-const { classes, show } = Astro.props as Props;
+const { classes, show = true } = Astro.props as Props;
 ---
 
-<div class:list={["floating-modeswitch-wrapper", classes, { showfloat: show }]}>
-  <button
-    class="modeswitch"
-    aria-label="Modeswitch Button"
-    data-umami-event="Floating Modeswitch"
-  >
-    <div class="slider round">
-      <div class="slidee round"></div>
-    </div>
-  </button>
-</div>
+<button
+  class:list={["modeswitch", { showfloat: show }, classes]}
+  aria-label="Modeswitch Button"
+  data-umami-event="Floating Modeswitch"
+>
+  <div class="modeswitch__slider">
+    <div class="modeswitch__slidee"></div>
+  </div>
+</button>
 
 <style lang="scss">
-  .floating-modeswitch-wrapper {
+  .modeswitch {
     position: fixed;
+    width: var(--float-modeswitch-size);
+    height: var(--float-modeswitch-size);
     bottom: var(--content-px);
     right: var(--content-px);
     opacity: 0;
+    border-radius: 999rem;
+    background-color: var(--c-pill-bg);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    outline: solid var(--stroke-w) rgb(var(--c-stroke));
+    pointer-events: none;
+
+    transition:
+      box-shadow var(--hover-transition),
+      outline var(--modeswitch-transition-time),
+      background-color var(--modeswitch-transition-time),
+      transform 200ms,
+      opacity var(--modeswitch-transition-time);
     z-index: 999;
-    transition: opacity var(--modeswitch-transition-time);
-    &:hover .modeswitch {
+
+    &:hover {
       transform: scale(1.03);
       background-color: rgb(var(--c-bg));
     }
-
-    .modeswitch {
-      width: var(--float-modeswitch-size);
-      height: var(--float-modeswitch-size);
-      border-radius: 50%;
-      background-color: var(--c-pill-bg);
-      backdrop-filter: blur(10px);
-      cursor: pointer;
-      outline: solid var(--stroke-w) rgb(var(--c-stroke));
-      pointer-events: none;
-
-      transition:
-        box-shadow var(--hover-transition),
-        outline var(--modeswitch-transition-time),
-        background-color var(--modeswitch-transition-time),
-        transform 200ms;
-    }
   }
 
-  .slider {
+  .modeswitch__slider {
     position: absolute;
     cursor: pointer;
     top: 50%;
@@ -58,14 +54,16 @@ const { classes, show } = Astro.props as Props;
     width: var(--float-modeswitch-w);
     height: var(--float-modeswitch-h);
     transform: translate(-50%, -50%);
+    border-radius: 999rem;
     outline: solid var(--stroke-w) rgb(var(--c-stroke));
     background-color: rgb(var(--clr-wb-light) / 0.2);
     transition: var(--modeswitch-transition-time);
 
-    .slidee {
+    .modeswitch__slidee {
       position: absolute;
       transform-origin: center;
       transform: translate(-50%, 0%) rotate(0deg);
+      border-radius: 999rem;
       background-color: rgb(var(--clr-wb-light));
       height: calc(100% - var(--float-modeswitch-slider-dist));
       width: calc(
@@ -77,26 +75,22 @@ const { classes, show } = Astro.props as Props;
       transition: var(--modeswitch-transition-time);
     }
   }
-  .round {
-    border-radius: 999rem;
-  }
 
-  body.lightmode .slider .slidee {
-    left: calc(var(--float-modeswitch-w) - var(--float-modeswitch-h) / 2);
-  }
-
-  body.lightmode .modeswitch {
+  body.lightmode .float-modeswitch {
     box-shadow: 5px 5px 0 2px rgb(var(--c-stroke));
+
+    .slider .slidee {
+      left: calc(var(--float-modeswitch-w) - var(--float-modeswitch-h) / 2);
+    }
+
+    &:hover {
+      box-shadow: 8px 8px 0 2px rgb(var(--c-stroke));
+    }
   }
-  body.lightmode .floating-modeswitch-wrapper:hover .modeswitch {
-    box-shadow: 8px 8px 0 2px rgb(var(--c-stroke));
-  }
+
   .showfloat {
     opacity: 1;
-
-    & .modeswitch {
-      pointer-events: auto;
-    }
+    pointer-events: auto;
   }
 
   @media only screen and (width <= 800px) {

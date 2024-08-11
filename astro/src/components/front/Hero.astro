@@ -281,9 +281,7 @@ const heroData = await sanityClient.fetch(`*[_type == 'hero'][0]{
       ".hero__subtitle--left"
     ) as HTMLElement;
     const heroModeSwitch = document.querySelector(".modeswitch");
-    const floatModeSwitch = document.querySelector(
-      ".floating-modeswitch-wrapper"
-    );
+    const floatModeSwitch = document.querySelector(".float-modeswitch");
     const options = {};
 
     const animateText = () => {
