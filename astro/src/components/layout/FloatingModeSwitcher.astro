@@ -76,7 +76,7 @@ const { classes, show = true } = Astro.props as Props;
     }
   }
 
-  body.lightmode .float-modeswitch {
+  body.lightmode .modeswitch {
     box-shadow: 5px 5px 0 2px rgb(var(--c-stroke));
 
     .slider .slidee {
@@ -94,7 +94,7 @@ const { classes, show = true } = Astro.props as Props;
   }
 
   @media only screen and (width <= 800px) {
-    .floating-modeswitch-wrapper {
+    .modeswitch {
       bottom: calc(var(--content-px) * 2);
     }
   }
