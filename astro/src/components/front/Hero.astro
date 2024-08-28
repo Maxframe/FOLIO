@@ -281,7 +281,7 @@ const heroData = await sanityClient.fetch(`*[_type == 'hero'][0]{
       ".hero__subtitle--left"
     ) as HTMLElement;
     const heroModeSwitch = document.querySelector(".modeswitch");
-    const floatModeSwitch = document.querySelector(".float-modeswitch");
+    const floatModeSwitch = document.querySelector("#modeswitch--float");
     const options = {};
 
     const animateText = () => {
@@ -343,8 +343,10 @@ const heroData = await sanityClient.fetch(`*[_type == 'hero'][0]{
       entries.forEach((entry) => {
         if (!entry.isIntersecting) {
           floatModeSwitch.classList.add("showfloat");
+          console.log("leaving")
         } else {
           floatModeSwitch.classList.remove("showfloat");
+          console.log("entering")
         }
       });
     }, options);

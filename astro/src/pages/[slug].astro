@@ -19,12 +19,12 @@ export async function getStaticPaths() {
         "slug": slug.current,
 
         "thumbnailImage": thumbnailImage.image.asset._ref,
-        "thumbAltText": thumbnailImage.image.alt,
+        "thumbAltText": thumbnailImage.alt,
         "thumbLqip": thumbnailImage.image.asset->metadata.lqip,
         "thumbRatio": thumbnailImage.image.asset->metadata.dimensions.aspectRatio,
 
         "heroImage": heroImage.image.asset._ref,
-        "heroAltText": heroImage.image.alt,
+        "heroAltText": heroImage.alt,
         "heroLqip": heroImage.image.asset->metadata.lqip,
         "heroRatio": heroImage.image.asset->metadata.dimensions.aspectRatio,
 

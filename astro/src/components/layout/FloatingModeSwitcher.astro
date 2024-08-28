@@ -9,6 +9,7 @@ const { classes, show = true } = Astro.props as Props;
 
 <button
   class:list={["modeswitch", { showfloat: show }, classes]}
+  id="modeswitch--float"
   aria-label="Modeswitch Button"
   data-umami-event="Floating Modeswitch"
 >
@@ -79,7 +80,7 @@ const { classes, show = true } = Astro.props as Props;
   body.lightmode .modeswitch {
     box-shadow: 5px 5px 0 2px rgb(var(--c-stroke));
 
-    .slider .slidee {
+    .modeswitch__slider .modeswitch__slidee {
       left: calc(var(--float-modeswitch-w) - var(--float-modeswitch-h) / 2);
     }
 
