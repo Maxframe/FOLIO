@@ -28,5 +28,10 @@ export default defineType({
       title: "Caption URL",
       type: "url",
     }),
+    defineField({
+      name: "isGif",
+      title: "Is Gif?",
+      type: "boolean",
+    }),
   ],
 });

@@ -27,6 +27,7 @@ export async function getStaticPaths() {
         "heroAltText": heroImage.alt,
         "heroLqip": heroImage.image.asset->metadata.lqip,
         "heroRatio": heroImage.image.asset->metadata.dimensions.aspectRatio,
+        "heroIsGif": heroImage.isGif,
 
         description,
         tags,
@@ -64,6 +65,7 @@ const { project } = Astro.props as { project: any };
               source={project.heroImage}
               lqip={project.heroLqip}
               alt={project.heroAltText}
+              isGif={project.heroIsGif}
               loading="eager"
               vert
             />
