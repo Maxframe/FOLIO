@@ -7,31 +7,31 @@ export interface Props {
 const { classes, show = true } = Astro.props as Props;
 ---
 
-<button
-  class:list={["modeswitch", { showfloat: show }, classes]}
-  id="modeswitch--float"
-  aria-label="Modeswitch Button"
-  data-umami-event="Floating Modeswitch"
+<button class:list={["modeswitch--float", { showfloat: show }, classes]}
+aria-label="Modeswitch Button"
+data-umami-event="Floating Modeswitch"
 >
   <div class="modeswitch__slider">
     <div class="modeswitch__slidee"></div>
   </div>
 </button>
 
+
 <style lang="scss">
-  .modeswitch {
+  .modeswitch--float {
     position: fixed;
-    width: var(--float-modeswitch-size);
-    height: var(--float-modeswitch-size);
     bottom: var(--content-px);
     right: var(--content-px);
     opacity: 0;
+    transition: opacity var(--modeswitch-transition-time);
+    pointer-events: none;
+    width: var(--float-modeswitch-size);
+    height: var(--float-modeswitch-size);
     border-radius: 999rem;
     background-color: var(--c-pill-bg);
     backdrop-filter: blur(10px);
     cursor: pointer;
     outline: solid var(--stroke-w) rgb(var(--c-stroke));
-    pointer-events: none;
 
     transition:
       box-shadow var(--hover-transition),
@@ -77,7 +77,7 @@ const { classes, show = true } = Astro.props as Props;
     }
   }
 
-  body.lightmode .modeswitch {
+  body.lightmode .modeswitch--float {
     box-shadow: 5px 5px 0 2px rgb(var(--c-stroke));
 
     .modeswitch__slider .modeswitch__slidee {
@@ -95,8 +95,9 @@ const { classes, show = true } = Astro.props as Props;
   }
 
   @media only screen and (width <= 800px) {
-    .modeswitch {
+    .modeswitch--float {
       bottom: calc(var(--content-px) * 2);
     }
   }
 </style>
+

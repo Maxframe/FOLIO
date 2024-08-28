@@ -31,7 +31,7 @@ const heroData = await sanityClient.fetch(`*[_type == 'hero'][0]{
   </div>
 
   <button
-    class="modeswitch"
+    class="modeswitch--hero"
     title="Dark/Light Mode"
     aria-label="Dark/Light Mode"
     data-umami-event="Hero Modeswitch"
@@ -167,7 +167,7 @@ const heroData = await sanityClient.fetch(`*[_type == 'hero'][0]{
     }
   }
   /* Mode Switcher */
-  .modeswitch {
+  .modeswitch--hero {
     display: inline-block;
     position: relative;
     width: var(--hero-modeswitch-w);
@@ -280,8 +280,8 @@ const heroData = await sanityClient.fetch(`*[_type == 'hero'][0]{
     const subLeftElement = document.querySelector(
       ".hero__subtitle--left"
     ) as HTMLElement;
-    const heroModeSwitch = document.querySelector(".modeswitch");
-    const floatModeSwitch = document.querySelector("#modeswitch--float");
+    const heroModeSwitch = document.querySelector(".modeswitch--hero");
+    const floatModeSwitch = document.querySelector(".modeswitch--float");
     const options = {};
 
     const animateText = () => {
@@ -343,10 +343,8 @@ const heroData = await sanityClient.fetch(`*[_type == 'hero'][0]{
       entries.forEach((entry) => {
         if (!entry.isIntersecting) {
           floatModeSwitch.classList.add("showfloat");
-          console.log("leaving")
         } else {
           floatModeSwitch.classList.remove("showfloat");
-          console.log("entering")
         }
       });
     }, options);
