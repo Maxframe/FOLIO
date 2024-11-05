@@ -258,6 +258,12 @@ const heroData = await sanityClient.fetch(`*[_type == 'hero'][0]{
   }
 
   @media only screen and (width <= 600px) {
+    :root {
+      --hero-modeswitch-h: 5.6rem;
+      --hero-modeswitch-w: 10rem;
+      --hero-modeswitch-slider-dist: 1.4rem;
+    }
+
     body .hero .hero__wrapper .hero__subtitle-wrapper {
       flex-direction: column;
       gap: 0;
